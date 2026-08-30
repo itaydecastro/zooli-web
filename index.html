@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זולי — רשימת הקניות של המשפחה, ואיפה היא הכי זולה</title>
+<meta name="description" content="זולי מנהל למשפחה את רשימת הקניות בוואטסאפ, וכשיוצאים לקנות אומר בכמה היא תעלה בכל רשת שסביבכם. 21 רשתות, מחירי מדף רשמיים, מתעדכן כל יום. חינם, בלי אפליקציה.">
+<meta property="og:title" content="זולי — אותו סל, מחיר אחר בכל סופר">
+<meta property="og:description" content="רשימת קניות בוואטסאפ שמשווה את כל הסל בין הרשתות שסביבכם, לפי מחירי המדף הרשמיים. חינם לגמרי.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFF6E9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Rubik+Bubbles&family=Assistant:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/market.css">
+<style>
+  /* ---------------------------------------------- הדמות המרוגלת
+     רק הדף הזה מריץ את הגרסה החיה של זולי (עיניים שעוקבות אחרי העכבר,
+     פריטים שנופלים לסל). שאר הדפים מציגים אותה כתמונה, ולכן זה כאן
+     ולא בגיליון המשותף. */
+  .zooli { width: min(230px, 58vw); height: auto; overflow: visible; display: block; margin: 0 auto 4px; }
+  #z-all    { animation: z-float 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin: 120px 200px; transform-box: fill-box; }
+  #z-squash { animation: z-squash 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin: 120px 190px; transform-box: fill-box; }
+  #z-shadow { animation: z-shadow 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes z-float  { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-16px); } }
+  @keyframes z-squash { 0%,100% { transform: scale(1.04,.96); } 45%,55% { transform: scale(.97,1.03); } }
+  @keyframes z-shadow { 0%,100% { transform: scale(1); opacity: .5; } 50% { transform: scale(.8); opacity: .28; } }
+  .z-wheel-spin { animation: z-spin 2.2s linear infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes z-spin { to { transform: rotate(360deg); } }
+  .z-eye { transform-origin: center; transform-box: fill-box; transition: transform .09s ease; }
+  .z-eye.shut { transform: scaleY(.08); }
+  .z-pupil { transition: transform .18s cubic-bezier(.22,1,.36,1); }
+  .z-drop { animation: z-drop 4.4s cubic-bezier(.55,0,.85,.35) infinite; }
+  #z-drop-2 { animation-delay: 2.2s; }
+  @keyframes z-drop {
+    0%,12%   { transform: translateY(-92px) rotate(-16deg); opacity: 0; }
+    18%      { transform: translateY(-86px) rotate(-13deg); opacity: 1; }
+    46%,100% { transform: translateY(34px) rotate(10deg);   opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #z-all, #z-squash, #z-shadow, .z-wheel-spin { animation: none !important; }
+    .z-drop { animation: none !important; opacity: 0 !important; }
+  }
+</style>
+</head>
+<body data-chains="21">
+
+<!-- ============================================================== ניווט
+     גלולה צפה עם הדמות בעיגול. היא מקפצת תמיד ונשארת על המסך בכל
+     גלילה — הבקשה של איתי, וגם מה שמזהים לפני שקוראים מילה. -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><span><img src="assets/zooli.svg" alt="" width="34" height="34"></span></span>
+      <span class="brand-tx">
+        <span class="brand-nm">זולי</span>
+        <span class="brand-sub">משווה מחירים בוואטסאפ</span>
+      </span>
+    </a>
+    <span class="nav-sp"></span>
+    <a class="link hide-sm" href="#how">איך זה עובד</a>
+    <a class="link hide-sm" href="#why">למה להאמין</a>
+    <a class="btn btn-wa" href="#top" data-open-demo>לנסות עכשיו</a>
+  </div>
+</nav>
+
+<!-- ============================================================= גיבור -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag-free reveal">🎉 חינם לגמרי · בבטא</span>
+      <h1 class="reveal d1">
+        <span class="l">אותו סל.</span>
+        <span class="l accent">מחיר אחר בכל סופר.</span>
+        <span class="bub">והכל בוואטסאפ.</span>
+      </h1>
+      <p class="hero-sub reveal d2">
+        כל הבית זורק לזולי מה שנגמר, מתי שנזכרים — והוא
+        <b>אוסף את הכול לרשימה אחת מסודרת</b>. כשיוצאים לקנות, הוא אומר
+        בכמה היא תעלה בכל רשת שסביבכם, לפי מחירי המדף הרשמיים.
+      </p>
+      <div class="nos reveal d3">
+        <span class="no"><i>✓</i> בלי אפליקציה</span>
+        <span class="no"><i>✓</i> בלי הרשמה</span>
+        <span class="no"><i>✓</i> בלי סיסמה</span>
+      </div>
+      <div class="hero-cta reveal d4">
+        <a class="btn btn-wa" href="#top" data-open-demo>לנסות את זולי עכשיו</a>
+        <a class="btn btn-ghost" href="#how">איך זה עובד ←</a>
+      </div>
+    </div>
+
+    <!-- ================================================== הטלפון
+         ⚠️ זו **ההדגמה החיה** ולא תמונה. אפשר להקליד בה, והיא מחזיקה
+         מצב: מי שמוסיף שמפו ואז מבקש "הצג רשימה" רואה אותו שם.
+         התשובות הן פלט מוקלט מהבוט האמיתי — ראה assets/zooli.js. -->
+    <div class="phone-wrap reveal d2">
+      <div>
+        <div class="phone demo-phone">
+          <div class="screen">
+            <div class="status">
+              <span>21:06</span>
+              <span class="dots">▮▮▮ ⌁ ▰</span>
+            </div>
+            <div class="wa-top">
+              <span class="back">‹</span>
+              <span class="av"><img src="assets/zooli.svg" alt="" width="26" height="26"></span>
+              <span class="who"><b>זולי</b><span>מקוון</span></span>
+              <span class="icons" aria-hidden="true">⋮</span>
+            </div>
+            <div class="wa-body" id="demoBody"></div>
+            <!-- ⚠️ **השבבים בתוך הטלפון ולא מתחתיו.** מתחת לטלפון הם
+                 מחוץ לשדה הראייה כשגוללים — רואים מסך שיחה, לא יודעים
+                 שיש מה ללחוץ עליו, ולא מנסים. כאן הם יושבים בדיוק
+                 מעל שורת ההקלדה, במקום שבו וואטסאפ מציג תשובות מהירות. -->
+            <div class="wa-chips" id="demoChips">
+              <button type="button" data-say="תוסיף שמפו">תוסיף שמפו</button>
+              <button type="button" data-say="הצג רשימה">הצג רשימה</button>
+              <button type="button" data-say="כמה עולה חלב">מחיר חלב</button>
+              <button type="button" data-say="אני יוצא לסופר">יוצא לסופר</button>
+              <button type="button" data-say="7290004131074">📷 ברקוד</button>
+              <button type="button" data-say="מאיפה המחירים?">מאיפה המחירים</button>
+            </div>
+            <form class="wa-foot" id="demoForm">
+              <input id="demoInput" type="text" autocomplete="off" placeholder="תכתבו לזולי…" aria-label="הודעה לזולי">
+              <button type="submit" aria-label="שליחה">➤</button>
+            </form>
+          </div>
+        </div>
+        <p class="demo-note">👋 <b>תתנסו כאן</b> — זו שיחה לדוגמה בתוך הדף, ולא הבוט האמיתי.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ההיקף הוא הטיעון, ורשימה זורמת אומרת אותו בלי משפט אחד.
+       ⚠️ ושורה אחת מעליה, כי שמות שצפים בלי הקשר לא אומרים כלום —
+       הם צריכים להגיד **למה** הם שם. -->
+  <p class="ticker-lead">מחוברים למחירונים הרשמיים של <b data-count="21" data-stat="chains">21</b> רשתות · נמשכים מחדש כל לילה · <b data-stat="updated">30.08</b></p>
+  <div class="ticker" aria-label="הרשתות שבהשוואה">
+    <div class="ticker-track">
+    <span><i aria-hidden="true"></i>שופרסל</span><span><i aria-hidden="true"></i>רמי לוי</span><span><i aria-hidden="true"></i>ויקטורי</span><span><i aria-hidden="true"></i>קרפור</span><span><i aria-hidden="true"></i>מחסני השוק</span><span><i aria-hidden="true"></i>יוחננוף</span><span><i aria-hidden="true"></i>סופר ספיר</span><span><i aria-hidden="true"></i>טיב טעם</span><span><i aria-hidden="true"></i>קינג סטור</span><span><i aria-hidden="true"></i>קשת טעמים</span><span><i aria-hidden="true"></i>אושר עד</span><span><i aria-hidden="true"></i>שוק העיר</span><span><i aria-hidden="true"></i>סופר ברקת</span><span><i aria-hidden="true"></i>מעיין 2000</span><span><i aria-hidden="true"></i>סופר יודה</span><span><i aria-hidden="true"></i>זול ובגדול</span><span><i aria-hidden="true"></i>שפע ברכת השם</span><span><i aria-hidden="true"></i>סטופ מרקט</span><span><i aria-hidden="true"></i>חצי חינם</span><span><i aria-hidden="true"></i>סלאח דבאח</span><span><i aria-hidden="true"></i>ח. כהן</span><span aria-hidden="true"><i aria-hidden="true"></i>שופרסל</span><span aria-hidden="true"><i aria-hidden="true"></i>רמי לוי</span><span aria-hidden="true"><i aria-hidden="true"></i>ויקטורי</span><span aria-hidden="true"><i aria-hidden="true"></i>קרפור</span><span aria-hidden="true"><i aria-hidden="true"></i>מחסני השוק</span><span aria-hidden="true"><i aria-hidden="true"></i>יוחננוף</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ספיר</span><span aria-hidden="true"><i aria-hidden="true"></i>טיב טעם</span><span aria-hidden="true"><i aria-hidden="true"></i>קינג סטור</span><span aria-hidden="true"><i aria-hidden="true"></i>קשת טעמים</span><span aria-hidden="true"><i aria-hidden="true"></i>אושר עד</span><span aria-hidden="true"><i aria-hidden="true"></i>שוק העיר</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ברקת</span><span aria-hidden="true"><i aria-hidden="true"></i>מעיין 2000</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר יודה</span><span aria-hidden="true"><i aria-hidden="true"></i>זול ובגדול</span><span aria-hidden="true"><i aria-hidden="true"></i>שפע ברכת השם</span><span aria-hidden="true"><i aria-hidden="true"></i>סטופ מרקט</span><span aria-hidden="true"><i aria-hidden="true"></i>חצי חינם</span><span aria-hidden="true"><i aria-hidden="true"></i>סלאח דבאח</span><span aria-hidden="true"><i aria-hidden="true"></i>ח. כהן</span></div>
+  </div>
+</header>
+
+<!-- ============================================================ הבעיה -->
+<section class="sec-white">
+  <div class="wrap narrow" style="text-align:center">
+    <p class="eyebrow mid reveal">הבעיה</p>
+    <h2 class="reveal d1">אתם קונים אותו דבר.<br>ומשלמים סכום אחר.</h2>
+    <p class="lede mid reveal d2" style="max-width:32em">
+      זה הפער שנמדד בין הרשת הזולה ליקרה, על סל שבועי של משפחה:
+    </p>
+    <span class="big-num reveal d3" data-stat="gap">14.0%</span>
+
+    <!-- ⚠️ שלושת מספרי ההתפלגות (מעל 20% בעיר אחת מארבע · 180 ₪
+         לקנייה · 34% באילת) ירדו בבקשת איתי — "יותר מדי מלל". הם
+         נמדדים בכל הרצה של sync_landing.py ומודפסים לטרמינל, אז אם
+         ירצו להחזיר אותם המספר טרי ולא צריך למדוד מחדש. -->
+
+    <p class="lede mid reveal d4" style="max-width:34em;margin-top:26px">
+      משפחה שמוציאה כ־3,000 ₪ בחודש על מזון משאירה על השולחן
+      <b class="o">מאות שקלים</b> — בלי לוותר על שום דבר בעגלה.
+    </p>
+  </div>
+
+  <div class="wrap narrow" style="margin-top:clamp(34px,6vw,58px)">
+    <div class="card reveal">
+      <p style="color:var(--soft);font-size:15px;margin:0">הרצה אמיתית · רעננה · מים, חלב ולחם</p>
+      <div class="proof">
+        <div class="prow best reveal d1">
+          <span class="who">חצי חינם</span>
+          <span class="ptrack"><i class="pfill win" style="--w:76%"></i></span>
+          <span class="amt">19 ₪</span>
+        </div>
+        <div class="prow reveal d3">
+          <span class="who">היקרה באזור</span>
+          <span class="ptrack"><i class="pfill lose" style="--w:100%"></i></span>
+          <span class="amt">25 ₪</span>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);font-size:15.5px;margin:18px 0 0">
+        שלושה פריטים, והפרש של <b>שליש</b>. עכשיו תכפילו בקנייה שבועית מלאה.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= איך זה עובד -->
+<section id="how">
+  <div class="wrap">
+    <div style="text-align:center">
+      <p class="eyebrow mid reveal">איך זה עובד</p>
+      <h2 class="reveal d1">שיחה אחת. כל השבוע.</h2>
+      <p class="lede mid reveal d2" style="max-width:34em">
+        כל בועה כאן היא פלט אמיתי של המערכת, שהוקלט מהרצה של הבוט.
+      </p>
+    </div>
+
+    <!-- ⚠️ **טלפון נעוץ במקום חמישה בלוקים.** קודם היו כאן חמש קבוצות
+         בועות שגוללים דרכן אחת אחרי השנייה, והדף היה 10,812px בטלפון.
+         עכשיו זה מסך אחד שהתוכן שלו מתחלף לפי הגלילה — פחות גלילה,
+         ונראה כאילו זה קורה עכשיו.
+
+         ⚠️ **בלי חטיפת גלילה.** הדף לא מאט ולא לוקח שליטה; הטלפון רק
+         מגיב למה שכבר קרה. עמוד שנלחם בגלילה מאבד את המבקר.
+
+         ⚠️ **ומי שמבקש הפחתת תנועה** מקבל את כל ההודעות בבת אחת, בלי
+         הנפשה — וזה גם מה שיקרה אם ה-JS ייפול. -->
+    <div class="reel">
+      <div class="reel-stage">
+        <div class="phone reel-phone">
+          <div class="screen">
+            <div class="wa-top">
+              <span class="back">‹</span>
+              <span class="av"><img src="assets/zooli.svg" alt="" width="26" height="26"></span>
+              <span class="who"><b>זולי</b><span>מקוון</span></span>
+              <span class="icons" aria-hidden="true">⋮</span>
+            </div>
+            <div class="wa-body" id="reelBody"></div>
+          </div>
+        </div>
+      </div>
+      <div class="reel-steps">
+        <div class="reel-step on">
+          <span class="reel-n">1</span>
+          <h3>במהלך השבוע — הוא אוסף</h3>
+          <p>נגמר משהו? כותבים לו, מתי שנזכרים. כל הבית על אותה רשימה. <b>והוא עונה בריאקט, לא בהודעה</b> — ומדבר רק כשמה שנרשם שונה ממה שכתבתם, כמו יחידת המכירה כאן.</p>
+        </div>
+        <div class="reel-step">
+          <span class="reel-n">2</span>
+          <h3>מתי שרוצים — הוא מראה</h3>
+          <p>שכחתם מה כבר ברשימה? שורה אחת, והיא כולה על המסך — מה שכולם הוסיפו במהלך השבוע, במקום אחד.</p>
+        </div>
+        <div class="reel-step">
+          <span class="reel-n">3</span>
+          <h3>ובדרך — כמה זה עולה?</h3>
+          <p>לא חייבים סל שלם. אפשר לשאול על מוצר בודד ולקבל את המחיר שלו בכל רשת באזור, לפני שיוצאים מהבית.</p>
+        </div>
+        <div class="reel-step">
+          <span class="reel-n">4</span>
+          <h3>לפני הקנייה — הוא משווה</h3>
+          <p>שורה אחת, והוא מתמחר את כל הסל בכל רשת שיש לה סניף באזור. ממוין לפי מחיר, עם הסניף והמרחק.</p>
+        </div>
+        <div class="reel-step">
+          <span class="reel-n">5</span>
+          <h3>בתוך הסופר — הוא מלווה</h3>
+          <p>מסמנים מה שכבר בעגלה. "סיימתי" מוריד רק את מה שנלקח, ומה שלא הספקתם נשאר לפעם הבאה.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== יתרונות -->
+<section class="sec-soft">
+  <div class="wrap">
+    <div style="text-align:center">
+      <p class="eyebrow mid reveal">ומה עוד</p>
+      <h2 class="reveal d1">וגם, בלי שביקשתם</h2>
+    </div>
+    <div class="cards">
+      <div class="acard reveal d1">
+        <div class="n">01</div>
+        <h3>רשימה משותפת</h3>
+        <p>קוד אחד, וכל הבית על אותה רשימה. מה שאחד מוסיף — השני רואה,
+           בלי קבוצת וואטסאפ שאף אחד לא קורא עד הסוף.</p>
+      </div>
+      <div class="acard reveal d2">
+        <div class="n">02</div>
+        <h3>רשימה קבועה</h3>
+        <p>מה שחוזר אצלכם כל שבוע נכנס לבד בסוף כל קנייה. לא צריך
+           להיזכר באותם דברים שוב ושוב.</p>
+      </div>
+      <div class="acard reveal d3">
+        <div class="n">03</div>
+        <h3>מותג או גודל, אם בא לכם</h3>
+        <p>"חלב תנובה 3%" או "שקדי מרק 350 גרם" — ככל שתדייקו, המחיר
+           קרוב יותר למה שתשלמו בקופה.</p>
+      </div>
+      <div class="acard reveal d4">
+        <div class="n">04</div>
+        <h3>ברקוד במקום הקלדה 📷</h3>
+        <p>מקלידים את הספרות שמתחת לפס, והמוצר נכנס לרשימה בשם המלא
+           שלו — כלומר בהשוואה המדויקת ביותר שאפשר.
+           <b data-count="44651" data-stat="barcodes">44,651</b> ברקודים מזוהים.
+           <span class="soon">צילום הברקוד — בקרוב</span></p>
+      </div>
+      <div class="acard reveal d4">
+        <div class="n">05</div>
+        <h3>חינם, וגם פרטי</h3>
+        <p>בלי הרשמה, בלי סיסמה, בלי אפליקציה. לא רוצים לשתף מיקום?
+           פשוט כתבו את שם העיר.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= למה להאמין -->
+<section id="why">
+  <div class="wrap">
+    <div style="text-align:center">
+      <p class="eyebrow mid reveal">למה המספר נכון</p>
+      <h2 class="reveal d1">לא הערכה. מחירון.</h2>
+      <p class="lede mid reveal d2" style="max-width:38em">
+        כל רשת מחויבת בחוק לפרסם את מחירי המדף בכל סניף. אלה המקורות
+        היחידים שזולי קורא — והם נמשכים מחדש כל לילה.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal d1"><span class="n" data-count="21" data-stat="chains">21</span><span class="l">רשתות</span></div>
+      <div class="stat reveal d2"><span class="n" data-count="146" data-stat="cities">146</span><span class="l">ערים</span></div>
+      <div class="stat reveal d3"><span class="n" data-count="484" data-stat="categories">484</span><span class="l">קטגוריות מוצר</span></div>
+      <div class="stat reveal d4"><span class="n" data-count="1259" data-stat="stores">1,259</span><span class="l">סניפים</span></div>
+    </div>
+
+    <div class="cards" style="margin-top:16px">
+      <div class="acard reveal d1">
+        <h3 class="g">אותו מוצר, לא מוצר דומה</h3>
+        <p>רשת לא יוצאת יקרה כי היא מוכרת גבינות מיובאות. ההשוואה נעשית
+           על המוצר שכל הרשתות מחזיקות, ובאותו גודל אריזה.</p>
+      </div>
+      <div class="acard reveal d2">
+        <h3 class="g">מתעדכן כל יום</h3>
+        <p>המחירים נמשכים מחדש בכל לילה. מחיר של שבוע שעבר גרוע יותר
+           מאין מחיר.</p>
+      </div>
+      <div class="acard reveal d3">
+        <h3 class="g">וכשהוא לא בטוח — הוא אומר</h3>
+        <p>חסר מחיר בעיר שלכם? הוא מציין מאיפה לקח. הערכה לעולם לא
+           מוכרזת כזולה ביותר.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ בכנות -->
+<section class="sec-white">
+  <div class="wrap narrow">
+    <p class="eyebrow reveal">בכנות</p>
+    <h2 class="reveal d1">ומה הוא עדיין לא עושה</h2>
+    <p class="lede reveal d2">אנחנו בהרצה ראשונה. הנה מה שחסר, לפני שתגלו לבד.</p>
+    <div class="honest">
+      <div class="hrow reveal d1"><span class="mk">🏷️</span><span>
+        <b>לא מציג מבצעים.</b>
+        <span class="tx">ההשוואה היא על מחירי מדף רגילים, וזו בחירה — ככה היא
+        אחידה והוגנת בין כל הרשתות. מבצעים יתווספו בהמשך.</span></span></div>
+      <div class="hrow reveal d2"><span class="mk">🧺</span><span>
+        <b>לא כל מוצר קיים בכל רשת.</b>
+        <span class="tx">כשחסר פריט הוא לא מעלים את הרשת — הוא משלים לפי רמת
+        המחירים שלה בשאר הסל, ואומר את זה על המסך.</span></span></div>
+      <div class="hrow reveal d3"><span class="mk">🎙️</span><span>
+        <b>לא מבין הודעות קוליות, ועדיין לא צילום.</b>
+        <span class="tx">כותבים לו בטקסט, כמו לאדם. ברקוד הוא כן מזהה —
+        מקלידים את הספרות; <b>לצלם</b> אותו יהיה אפשר כשהחיבור לוואטסאפ
+        יעביר תמונות.</span></span></div>
+      <div class="hrow reveal d4"><span class="mk">🛒</span><span>
+        <b>לא מפצל סל בין שתי חנויות.</b>
+        <span class="tx">התשובה היא לאן ללכת, לא איך לרוץ בין שניים.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= סיום -->
+<section>
+  <div class="wrap narrow">
+    <div class="final reveal">
+      <svg class="zooli" id="zooli" viewBox="0 0 240 232" role="img" aria-label="זולי, עגלת קניות מחייכת">
+        <defs>
+          <linearGradient id="gBody" x1=".2" y1="0" x2=".8" y2="1">
+            <stop offset="0%" stop-color="#5CF29A"/><stop offset="45%" stop-color="#25D366"/><stop offset="100%" stop-color="#0E7C43"/>
+          </linearGradient>
+          <linearGradient id="gFace" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DDEBE3"/>
+          </linearGradient>
+          <linearGradient id="gHandle" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7CF7AF"/><stop offset="100%" stop-color="#12A052"/>
+          </linearGradient>
+          <radialGradient id="gGloss" cx=".3" cy=".2" r=".7">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="fSoft" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#02150B" flood-opacity=".55"/>
+          </filter>
+          <clipPath id="clipAbove"><rect x="-40" y="-120" width="320" height="208"/></clipPath>
+        </defs>
+        <ellipse id="z-shadow" cx="120" cy="216" rx="62" ry="9" fill="#000" opacity=".5"/>
+        <g id="z-all">
+          <g id="z-squash" filter="url(#fSoft)">
+            <path d="M22 44 h16 a14 14 0 0 1 13.4 9.8 L58 84" fill="none" stroke="url(#gHandle)" stroke-width="11" stroke-linecap="round"/>
+            <circle cx="22" cy="44" r="7" fill="#7CF7AF"/>
+            <g id="z-arm-r">
+              <path d="M46 128 q-16 -4 -22 -16" fill="none" stroke="#12A052" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="23" cy="111" r="7.5" fill="#5CF29A"/>
+            </g>
+            <path d="M194 128 q16 -4 22 -16" fill="none" stroke="#0E7C43" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="217" cy="111" r="7.5" fill="#3ADE7C"/>
+            <path d="M44 84 h152 l-14 74 a16 16 0 0 1 -15.8 13.4 H73.8 A16 16 0 0 1 58 158 Z" fill="url(#gBody)"/>
+            <g clip-path="url(#clipAbove)">
+              <g class="z-drop" id="z-drop-1">
+                <rect x="106" y="84" width="27" height="33" rx="6" fill="#F2FAF6"/>
+                <rect x="106" y="84" width="27" height="11" rx="5" fill="#1FB855"/>
+                <rect x="112" y="97" width="15" height="4" rx="2" fill="#C8DED4"/>
+              </g>
+              <g class="z-drop" id="z-drop-2">
+                <circle cx="120" cy="98" r="13" fill="#FF6B6B"/>
+                <path d="M120 86 q4 -7 9 -8" fill="none" stroke="#2E7D4F" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="115" cy="93" rx="4" ry="2.6" fill="#FFFFFF" opacity=".45"/>
+              </g>
+            </g>
+            <rect x="40" y="76" width="160" height="15" rx="7.5" fill="#4BEA8C"/>
+            <ellipse cx="86" cy="104" rx="34" ry="20" fill="url(#gGloss)"/>
+            <path d="M62 96 h116 l-10.5 52 a13 13 0 0 1 -12.8 10.4 H85.3 A13 13 0 0 1 72.5 148 Z" fill="url(#gFace)"/>
+            <g class="z-eye" id="z-eye-l">
+              <ellipse cx="99" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+              <g class="z-pupil" id="z-pupil-l">
+                <circle cx="99" cy="119" r="7.2" fill="#0A1F14"/>
+                <circle cx="101.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+              </g>
+            </g>
+            <g class="z-eye" id="z-eye-r">
+              <ellipse cx="141" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+              <g class="z-pupil" id="z-pupil-r">
+                <circle cx="141" cy="119" r="7.2" fill="#0A1F14"/>
+                <circle cx="143.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+              </g>
+            </g>
+            <ellipse cx="80" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+            <ellipse cx="160" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+            <path id="z-mouth" d="M107 136 q13 12 26 0" fill="none" stroke="#0A1F14" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M92 170 v14 M148 170 v14" stroke="#0E7C43" stroke-width="8" stroke-linecap="round"/>
+          </g>
+          <g class="z-wheel-spin">
+            <circle cx="92" cy="194" r="15" fill="#0A1F14"/>
+            <circle cx="92" cy="194" r="5.5" fill="#EAF6F0"/>
+            <rect x="90.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+          </g>
+          <g class="z-wheel-spin" style="animation-delay:-.4s">
+            <circle cx="148" cy="194" r="15" fill="#0A1F14"/>
+            <circle cx="148" cy="194" r="5.5" fill="#EAF6F0"/>
+            <rect x="146.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+          </g>
+        </g>
+      </svg>
+
+      <h2>רוצים להיות מהראשונים?<span class="bub">זה חינם.</span></h2>
+      <p>אנחנו מצרפים עכשיו את המשפחות הראשונות. שיחה אחת בוואטסאפ,
+         ומשם זה עובד לבד — בלי אפליקציה, בלי הרשמה.</p>
+      <a class="btn btn-wa" href="#top" data-open-demo>לנסות את זולי</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⚠️ **סרגל דביק במובייל בלבד.** רוב מי שיגיע לדף יגיע מקישור
+     בוואטסאפ, בטלפון, ויגלול — והכפתור של הגיבור נשאר הרחק למעלה.
+     הוא מופיע רק אחרי שהכפתור הראשון יצא מהמסך, כדי שלא יכסה אותו. -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-wa btn-wide" href="#top" data-open-demo>לנסות את זולי — חינם</a>
+</div>
+
+<footer>
+  <div class="wrap" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center">
+    <span><b>זולי</b> · רשימת קניות שמשווה מחירים</span>
+    <span>·</span>
+    <a href="dashboard.html">מצב המערכת</a>
+  </div>
+</footer>
+
+<script src="assets/zooli.js"></script>
+<script>
+  /* ⚠️ **המספר של הבוט עדיין לא קיים.** כשהוא יגיע — ממלאים כאן ספרות
+     בלבד (למשל "972501234567") וכל כפתורי הקריאה לפעולה הופכים לקישור
+     wa.me אמיתי, בלי לגעת בשום מקום אחר.
+
+     עד אז הם גוללים אל הטלפון שבגיבור ומתמקדים בשדה. **כפתור שמבטיח
+     שיחה ולא פותח אותה נשבר דווקא אצל מי שהכי רצה**, ולכן ברירת המחדל
+     היא להודות ולא להעמיד פנים. */
+  var BOT_NUMBER = "";
+
+  (function () {
+    var btns = document.querySelectorAll('[data-open-demo]');
+
+    /* ⚠️ הסרגל הדביק מופיע **רק אחרי** שהכפתור של הגיבור יצא מהמסך —
+       אחרת שני כפתורים זהים יושבים זה על זה בפתיחה, וזה נראה כמו
+       תקלה ולא כמו הזמנה. */
+    var bar = document.getElementById('stickyCta');
+    var heroBtn = document.querySelector('.hero-cta .btn-wa');
+    if (bar && heroBtn && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) {
+        bar.classList.toggle('on', !e[0].isIntersecting);
+      }, { threshold: 0 }).observe(heroBtn);
+    }
+
+
+    if (BOT_NUMBER) {
+      var url = 'https://wa.me/' + BOT_NUMBER + '?text=' + encodeURIComponent('היי זולי');
+      Array.prototype.forEach.call(btns, function (b) {
+        b.setAttribute('href', url);
+        b.setAttribute('target', '_blank');
+        b.setAttribute('rel', 'noopener');
+        b.removeAttribute('data-open-demo');
+      });
+      return;
+    }
+
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var phone = document.querySelector('.demo-phone');
+        if (!phone) return;
+        phone.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        setTimeout(function () {
+          var i = document.getElementById('demoInput');
+          if (i) i.focus({ preventScroll: true });
+        }, 520);
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

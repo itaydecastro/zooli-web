@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>המדריך של זולי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Heebo:wght@400;500;700&display=swap">
+</head>
+<body>
+<style>
+  :root {
+    --paper:     #EFE9DF;
+    --card:      #FFFDFA;
+    --ink:       #1B2327;
+    --ink-soft:  #5D6B71;
+    --rule:      #DCD2C3;
+    --green:     #1B7A54;
+    --green-ink: #0E4A32;
+    --wash:      #E6F0E9;
+    --amber:     #A5601A;
+    --shadow:    0 1px 2px rgba(27,35,39,.08), 0 10px 26px rgba(27,35,39,.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #11161A;
+      --card:      #1A2126;
+      --ink:       #E7ECEA;
+      --ink-soft:  #95A4AB;
+      --rule:      #2C383F;
+      --green:     #52C08D;
+      --green-ink: #A9E5CB;
+      --wash:      #16302A;
+      --amber:     #DFA35C;
+      --shadow:    0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:     #11161A;
+    --card:      #1A2126;
+    --ink:       #E7ECEA;
+    --ink-soft:  #95A4AB;
+    --rule:      #2C383F;
+    --green:     #52C08D;
+    --green-ink: #A9E5CB;
+    --wash:      #16302A;
+    --amber:     #DFA35C;
+    --shadow:    0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Assistant", "Segoe UI", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    direction: rtl;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(26px, 6vw, 56px) clamp(16px, 4vw, 32px) 80px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(30px, 5vw, 44px);
+  }
+
+  /* ---- masthead ---- */
+  header { display: flex; flex-direction: column; gap: 10px; }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: "Heebo", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--green);
+  }
+  .mark span[aria-hidden] { font-size: 17px; letter-spacing: 0; }
+
+  h1 {
+    font-family: "Heebo", sans-serif;
+    font-weight: 700;
+    font-size: clamp(27px, 5.6vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    margin: 0;
+    max-width: 54ch;
+    color: var(--ink-soft);
+    font-size: clamp(15.5px, 2.2vw, 17.5px);
+  }
+
+  /* ---- a moment in the week ---- */
+  .moment {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .moment > h2 {
+    margin: 0;
+    padding: 15px 18px;
+    background: var(--wash);
+    border-bottom: 1px solid var(--rule);
+    font-family: "Heebo", sans-serif;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--green-ink);
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+  }
+  .moment > h2 em {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  dl { margin: 0; padding: 4px 0; }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 4px 18px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .row:last-child { border-bottom: 0; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 6px; } }
+
+  dt { min-width: 0; }
+  dd { margin: 0; color: var(--ink-soft); font-size: 15.5px; min-width: 0; }
+
+  code {
+    font-family: "Heebo", sans-serif;
+    font-size: 15.5px;
+    font-weight: 500;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    padding: 3px 9px;
+    display: inline-block;
+    margin: 2px 0;
+    unicode-bidi: plaintext;
+  }
+  code + code { margin-inline-start: 5px; }
+
+  .also { display: block; font-size: 13.5px; color: var(--ink-soft); margin-top: 5px; }
+
+  /* ---- the limits ---- */
+  .limits {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .limits h2 {
+    margin: 0;
+    font-family: "Heebo", sans-serif;
+    font-size: 16.5px;
+    font-weight: 700;
+  }
+  .limits ul { margin: 0; padding-inline-start: 20px; color: var(--ink-soft); }
+  .limits li { margin: 4px 0; font-size: 15.5px; }
+  .limits p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  footer b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="mark"><span aria-hidden="true">🛒</span>‏זולי</p>
+    <h1>כל מה שאפשר לבקש ממני</h1>
+    <p class="standfirst">
+      אין פקודות לשנן — פשוט כותבים בשפה רגילה. זה הדף למי שרוצה לראות
+      הכול במקום אחד, עם הניסוח המדויק לצד כל דבר.
+    </p>
+  </header>
+
+  <section class="moment">
+    <h2>📝 במהלך השבוע <em>אוספים את הרשימה</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>נגמר החלב</code> <code>חלב</code> <code>צריך לחם</code></dt>
+        <dd>מוסיף לרשימה. כל ניסוח עובד — גם רק שם המוצר.</dd>
+      </div>
+      <div class="row">
+        <dt><code>3 חלב</code></dt>
+        <dd>כמות. המספר בהתחלה נספר; <code>חלב 3%</code> זה עדיין אחד.</dd>
+      </div>
+      <div class="row">
+        <dt><code>חלב תנובה</code></dt>
+        <dd>מותג מסוים. אשווה את תנובה בכל הרשתות, לא חלב כללי.</dd>
+      </div>
+      <div class="row">
+        <dt><code>שקדי מרק 350 גרם</code></dt>
+        <dd>גודל מסוים. אתמחר את הגודל שביקשת בכל רשת שיש לי אותו בה;
+          איפה שאין — אקח את המחיר הרגיל ואגיד לך.</dd>
+      </div>
+      <div class="row">
+        <dt><code>10 לחמניות</code></dt>
+        <dd>בלחמניות ובפיתות המספר הוא חתיכות, לא מארזים — עשר לחמניות הן
+          בערך שני מארזים, והתרגום כתוב על הרשימה.</dd>
+      </div>
+      <div class="row">
+        <dt><code>בלי מותג</code></dt>
+        <dd>מבטל את המותג וחוזר למחיר הרגיל של הקטגוריה.</dd>
+      </div>
+      <div class="row">
+        <dt><code>הצג רשימה</code></dt>
+        <dd>מציג את הרשימה המלאה.
+          <span class="also">גם: <code>מה ברשימה</code> · <code>מה יש לי</code> · <code>תראה לי</code> · <code>מה עוד צריך</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>תוריד חלב</code></dt>
+        <dd>מוריד פריט אחד.
+          <span class="also">גם: <code>תמחק חלב</code> · <code>בטל חלב</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>תוריד חלב ולחם</code></dt>
+        <dd>כמה פריטים בהודעה אחת, בלי לחזור על ההוראה.</dd>
+      </div>
+      <div class="row">
+        <dt><code>תמחק הכל</code></dt>
+        <dd>מנקה את כל הרשימה. טעות? <code>תחזיר</code> ואני מחזיר אותה.</dd>
+      </div>
+      <div class="row">
+        <dt><code>בוא נתחיל מחדש</code></dt>
+        <dd>אשאל אותך מה בדיוק — את הרשימה או את ההגדרות — ולא אנחש.
+          כלום לא נמחק עד שתענה.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="moment">
+    <h2>💰 לפני שיוצאים <em>איפה הכי משתלם</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>אני יוצא לסופר</code></dt>
+        <dd>מחשב את כל הסל בכל רשת לידך, עם הסניף והמרחק, ממוין לפי מחיר.
+          <span class="also">גם: <code>הולך לקניות</code> · <code>לעשות קניות</code> · <code>אני מתכנן לצאת לסופר</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>תעשה לי השוואה</code></dt>
+        <dd>אותה השוואה, בלי להצהיר שאתה יוצא. סיימת רשימה ורוצה לדעת
+          כבר עכשיו כמה היא עולה — זה מה שתכתוב.
+          <span class="also">גם: <code>תשלח לי את המחירים</code> · <code>תחשב לי</code> · <code>כמה הכל</code> · <code>איפה הכי משתלם</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>כל הרשתות</code></dt>
+        <dd>כברירת מחדל אני מציג את חמש הזולות ואומר כמה נשארו. זה פותח
+          את כולן.</dd>
+      </div>
+      <div class="row">
+        <dt><code>תשווה רמי לוי לשופרסל</code></dt>
+        <dd>שתי רשתות זו מול זו, פריט־פריט, לפי מה שבאמת שונה ביניהן.
+          אפשר גם שלוש. תבחר את מי שאתה מתלבט ביניהן — לא חייב את הזולות.
+          <span class="also">גם: <code>פירוט</code> משווה את שתי הזולות</span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>כמה עולה חלב</code></dt>
+        <dd>מחיר של מוצר אחד בכל הרשתות, בלי כל הסל.
+          <span class="also">גם: <code>מה המחיר של חלב</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>אני בחיפה</code></dt>
+        <dd>מעדכן עיר, וכל המחירים מחושבים מחדש לשם.
+          <span class="also">גם: שיתוף מיקום מהמהדק 📎 בוואטסאפ</span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>תשנה מחיר להכי זול</code></dt>
+        <dd>עובר בין המחיר האופייני לזול ביותר. חל על כל מוצר שלא נקבת בו מותג.
+          <span class="also">גם: <code>סגנון מחיר אופייני</code></span>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="moment">
+    <h2>🛒 בתוך הסופר <em>עם עגלה ביד אחת</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>אני בסופר</code></dt>
+        <dd>פותח את הרשימה המלאה למעקב תוך כדי קנייה.
+          <span class="also">גם: <code>הגעתי לסופר</code> · <code>אני במכולת</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>קניתי חלב</code></dt>
+        <dd>מסמן בקו. הפריט נשאר על המסך כדי שתראה מה כבר לקחת.
+          <span class="also">גם: <code>לקחתי חלב</code> · <code>שמתי בעגלה חלב</code> · <code>קניתי חלב ולחם</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>2</code> <code>1 3</code></dt>
+        <dd>מסמן לפי מספר השורה. הכי מהיר כשהידיים תפוסות.</dd>
+      </div>
+      <div class="row">
+        <dt><code>לא קניתי חלב</code></dt>
+        <dd>מוריד את הסימון. הפריט נשאר ברשימה.
+          <span class="also">גם: <code>תחזיר את החלב</code> · <code>תוריד את הסימון</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>סיימתי</code></dt>
+        <dd>מוריד רק את מה שסימנת. מה שלא לקחת נשאר לפעם הבאה.
+          <span class="also">גם: <code>שילמתי</code> · <code>אני בקופה</code></span>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="moment">
+    <h2>🔁 הרשימה הקבועה <em>מה שקונים כל שבוע</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>תוסיף חלב לרשימה הקבועה</code></dt>
+        <dd>חלב יחזור אוטומטית בכל מחזור קנייה חדש.
+          <span class="also">גם: <code>חלב זה קבוע</code> · <code>תמיד תוסיף חלב</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>הרשימה הקבועה</code></dt>
+        <dd>מציג מה קבוע אצלך.</dd>
+      </div>
+      <div class="row">
+        <dt><code>תוריד את החלב מהרשימה הקבועה</code></dt>
+        <dd>מפסיק להחזיר אותו.</dd>
+      </div>
+      <div class="row">
+        <dt><code>תביא את הקבועים</code></dt>
+        <dd>מכניס אותם לרשימה עכשיו, בלי לחכות למחזור הבא.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="moment">
+    <h2>👫 רשימה משותפת <em>שני טלפונים, רשימה אחת</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>לשתף</code></dt>
+        <dd>מייצר קוד בן 6 תווים, תקף 24 שעות. שולחים אותו לבן/בת הזוג.</dd>
+      </div>
+      <div class="row">
+        <dt><code>הצטרף A7K2M9</code></dt>
+        <dd>מה שהצד השני כותב לי. מאותו רגע זו אותה רשימה לשניכם.</dd>
+      </div>
+      <div class="row">
+        <dt><code>מי ברשימה</code></dt>
+        <dd>כמה אנשים חולקים את הרשימה הזאת איתך.</dd>
+      </div>
+      <div class="row">
+        <dt><code>תבטל את השיתוף</code></dt>
+        <dd>מפסיק את השיתוף ומשאיר לך עותק של מה שהיה ברשימה.
+          <span class="also">גם: <code>תוציא אותי</code></span>
+        </dd>
+      </div>
+    </dl>
+    <div class="row" style="border-top:1px solid var(--rule)">
+      <dt><strong>מה משותף</strong></dt>
+      <dd>הרשימה, הקבועים, הסימונים בסופר וסגנון המחיר. <strong>המיקום נשאר אישי</strong> — מי שקונה בעיר אחרת לא מזיז את המחירים של השני.</dd>
+    </div>
+  </section>
+
+  <section class="moment">
+    <h2>❓ שאלות עליי <em>מותר לשאול, אני עונה</em></h2>
+    <dl>
+      <div class="row">
+        <dt><code>מה זה אופייני?</code></dt>
+        <dd>מסביר את שתי ההגדרות — אופייני מול הכי זול — גם באמצע ההיכרות,
+          בלי שהשאלה תיקרא בטעות כתשובה.
+          <span class="also">גם: <code>מה זה הכי זול?</code> · <code>מה ההבדל בין אופייני להכי זול?</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>מאיפה המחירים שלך?</code></dt>
+        <dd>מהמחירונים הרשמיים שכל רשת מחויבת בחוק לפרסם, מתעדכנים כל יום.
+          <span class="also">גם: <code>המחירים שלך מעודכנים?</code></span>
+        </dd>
+      </div>
+      <div class="row">
+        <dt><code>יש מבצעים?</code></dt>
+        <dd>עונה ביושר: כרגע מחירי מדף בלבד, ומבצעים יתווספו בהמשך.</dd>
+      </div>
+      <div class="row">
+        <dt><code>אילו רשתות אתה משווה?</code></dt>
+        <dd>הרשתות שבאזור שלך — או כל הרשתות בארץ אם עוד לא סיפרת לי איפה אתה.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="limits">
+    <h2>מה אני לא עושה</h2>
+    <ul>
+      <li>לא מזמין ולא משלם — רק אומר לך איפה זול.</li>
+      <li>לא יודע מבצעים ומועדוני לקוחות. המחירים הם מחירי המדף שהרשתות מפרסמות לפי חוק.</li>
+      <li>לא מפצל סל בין שתי חנויות.</li>
+      <li>עוד לא קורא הודעות קוליות ולא תמונות של רשימה.</li>
+    </ul>
+    <p>
+      וכשאין לי מחיר של מוצר ברשת מסוימת — אני אומר את זה ולא מדרג אותה,
+      במקום לנחש. מספר שאי אפשר לסמוך עליו גרוע ממספר שחסר.
+    </p>
+  </section>
+
+  <footer>
+    לא בטוח איך לנסח משהו? פשוט תכתוב לי בשפה חופשית — ואם לא אבין,
+    אשאל ולא אנחש. אפשר גם לכתוב <b>עזרה</b> בצ'אט בכל רגע.
+  </footer>
+
+</div>
+</body>
+</html>
