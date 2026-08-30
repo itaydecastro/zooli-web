@@ -399,11 +399,6 @@ h1 .bub {
   0%       { transform: scale(.7); opacity: .5; }
   70%,100% { transform: scale(1.6); opacity: 0; }
 }
-.ticker-lead {
-  text-align: center; margin: 0 0 12px;
-  font-size: 14.5px; color: var(--soft);
-}
-.ticker-lead b { color: var(--green-tx); }
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(50%); } }
 
 /* ------------------------------------------------------------ המספר */

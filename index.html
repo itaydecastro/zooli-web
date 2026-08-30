@@ -9,6 +9,23 @@
 <meta property="og:description" content="רשימת קניות בוואטסאפ שמשווה את כל הסל בין הרשתות שסביבכם, לפי מחירי המדף הרשמיים. חינם לגמרי.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FFF6E9">
+
+<!-- ⚠️ **דף נחיתה נפתח בהתחלה, תמיד.** הדפדפן משחזר לבדו את מיקום
+     הגלילה מהביקור הקודם, ובדף באורך הזה זה אומר שמי שכבר היה כאן
+     נוחת באמצע — רואה חצי משפט במקום את הפתיחה, ולא מבין מה זה.
+     ⚠️ **ועוגן בכתובת עדיין עובד:** מי שהגיע ל-#how מגיע ל-#how.
+     ⚠️ **וכיבוי זמני של הגלילה הרכה** — בלעדיו הקפיצה לראש הדף
+     מונפשת, ונראית כאילו הדף ברח למשתמש. -->
+<script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  addEventListener('load', function () {
+    if (location.hash) return;
+    var h = document.documentElement, was = h.style.scrollBehavior;
+    h.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    h.style.scrollBehavior = was;
+  });
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Rubik+Bubbles&family=Assistant:wght@400;600;700;800&display=swap">
@@ -69,15 +86,23 @@
   <div class="wrap hero-grid">
     <div>
       <span class="tag-free reveal">🎉 חינם לגמרי · בבטא</span>
+      <!-- ⚠️ **הכותרת נוקבת במוצר בשורה הראשונה.** הקודמת נפתחה ב"אותו
+           סל. מחיר אחר בכל סופר." — כלומר דיברה על **השוואת מחירים בלבד**,
+           ומי שקרא אותה לא ידע שיש כאן רשימה שמנהלים כל השבוע, שהיא חצי
+           מהמוצר. איתי: "לוקח לקורא קצת זמן להבין שמדובר ברשימת קניות".
+           הניסוח כאן הוא כמעט מילה במילה ה-<title> שכבר היה בראש הקובץ —
+           הוא נכתב נכון מלכתחילה ופשוט לא הופיע על המסך.
+           ⚠️ והמשפט הקודם לא נמחק: הוא עבר לשורת התיאור ונוחת שם כמסקנה. -->
       <h1 class="reveal d1">
-        <span class="l">אותו סל.</span>
-        <span class="l accent">מחיר אחר בכל סופר.</span>
-        <span class="bub">והכל בוואטסאפ.</span>
+        <span class="l">רשימת הקניות של הבית,</span>
+        <span class="bub">בוואטסאפ.</span>
+        <span class="l accent">ואיפה היא הכי זולה.</span>
       </h1>
       <p class="hero-sub reveal d2">
         כל הבית זורק לזולי מה שנגמר, מתי שנזכרים — והוא
-        <b>אוסף את הכול לרשימה אחת מסודרת</b>. כשיוצאים לקנות, הוא אומר
-        בכמה היא תעלה בכל רשת שסביבכם, לפי מחירי המדף הרשמיים.
+        <b>אוסף את הכול לרשימה אחת מסודרת</b>. כשיוצאים לקנות הוא מתמחר
+        אותה בכל רשת שסביבכם, לפי מחירי המדף הרשמיים:
+        <b>אותו סל, מחיר אחר בכל סופר.</b>
       </p>
       <div class="nos reveal d3">
         <span class="no"><i>✓</i> בלי אפליקציה</span>
@@ -133,9 +158,15 @@
   </div>
 
   <!-- ההיקף הוא הטיעון, ורשימה זורמת אומרת אותו בלי משפט אחד.
-       ⚠️ ושורה אחת מעליה, כי שמות שצפים בלי הקשר לא אומרים כלום —
-       הם צריכים להגיד **למה** הם שם. -->
-  <p class="ticker-lead">מחוברים למחירונים הרשמיים של <b data-count="21" data-stat="chains">21</b> רשתות · נמשכים מחדש כל לילה · <b data-stat="updated">30.08</b></p>
+       ⚠️ **הייתה כאן שורת הסבר מעל, והיא ירדה בהכרעת איתי** —
+       *"כל השורה הזאת לא מעניינת"*. היא אמרה **למה** השמות כאן
+       (מחירונים רשמיים, נמשכים כל לילה) ואת תאריך המשיכה.
+       ⚠️ **המחיר המוצהר:** השמות צפים עכשיו בלי הקשר מיידי. הטענה
+       עצמה לא אבדה — היא נאמרת בשלושה מקומות אחרים בדף (כרטיס
+       "מתעדכן כל יום", סעיף מקורות המחיר, והשאלות הנפוצות).
+       ⚠️ **ותאריך המשיכה עבר לפוטר** ולא נמחק: הוא העוגן היחיד של
+       `updated` ב-sync_landing.py, ובלעדיו המסנכרן נכשל — וחשוב
+       מזה, הוא ההוכחה לטענה "מתעדכן כל יום". -->
   <div class="ticker" aria-label="הרשתות שבהשוואה">
     <div class="ticker-track">
     <span><i aria-hidden="true"></i>שופרסל</span><span><i aria-hidden="true"></i>רמי לוי</span><span><i aria-hidden="true"></i>ויקטורי</span><span><i aria-hidden="true"></i>קרפור</span><span><i aria-hidden="true"></i>מחסני השוק</span><span><i aria-hidden="true"></i>יוחננוף</span><span><i aria-hidden="true"></i>סופר ספיר</span><span><i aria-hidden="true"></i>טיב טעם</span><span><i aria-hidden="true"></i>קינג סטור</span><span><i aria-hidden="true"></i>קשת טעמים</span><span><i aria-hidden="true"></i>אושר עד</span><span><i aria-hidden="true"></i>שוק העיר</span><span><i aria-hidden="true"></i>סופר ברקת</span><span><i aria-hidden="true"></i>מעיין 2000</span><span><i aria-hidden="true"></i>סופר יודה</span><span><i aria-hidden="true"></i>זול ובגדול</span><span><i aria-hidden="true"></i>שפע ברכת השם</span><span><i aria-hidden="true"></i>סטופ מרקט</span><span><i aria-hidden="true"></i>חצי חינם</span><span><i aria-hidden="true"></i>סלאח דבאח</span><span><i aria-hidden="true"></i>ח. כהן</span><span aria-hidden="true"><i aria-hidden="true"></i>שופרסל</span><span aria-hidden="true"><i aria-hidden="true"></i>רמי לוי</span><span aria-hidden="true"><i aria-hidden="true"></i>ויקטורי</span><span aria-hidden="true"><i aria-hidden="true"></i>קרפור</span><span aria-hidden="true"><i aria-hidden="true"></i>מחסני השוק</span><span aria-hidden="true"><i aria-hidden="true"></i>יוחננוף</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ספיר</span><span aria-hidden="true"><i aria-hidden="true"></i>טיב טעם</span><span aria-hidden="true"><i aria-hidden="true"></i>קינג סטור</span><span aria-hidden="true"><i aria-hidden="true"></i>קשת טעמים</span><span aria-hidden="true"><i aria-hidden="true"></i>אושר עד</span><span aria-hidden="true"><i aria-hidden="true"></i>שוק העיר</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ברקת</span><span aria-hidden="true"><i aria-hidden="true"></i>מעיין 2000</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר יודה</span><span aria-hidden="true"><i aria-hidden="true"></i>זול ובגדול</span><span aria-hidden="true"><i aria-hidden="true"></i>שפע ברכת השם</span><span aria-hidden="true"><i aria-hidden="true"></i>סטופ מרקט</span><span aria-hidden="true"><i aria-hidden="true"></i>חצי חינם</span><span aria-hidden="true"><i aria-hidden="true"></i>סלאח דבאח</span><span aria-hidden="true"><i aria-hidden="true"></i>ח. כהן</span></div>
@@ -208,7 +239,14 @@
          הנפשה — וזה גם מה שיקרה אם ה-JS ייפול. -->
     <div class="reel">
       <div class="reel-stage">
-        <div class="phone reel-phone">
+        <!-- ⚠️ **מוסתר מקוראי מסך, בכוונה.** התוכן כאן **מתחלף לבד**
+             לפי הגלילה, וקורא מסך שהגיע אליו שומע תמלול של שיחה
+             שהתחלפה בזמן שהוא ירד אליה — כלומר רעש, לא מידע.
+             המשמעות יושבת בטקסט שלצידו, וזו הסיבה שהוא נוסח כך
+             שהוא עומד בלי הטלפון.
+             ⚠️ **המחיר המוצהר:** מי שמשתמש בקורא מסך מקבל את ההסבר
+             ולא את הדוגמה עצמה. -->
+        <div class="phone reel-phone" aria-hidden="true">
           <div class="screen">
             <div class="wa-top">
               <span class="back">‹</span>
@@ -216,7 +254,10 @@
               <span class="who"><b>זולי</b><span>מקוון</span></span>
               <span class="icons" aria-hidden="true">⋮</span>
             </div>
-            <div class="wa-body" id="reelBody"></div>
+            <!-- tabindex="-1": גוף השיחה ניתן לגלילה, וכרום מכניס
+                 אזורים כאלה לסדר ה-Tab. אלמנט שאפשר להגיע אליו
+                 במקלדת בתוך תת-עץ aria-hidden הוא שגיאה. -->
+            <div class="wa-body" id="reelBody" tabindex="-1"></div>
           </div>
         </div>
       </div>
@@ -224,7 +265,7 @@
         <div class="reel-step on">
           <span class="reel-n">1</span>
           <h3>במהלך השבוע — הוא אוסף</h3>
-          <p>נגמר משהו? כותבים לו, מתי שנזכרים. כל הבית על אותה רשימה. <b>והוא עונה בריאקט, לא בהודעה</b> — ומדבר רק כשמה שנרשם שונה ממה שכתבתם, כמו יחידת המכירה כאן.</p>
+          <p>נגמר משהו? כותבים לו, מתי שנזכרים. כל הבית על אותה רשימה. <b>והוא עונה בריאקט, לא בהודעה</b> — ומדבר רק כשמה שנרשם שונה ממה שכתבתם, למשל כשמים מינרליים נרשמים כבקבוק ליטר וחצי.</p>
         </div>
         <div class="reel-step">
           <span class="reel-n">2</span>
@@ -503,6 +544,8 @@
     <span><b>זולי</b> · רשימת קניות שמשווה מחירים</span>
     <span>·</span>
     <a href="dashboard.html">מצב המערכת</a>
+    <span>·</span>
+    <span>מחירים מ־<b data-stat="updated">30.08</b></span>
   </div>
 </footer>
 
