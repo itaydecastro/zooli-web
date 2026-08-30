@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זולי — ערכת שיווק</title>
+<meta name="description" content="הטקסטים המוכנים להעתקה, המספרים המאושרים, וכרטיסי השיתוף של זולי.">
+<meta name="theme-color" content="#25D366">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Varela+Round&family=Rubik:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .snip-title {
+    font-family: "Varela Round", sans-serif; font-size: 16px;
+    margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline;
+  }
+  .snip-title small { color: var(--soft); font-weight: 400; font-size: 14px; }
+
+  .rules li b { color: var(--ink); }
+  .no  { color: var(--warn); }
+  .yes { color: var(--green); }
+
+  /* כרטיסי שיתוף — נועדו לצילום מסך, לכן במידות אמיתיות */
+  .cards { display: flex; gap: 22px; flex-wrap: wrap; }
+  .shot-wrap { }
+  .shot-lab { color: var(--soft); font-size: 14px; margin: 0 0 8px; }
+  /* הפלטה של זולי: שחור, ירוק וואטסאפ, לבן. הגרסה הקודמת הייתה ירוק
+     כהה מלא — צבע שאינו מופיע בשום מקום אחר במוצר. */
+  .shot {
+    background:
+      radial-gradient(120% 130% at 88% -10%, rgba(37,211,102,.30) 0%, transparent 58%),
+      linear-gradient(160deg, #0F1613 0%, #070B09 100%);
+    color: #fff; border-radius: 26px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 56px 58px; box-shadow: var(--shadow);
+    transform-origin: top right;
+  }
+  .shot .top {
+    font-family: "Varela Round", sans-serif; font-size: 24px; color: var(--green);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .shot .top img { width: 42px; height: 42px; }
+  .shot .mid {
+    font-family: "Secular One", sans-serif;
+    font-size: 62px; line-height: 1.1; letter-spacing: -1px; margin: 18px 0;
+  }
+  .shot .mid em { font-style: normal; color: var(--green); }
+  .shot .bot { font-size: 25px; color: #C9D8D0; line-height: 1.45; }
+  .shot .foot { font-family: "Varela Round", sans-serif; font-size: 21px; color: #7C8D85; }
+  /* הדמות מציצה מהפינה — היא מה שמזהים לפני שקוראים מילה. */
+  .shot .peek {
+    position: absolute; inset-inline-start: -54px; bottom: -58px;
+    width: 260px; opacity: .16; pointer-events: none;
+  }
+  .shot.og  { width: 1200px; height: 630px; transform: scale(.38); }
+  .shot.sq  { width: 1080px; height: 1080px; transform: scale(.30); }
+  .shot.sq .mid { font-size: 76px; }
+  .frame-og { width: 456px; height: 240px; }
+  .frame-sq { width: 324px; height: 324px; }
+  @media (max-width: 560px) {
+    .shot.og { transform: scale(.26); } .frame-og { width: 312px; height: 164px; }
+    .shot.sq { transform: scale(.21); } .frame-sq { width: 227px; height: 227px; }
+  }
+  .num-strip { display: flex; gap: 10px 26px; flex-wrap: wrap; font-size: 16px; }
+  .num-strip b { font-family: "Secular One", sans-serif; font-size: 21px; color: var(--green); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html">🛒 זולי</a>
+    <a class="link" href="index.html">דף הבית</a>
+    <a class="link" href="dashboard.html">מצב המערכת</a>
+    <span class="spacer"></span>
+    <span class="pill">פנימי</span>
+  </div>
+</nav>
+
+<section>
+  <div class="wrap narrow">
+    <p class="eyebrow">ערכת שיווק</p>
+    <h1>מה להגיד, ומה לא</h1>
+    <p class="lede">
+      כל טקסט כאן מוכן להעתקה כמו שהוא. כל מספר כאן נמדד. הכלל היחיד:
+      אף טענה על חיסכון שלא עומדת מאחוריה מדידה — כי המספר הזה הוא כל
+      מה שהמוצר מוכר.
+    </p>
+  </div>
+</section>
+
+<!-- ======================================================== המספרים -->
+<section class="sec-line">
+  <div class="wrap narrow">
+    <h2>המספרים המאושרים</h2>
+    <p class="lede">מותר להשתמש בכל אחד מאלה. הם נמדדים מחדש אחרי כל עדכון
+      נתונים, והמצב העדכני נמצא ב<a href="dashboard.html">דשבורד</a>.</p>
+    <div class="card" style="margin-top:18px">
+      <p class="num-strip">
+        <span><b data-count="21" data-stat="chains">21</b> רשתות</span>
+        <span><b data-count="146" data-stat="cities">146</b> ערים</span>
+        <span><b data-count="484" data-stat="categories">484</b> קטגוריות</span>
+        <span><b data-count="1259" data-stat="stores">1,259</b> סניפים</span>
+        <span><b>כל יום</b> עדכון</span>
+        <span><b data-stat="gap">14.0%</b> פער בין הזולה ליקרה</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== כללי הברזל -->
+<section class="sec-line">
+  <div class="wrap narrow">
+    <h2>מה שלא אומרים</h2>
+    <p class="lede">חמישה משפטים שנשמעים טוב ואי אפשר לעמוד מאחוריהם.
+      משפט שיווקי שהמשתמש יגלה שאינו נכון בקנייה הראשונה שלו מוחק את
+      האמון בכל שאר המספרים.</p>
+    <ul class="list-clean rules" style="margin-top:18px">
+      <li><span class="mark no">✕</span><span>
+        <b>"חסכת 40 ₪"</b> — הבוט לא יודע לאיזו חנות באמת נכנסתם. הוא מדווח
+        על ה<b>פער</b>: "ההפרש היה 40 ₪ — אם לא הלכתם ליקרה, זה מה שנשאר
+        בכיס". <span class="yes">כך גם בשיווק.</span>
+      </span></li>
+      <li><span class="mark no">✕</span><span>
+        <b>"עד 40% חיסכון"</b> — הפער הנמדד הוא כ־<b data-stat="gap">14.0%</b>. מספר גדול יותר
+        ימכור יותר בפעם הראשונה ופעם אחת בלבד.
+      </span></li>
+      <li><span class="mark no">✕</span><span>
+        <b>"כולל כל המבצעים"</b> — אין מבצעים בהשוואה, במכוון. אם מזכירים
+        את זה — מזכירים כיתרון: השוואה אחידה והוגנת בין הרשתות.
+      </span></li>
+      <li><span class="mark no">✕</span><span>
+        <b>"כל הרשתות בישראל"</b> — <b data-count="21" data-stat="chains">21</b> רשתות, וזה הרבה. לומר "כל" זה
+        להפסיד את האמון על מילה אחת מיותרת.
+      </span></li>
+      <li><span class="mark no">✕</span><span>
+        <b>"מבוסס בינה מלאכותית"</b> — הוא לא. הוא קורא את המחירונים
+        הרשמיים ומשווה. זו דווקא טענה חזקה יותר: אין כאן ניחוש.
+      </span></li>
+    </ul>
+    <div class="card" style="margin-top:22px; border-color:var(--green)">
+      <h3 class="yes">✓ הניסוח המאושר לחיסכון</h3>
+      <p style="margin:0; color:var(--soft)">
+        <b style="color:var(--ink)">"מאות שקלים בחודש"</b> — למשפחה שמוציאה
+        כ-3,000 ₪ על מזון. יש בדיקה אוטומטית במערכת שנכשלת אם זה מפסיק
+        להיות נכון, ואז מחליפים את הניסוח — לא את הבדיקה.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== טקסטים -->
+<section class="sec-line">
+  <div class="wrap narrow">
+    <h2>טקסטים מוכנים</h2>
+    <p class="lede">לחיצה על "העתק" מכניסה את הטקסט ללוח.</p>
+
+    <p class="snip-title">משפט אחד <small>· לחתימה, לפרופיל, לתשובה מהירה</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">זולי — רשימת הקניות של המשפחה בוואטסאפ, ולפני שיוצאים לסופר: איפה היא הכי זולה.</div>
+    </div>
+
+    <p class="snip-title">הודעה לחבר <small>· וואטסאפ, אישי</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">תשמע, אני משתמש בבוט וואטסאפ לרשימת קניות שקוראים לו זולי, ואני חייב לספר לך.
+כותב לו במהלך השבוע מה נגמר — "זולי נגמר החלב" — והוא זוכר.
+ולפני שאני יוצא לסופר הוא מחשב לי כמה כל הסל עולה בכל רשת באזור ואומר איפה הכי זול.
+בלי אפליקציה, בלי הרשמה, הכול בוואטסאפ. רוצה שאשלח לך?</div>
+    </div>
+
+    <p class="snip-title">הודעה לקבוצת המשפחה <small>· כשמצרפים את הבית</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">הוספתי לקבוצה את זולי 🛒
+כל אחד כותב לו מה נגמר — "זולי תוסיף חלב" — וזה נכנס לרשימה אחת שכולנו רואים.
+לפני הקנייה הוא מחשב כמה הסל יוצא בכל סופר באזור ואומר איפה הכי משתלם.
+הכול פה בוואטסאפ, בלי להוריד כלום.</div>
+    </div>
+
+    <p class="snip-title">פוסט לקבוצת שכונה או פייסבוק <small>· גיוס משפחות לבטא</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">מישהו עוד מרגיש שהקנייה השבועית עולה כל פעם סכום אחר?
+
+בניתי בוט וואטסאפ בשם זולי, שעושה שני דברים פשוטים:
+1. מנהל את רשימת הקניות של הבית — כותבים בקבוצה "זולי תוסיף חלב" והוא זוכר. כולם מוסיפים לאותה רשימה וכולם רואים אותה.
+2. לפני היציאה לסופר הוא מחשב כמה כל הסל יעלה בכל רשת שיש לה סניף באזור, ומראה מי הזולה.
+
+המחירים מגיעים מהמחירונים הרשמיים שכל רשת מחויבת בחוק לפרסם, ומתעדכנים כל יום — <b data-count="21" data-stat="chains">21</b> רשתות ב-<b data-count="146" data-stat="cities">146</b> ערים.
+הפער בין הרשת הזולה ליקרה על סל משפחתי הוא בערך <b data-stat="gap">14.0%</b>, כלומר מאות שקלים בחודש.
+
+הכול בוואטסאפ, בלי אפליקציה ובלי הרשמה. מחפש עוד כמה משפחות שינסו — מי בפנים?</div>
+    </div>
+
+    <p class="snip-title">תיאור קצר <small>· לאתר, לחנות אפליקציות, לכותרת</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">זולי — רשימת הקניות של המשפחה, בוואטסאפ. כותבים בקבוצה מה נגמר, ולפני היציאה לסופר מקבלים השוואה של כל הסל בין הרשתות שסביבכם, לפי מחירי המדף הרשמיים.</div>
+    </div>
+
+    <p class="snip-title">המשפט שמסביר למה זה קיים <small>· לפתיחת שיחה או מצגת</small></p>
+    <div class="copy-row">
+      <button class="copy-btn" data-copy>העתק</button>
+      <div class="snippet">אותו סל בדיוק, באותה עיר, עולה ברשת אחת אחוזים שלמים יותר מאשר בשנייה. אף אחד לא בודק את זה — כי לבדוק את זה ידנית זה בלתי אפשרי.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== כרטיסים -->
+<section class="sec-line">
+  <div class="wrap">
+    <h2>כרטיסי שיתוף</h2>
+    <p class="lede narrow">
+      מוצגים כאן מוקטנים ובנויים במידה האמיתית. לצילום: פותחים את הדף
+      במחשב, מגדילים את הכרטיס (הסרת ה-scale ב-CSS) ומצלמים מסך — או
+      פשוט משתמשים בהם כרפרנס לעיצוב.
+    </p>
+    <div class="cards" style="margin-top:24px">
+      <div class="shot-wrap">
+        <p class="shot-lab">1200 × 630 — תצוגה מקדימה של קישור</p>
+        <div class="frame-og">
+          <div class="shot og">
+            <img class="peek" src="assets/zooli.svg" alt="">
+            <div class="top"><img src="assets/zooli.svg" alt="">זולי</div>
+            <div>
+              <div class="mid">רשימת הקניות<br><em>שיודעת איפה זה הכי זול</em></div>
+              <div class="bot"><b data-count="21" data-stat="chains">21</b> רשתות · <b data-count="146" data-stat="cities">146</b> ערים · מחירי מדף רשמיים, כל יום</div>
+            </div>
+            <div class="foot">הכול בוואטסאפ · בלי אפליקציה</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shot-wrap">
+        <p class="shot-lab">1080 × 1080 — פוסט מרובע</p>
+        <div class="frame-sq">
+          <div class="shot sq">
+            <img class="peek" src="assets/zooli.svg" alt="">
+            <div class="top"><img src="assets/zooli.svg" alt="">זולי</div>
+            <div>
+              <div class="mid">אותו סל.<br><em><b data-stat="gap">14.0%</b> הפרש.</em></div>
+              <div class="bot">בין הרשת הזולה ליקרה, באותה עיר.<br>מאות שקלים בחודש למשפחה.</div>
+            </div>
+            <div class="foot">רשימת קניות בוואטסאפ שמשווה בשבילך</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== חומר גלם -->
+<section class="sec-line">
+  <div class="wrap narrow">
+    <h2>חומר גלם להדגמות</h2>
+    <ul class="list-clean" style="margin-top:14px">
+      <li><span class="mark">💬</span><span>
+        <b>שיחה אמיתית מוקלטת</b> — הבועות ב<a href="index.html#chat">דף הבית</a>
+        הן פלט אמיתי של המערכת. זה החומר החזק ביותר שיש: אנשים מאמינים
+        לצילום מסך של שיחה יותר מלכל טענה.
+      </span></li>
+      <li><span class="mark">📊</span><span>
+        <b>מצב המערכת</b> — <a href="dashboard.html">הדשבורד</a> נבנה
+        מהנתונים עצמם, ואפשר להראות אותו למי ששואל "כמה זה באמת מכסה".
+      </span></li>
+      <li><span class="mark">📖</span><span>
+        <b>דף היכולות של הבוט</b> — מקור האמת למה שהוא יודע לעשות.
+        <a href="https://claude.ai/code/artifact/7dc7c47c-fe7a-4e0d-95dc-ffd7a214a267">לפתיחה</a>.
+      </span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; gap:14px; flex-wrap:wrap">
+    <span>🛒 <b>זולי</b></span>
+    <span style="flex:1"></span>
+    <a href="index.html">דף הבית</a>
+    <a href="dashboard.html">מצב המערכת</a>
+  </div>
+</footer>
+
+<script>
+/* העתקה ללוח. navigator.clipboard לא זמין ב-file:// בחלק מהדפדפנים,
+   ולכן יש נפילה ל-execCommand — אחרת הכפתור נראה שבור דווקא במצב
+   שבו הדף ייפתח הכי הרבה פעמים: קובץ מקומי. */
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-copy]');
+  if (!btn) return;
+  var text = btn.parentNode.querySelector('.snippet').innerText;
+  var done = function () {
+    var was = btn.textContent;
+    btn.textContent = 'הועתק ✓';
+    btn.classList.add('done');
+    setTimeout(function () { btn.textContent = was; btn.classList.remove('done'); }, 1600);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done, fallback);
+  } else { fallback(); }
+
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+});
+</script>
+
+</body>
+</html>

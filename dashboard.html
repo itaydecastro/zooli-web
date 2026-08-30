@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זולי — מצב המערכת</title>
+<meta name="description" content="הדשבורד של זולי: כמה רשתות, ערים וקטגוריות נמצאות בהשוואה היום, ומה עוד פתוח.">
+<meta name="theme-color" content="#25D366">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Varela+Round&family=Rubik:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ==========================================================================
+   דשבורד זולי.
+   כתב מעובה: Secular One לכותרות ולמספרים (כבד, ידידותי, ותומך עברית),
+   Varela Round לכפתורים ולתוויות, Rubik לגוף הטקסט.
+   ========================================================================== */
+
+h1, h2, h3, .tile .num, .btn, .chip2 { font-family: "Secular One", "Varela Round", sans-serif; }
+h1 { font-size: clamp(38px, 8.5vw, 76px); letter-spacing: -1px; }
+h2 { font-size: clamp(27px, 5.2vw, 44px); }
+
+/* -------------------------------------------------- ראש הדף */
+.head { position: relative; overflow: hidden; padding: clamp(28px,5vw,54px) 0 clamp(22px,4vw,40px); }
+.head::before {
+  content:""; position:absolute; inset:-40% -20% auto -20%; height:640px; pointer-events:none;
+  background: radial-gradient(52% 52% at 62% 30%, rgba(37,211,102,.20) 0%, transparent 70%);
+}
+.head .wrap { position: relative; }
+.head-grid { display:grid; gap:clamp(18px,4vw,40px); grid-template-columns:1fr; align-items:center; }
+@media (min-width: 860px){ .head-grid { grid-template-columns: 1.35fr .65fr; } }
+
+.stamp { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.stamp .pill { font-family:"Varela Round",sans-serif; }
+.stamp .pill b { color: var(--ink); }
+.live::before {
+  content:""; display:inline-block; width:8px; height:8px; border-radius:50%;
+  background: var(--green); margin-inline-end:8px; vertical-align:1px;
+  box-shadow: 0 0 0 0 rgba(37,211,102,.6); animation: pulse 2.2s infinite;
+}
+@keyframes pulse { 70%{ box-shadow:0 0 0 9px rgba(37,211,102,0);} 100%{ box-shadow:0 0 0 0 rgba(37,211,102,0);} }
+
+/* -------------------------------------------------- הדמות */
+.zooli { width: min(280px, 62vw); height:auto; overflow:visible; display:block; margin:0 auto; }
+#z-all    { animation: z-float 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin:120px 200px; transform-box:fill-box; }
+#z-squash { animation: z-squash 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin:120px 190px; transform-box:fill-box; }
+#z-shadow { animation: z-shadow 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin:center; transform-box:fill-box; }
+@keyframes z-float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+@keyframes z-squash { 0%,100%{transform:scale(1.04,.96)} 45%,55%{transform:scale(.97,1.03)} }
+@keyframes z-shadow { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(.8);opacity:.28} }
+.z-wheel-spin { animation: z-spin 2.2s linear infinite; transform-origin:center; transform-box:fill-box; }
+@keyframes z-spin { to { transform: rotate(360deg); } }
+.z-eye { transform-origin:center; transform-box:fill-box; transition: transform .09s ease; }
+.z-eye.shut { transform: scaleY(.08); }
+.z-pupil { transition: transform .18s cubic-bezier(.22,1,.36,1); }
+.z-drop { animation: z-drop 4.4s cubic-bezier(.55,0,.85,.35) infinite; }
+#z-drop-2 { animation-delay: 2.2s; }
+@keyframes z-drop {
+  0%,12%{transform:translateY(-92px) rotate(-16deg);opacity:0}
+  18%{transform:translateY(-86px) rotate(-13deg);opacity:1}
+  46%,100%{transform:translateY(34px) rotate(10deg);opacity:1}
+}
+
+/* -------------------------------------------------- אריחים */
+.tiles { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); }
+.tile {
+  border-radius: 26px; padding: 22px 20px; position:relative; overflow:hidden;
+  background: linear-gradient(160deg, #16211B 0%, #0E1613 100%);
+  border:1px solid var(--line);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), border-color .22s;
+}
+.tile:hover { transform: translateY(-5px); border-color: rgba(37,211,102,.45); }
+.tile .num { font-size: clamp(30px,5.4vw,44px); color: var(--green); }
+.tile .lab { color: var(--ink); font-size: 15px; opacity:.9; }
+.tile .sub { color: var(--soft); font-size: 12.5px; margin-top:4px; }
+
+/* -------------------------------------------------- כפתורי בועה
+   הקצה התחתון הוא "עובי" הכפתור, והוא נעלם בלחיצה — ככה כפתור פיזי
+   מתנהג, וזה מה שנותן את התחושה הצעצועית שאיתי ביקש. */
+.chips { display:flex; gap:10px; flex-wrap:wrap; margin: 22px 0 26px; }
+.chip2 {
+  cursor:pointer; font-size:15.5px; padding:11px 22px; border-radius:999px;
+  background:#16211B; color:var(--soft); border:1.5px solid var(--line);
+  box-shadow: 0 4px 0 #0A120E;
+  transition: transform .13s, box-shadow .13s, color .18s, border-color .18s, background .18s;
+}
+.chip2:hover { color: var(--ink); border-color: rgba(37,211,102,.5); }
+.chip2:active { transform: translateY(4px); box-shadow: 0 0 0 #0A120E; }
+.chip2[aria-pressed="true"] {
+  background: var(--green); color: var(--on-green); border-color: var(--green);
+  box-shadow: 0 4px 0 #0B7A3C, 0 10px 26px rgba(37,211,102,.28);
+}
+.btn { box-shadow: 0 5px 0 #0B7A3C, 0 14px 34px rgba(37,211,102,.22); }
+.btn:active { transform: translateY(5px); box-shadow: 0 0 0 #0B7A3C, 0 6px 16px rgba(37,211,102,.18); }
+
+/* -------------------------------------------------- שורות הרשתות */
+.chains { display:flex; flex-direction:column; gap:9px; }
+.crow {
+  display:grid; align-items:center; gap:12px;
+  grid-template-columns: 30px minmax(84px,1.1fr) minmax(60px,3fr) auto;
+  background:#111A16; border:1px solid var(--line); border-radius:18px; padding:12px 15px;
+  transition: border-color .2s, background .2s;
+}
+.crow:hover { border-color: rgba(37,211,102,.4); background:#13201A; }
+.crow .rank { font-family:"Secular One",sans-serif; color:var(--soft); font-size:14px; }
+.crow .cname { font-size:15.5px; }
+.crow .ctrack { background:#0A120E; border-radius:999px; height:11px; overflow:hidden; }
+.crow .cfill {
+  display:block; height:100%; width:0; border-radius:999px;
+  background: linear-gradient(90deg,#0E7C43,#25D366 70%,#5CF29A);
+  transition: width 1.1s cubic-bezier(.22,1,.36,1);
+}
+.crow.on .cfill { width: var(--w); }
+.crow .ccells { font-family:"Secular One",sans-serif; font-variant-numeric:tabular-nums; font-size:15px; }
+.crow .ccities { color:var(--soft); font-size:12.5px; }
+@media (max-width:620px){
+  .crow { grid-template-columns: 26px 1fr auto; }
+  .crow .ctrack { grid-column: 1 / -1; }
+  .crow .ccities { display:none; }
+}
+
+/* -------------------------------------------------- מה פתוח */
+.open-list { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.open-list li {
+  display:flex; gap:14px; align-items:flex-start;
+  background:#111A16; border:1px solid var(--line); border-radius:20px; padding:17px 19px;
+}
+.open-list .dot { width:11px; height:11px; border-radius:50%; background:var(--warn); margin-top:8px; flex:none; }
+.open-list b { display:block; font-family:"Varela Round",sans-serif; font-size:17px; }
+.open-list em { font-style:normal; color:var(--soft); font-size:14.5px; }
+
+/* -------------------------------------------------- הטלפון הצף */
+.fab {
+  position:fixed; inset-inline-end:20px; inset-block-end:20px; z-index:60;
+  width:66px; height:66px; border-radius:50%; border:0; cursor:pointer;
+  background: var(--green); box-shadow: 0 6px 0 #0B7A3C, 0 16px 40px rgba(37,211,102,.35);
+  display:flex; align-items:center; justify-content:center;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  animation: fab-in .5s cubic-bezier(.34,1.56,.64,1) both .8s;
+}
+@keyframes fab-in { from{ transform:scale(0) translateY(30px); opacity:0 } to{ transform:none; opacity:1 } }
+.fab:hover { transform: translateY(-3px) scale(1.05); }
+.fab:active { transform: translateY(4px); box-shadow: 0 2px 0 #0B7A3C; }
+.fab svg { width:34px; height:34px; }
+.fab .badge {
+  position:absolute; top:-3px; inset-inline-start:-3px; background:#FF5B5B; color:#fff;
+  font-size:12px; width:22px; height:22px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-family:"Varela Round",sans-serif;
+}
+.fab.open .badge { display:none; }
+
+/* ⚠️ הגובה חייב תקרה שתלויה במסך ולא מספר קבוע. בגרסה הראשונה הפאנל
+   היה 538px בגובה קבוע, ובחלון של 550px הוא גלש מעל הניווט וכיסה את
+   ראש הדף — כלומר נשבר בדיוק במסכים הנמוכים (חלון קטן, טלפון לרוחב).
+   flex column + max-height נותנים לגוף השיחה להתכווץ במקום לדחוף. */
+.chatbox {
+  position:fixed; inset-inline-end:20px; inset-block-end:96px; z-index:60;
+  width:min(340px, calc(100vw - 40px)); background:var(--chat);
+  border:1px solid var(--line); border-radius:26px; overflow:hidden;
+  box-shadow: 0 20px 70px rgba(0,0,0,.7);
+  display:flex; flex-direction:column;
+  max-height: calc(100vh - 116px);
+  max-height: calc(100dvh - 116px);
+  transform-origin: bottom left; transform: scale(.85) translateY(18px); opacity:0;
+  pointer-events:none; transition: transform .26s cubic-bezier(.34,1.56,.64,1), opacity .2s;
+}
+.cb-top, .cb-sugg, .cb-form, .cb-note { flex: none; }
+.chatbox.open { transform:none; opacity:1; pointer-events:auto; }
+.cb-top { background:var(--green); color:var(--on-green); padding:12px 16px; display:flex; align-items:center; gap:10px; }
+.cb-top .t { font-family:"Varela Round",sans-serif; font-size:16px; line-height:1.2; }
+.cb-top .s { font-size:11.5px; opacity:.75; }
+.cb-top .x { margin-inline-start:auto; background:none; border:0; color:var(--on-green); font-size:20px; cursor:pointer; line-height:1; padding:4px; }
+.cb-body {
+  padding:14px 12px; height:290px; min-height:110px; flex:1 1 auto;
+  overflow-y:auto; display:flex; flex-direction:column; gap:8px;
+}
+.cb-body::-webkit-scrollbar { width:6px; }
+.cb-body::-webkit-scrollbar-thumb { background:#22302A; border-radius:999px; }
+.msg {
+  max-width:86%; padding:9px 13px; font-size:14.5px; line-height:1.5; white-space:pre-wrap;
+  animation: msg-in .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes msg-in { from{ opacity:0; transform:translateY(10px) scale(.96) } to{ opacity:1; transform:none } }
+.msg.bot  { background:var(--bot); border:1px solid var(--line); border-radius:6px 16px 16px 16px; align-self:flex-start; }
+.msg.me   { background:var(--user); border-radius:16px 6px 16px 16px; align-self:flex-end; }
+.typing { display:flex; gap:4px; align-items:center; }
+.typing i { width:7px; height:7px; border-radius:50%; background:var(--soft); animation: bounce 1.1s infinite; }
+.typing i:nth-child(2){ animation-delay:.15s } .typing i:nth-child(3){ animation-delay:.3s }
+@keyframes bounce { 0%,60%,100%{ transform:translateY(0); opacity:.4 } 30%{ transform:translateY(-5px); opacity:1 } }
+.cb-sugg { display:flex; gap:7px; flex-wrap:wrap; padding:0 12px 10px; }
+.cb-sugg button {
+  background:#16211B; border:1px solid var(--line); color:var(--soft); cursor:pointer;
+  border-radius:999px; padding:6px 13px; font-size:13px; font-family:"Varela Round",sans-serif;
+  transition: color .15s, border-color .15s;
+}
+.cb-sugg button:hover { color:var(--green); border-color:var(--green); }
+.cb-form { display:flex; gap:8px; padding:10px 12px; border-top:1px solid var(--line); }
+.cb-form input {
+  flex:1; background:#0A120E; border:1px solid var(--line); border-radius:999px;
+  padding:11px 16px; color:var(--ink); font-family:inherit; font-size:14.5px; min-width:0;
+}
+.cb-form input::placeholder { color:#5E6E66; }
+.cb-form button {
+  flex:none; width:42px; height:42px; border-radius:50%; border:0; background:var(--green);
+  color:var(--on-green); cursor:pointer; font-size:17px;
+  display:flex; align-items:center; justify-content:center; transition: transform .15s;
+}
+.cb-form button:active { transform:scale(.92); }
+.cb-note { padding:0 14px 12px; color:#5E6E66; font-size:11.5px; text-align:center; }
+
+@media (prefers-reduced-motion: reduce){
+  #z-all,#z-squash,#z-shadow,.z-wheel-spin,.fab { animation:none !important; }
+  .z-drop { animation:none !important; opacity:0 !important; }
+  .crow .cfill { transition:none; width:var(--w); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html">🛒 זולי</a>
+    <a class="link" href="index.html">דף הבית</a>
+    <span class="spacer"></span>
+    <a class="link" href="marketing.html">ערכת שיווק</a>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap head-grid">
+    <div>
+      <p class="eyebrow">מצב המערכת</p>
+      <h1>מה יש בפנים<br>היום</h1>
+      <p class="lede" style="max-width:34em">
+        כל מספר בדף הזה נקרא מטבלאות המחירים עצמן ברגע שהוא נבנה.
+        אין כאן מספר שהוקלד ביד.
+      </p>
+      <div class="stamp">
+        <span class="pill ok live">הנתונים נבנו <b>30.08.2026 · 12:43</b></span>
+        <span class="pill">הדף נוצר <b>30.08.2026 · 13:24</b></span>
+      </div>
+    </div>
+    <div><svg xmlns="http://www.w3.org/2000/svg" class="zooli" id="zooli" viewBox="0 0 240 232" role="img" aria-label="זולי, עגלת קניות מחייכת">
+  <defs>
+    <linearGradient id="gBody" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0%" stop-color="#5CF29A"/><stop offset="45%" stop-color="#25D366"/><stop offset="100%" stop-color="#0E7C43"/>
+    </linearGradient>
+    <linearGradient id="gFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DDEBE3"/>
+    </linearGradient>
+    <linearGradient id="gHandle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7CF7AF"/><stop offset="100%" stop-color="#12A052"/>
+    </linearGradient>
+    <radialGradient id="gGloss" cx=".3" cy=".2" r=".7">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fSoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#02150B" flood-opacity=".55"/>
+    </filter>
+    <clipPath id="clipAbove"><rect x="-40" y="-120" width="320" height="208"/></clipPath>
+  </defs>
+
+  <ellipse id="z-shadow" cx="120" cy="216" rx="62" ry="9" fill="#000" opacity=".5"/>
+
+  <g id="z-all">
+    <g id="z-squash" filter="url(#fSoft)">
+      <path d="M22 44 h16 a14 14 0 0 1 13.4 9.8 L58 84" fill="none" stroke="url(#gHandle)" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="22" cy="44" r="7" fill="#7CF7AF"/>
+
+      <g id="z-arm-r">
+        <path d="M46 128 q-16 -4 -22 -16" fill="none" stroke="#12A052" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="23" cy="111" r="7.5" fill="#5CF29A"/>
+      </g>
+      <path d="M194 128 q16 -4 22 -16" fill="none" stroke="#0E7C43" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="217" cy="111" r="7.5" fill="#3ADE7C"/>
+
+      <path d="M44 84 h152 l-14 74 a16 16 0 0 1 -15.8 13.4 H73.8 A16 16 0 0 1 58 158 Z" fill="url(#gBody)"/>
+
+      <g clip-path="url(#clipAbove)">
+        <g class="z-drop" id="z-drop-1">
+          <rect x="106" y="84" width="27" height="33" rx="6" fill="#F2FAF6"/>
+          <rect x="106" y="84" width="27" height="11" rx="5" fill="#1FB855"/>
+          <rect x="112" y="97" width="15" height="4" rx="2" fill="#C8DED4"/>
+        </g>
+        <g class="z-drop" id="z-drop-2">
+          <circle cx="120" cy="98" r="13" fill="#FF6B6B"/>
+          <path d="M120 86 q4 -7 9 -8" fill="none" stroke="#2E7D4F" stroke-width="3.5" stroke-linecap="round"/>
+          <ellipse cx="115" cy="93" rx="4" ry="2.6" fill="#FFFFFF" opacity=".45"/>
+        </g>
+      </g>
+
+      <rect x="40" y="76" width="160" height="15" rx="7.5" fill="#4BEA8C"/>
+      <ellipse cx="86" cy="104" rx="34" ry="20" fill="url(#gGloss)"/>
+
+      <path d="M62 96 h116 l-10.5 52 a13 13 0 0 1 -12.8 10.4 H85.3 A13 13 0 0 1 72.5 148 Z" fill="url(#gFace)"/>
+
+      <g class="z-eye" id="z-eye-l">
+        <ellipse cx="99" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+        <g class="z-pupil" id="z-pupil-l">
+          <circle cx="99" cy="119" r="7.2" fill="#0A1F14"/>
+          <circle cx="101.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+        </g>
+      </g>
+      <g class="z-eye" id="z-eye-r">
+        <ellipse cx="141" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+        <g class="z-pupil" id="z-pupil-r">
+          <circle cx="141" cy="119" r="7.2" fill="#0A1F14"/>
+          <circle cx="143.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+        </g>
+      </g>
+
+      <ellipse cx="80" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+      <ellipse cx="160" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+
+      <path id="z-mouth" d="M107 136 q13 12 26 0" fill="none" stroke="#0A1F14" stroke-width="4.5" stroke-linecap="round"/>
+
+      <path d="M92 170 v14 M148 170 v14" stroke="#0E7C43" stroke-width="8" stroke-linecap="round"/>
+    </g>
+
+    <g class="z-wheel-spin">
+      <circle cx="92" cy="194" r="15" fill="#0A1F14"/>
+      <circle cx="92" cy="194" r="5.5" fill="#EAF6F0"/>
+      <rect x="90.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+    </g>
+    <g class="z-wheel-spin" style="animation-delay:-.4s">
+      <circle cx="148" cy="194" r="15" fill="#0A1F14"/>
+      <circle cx="148" cy="194" r="5.5" fill="#EAF6F0"/>
+      <rect x="146.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+    </g>
+  </g>
+</svg>
+</div>
+  </div>
+</header>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="tiles"><div class="tile reveal d1"><span class="num" data-count="21">21</span><span class="lab">רשתות בהשוואה</span></div>
+<div class="tile reveal d2"><span class="num" data-count="146">146</span><span class="lab">ערים עם מחיר אמיתי</span></div>
+<div class="tile reveal d3"><span class="num" data-count="484">484</span><span class="lab">קטגוריות מוצר</span></div>
+<div class="tile reveal d4"><span class="num" data-count="201180">201,180</span><span class="lab">תאי מחיר</span><div class="sub">רשת × עיר × קטגוריה</div></div>
+<div class="tile reveal d1"><span class="num" data-count="1259">1,259</span><span class="lab">סניפים במאגר</span><div class="sub">1,142 ממוקמים על המפה</div></div>
+<div class="tile reveal d2"><span class="num" data-count="6775">6,775</span><span class="lab">צמדי מותג</span><div class="sub">מה שהבוט מזהה כ&quot;חלב תנובה&quot;</div></div>
+<div class="tile reveal d3"><span class="num" data-count="739">739</span><span class="lab">פונקציות בדיקה</span><div class="sub">חלקן רצות על כמה מקרים</div></div>
+<div class="tile reveal d4"><span class="num" data-count="14">14%</span><span class="lab">פער בין הזולה ליקרה</span><div class="sub">על סל משפחתי מדוד</div></div></div>
+  </div>
+</section>
+
+<section class="sec-line">
+  <div class="wrap">
+    <h2 class="reveal">כל הרשתות, לפי כמה מהן נמדד</h2>
+    <p class="lede reveal d1" style="max-width:44em">
+      רשת גדולה מפרסמת מחירים ליותר סניפים ולכן מכסה יותר ערים. מה שקובע
+      אם היא נכנסת להשוואה שלכם הוא לא הגודל אלא אם יש לה סניף באזור.
+    </p>
+    <div class="chips reveal d2" role="group" aria-label="מיון הרשתות">
+      <button class="chip2" data-sort="cells" aria-pressed="true">לפי תאי מחיר</button>
+      <button class="chip2" data-sort="cities" aria-pressed="false">לפי ערים</button>
+      <button class="chip2" data-sort="name" aria-pressed="false">לפי שם</button>
+    </div>
+    <div class="chains" id="chains"><div class="crow" data-cells="40363" data-cities="107" data-name="שופרסל"><span class="rank">1</span><span class="cname">שופרסל</span><span class="ctrack"><i class="cfill" style="--w:100.0%"></i></span><span class="ccells">40,363</span><span class="ccities">107 ערים</span></div>
+<div class="crow" data-cells="23438" data-cities="54" data-name="רמי לוי"><span class="rank">2</span><span class="cname">רמי לוי</span><span class="ctrack"><i class="cfill" style="--w:58.1%"></i></span><span class="ccells">23,438</span><span class="ccities">54 ערים</span></div>
+<div class="crow" data-cells="19611" data-cities="47" data-name="ויקטורי"><span class="rank">3</span><span class="cname">ויקטורי</span><span class="ctrack"><i class="cfill" style="--w:48.6%"></i></span><span class="ccells">19,611</span><span class="ccities">47 ערים</span></div>
+<div class="crow" data-cells="17257" data-cities="42" data-name="קרפור"><span class="rank">4</span><span class="cname">קרפור</span><span class="ctrack"><i class="cfill" style="--w:42.8%"></i></span><span class="ccells">17,257</span><span class="ccities">42 ערים</span></div>
+<div class="crow" data-cells="14560" data-cities="35" data-name="מחסני השוק"><span class="rank">5</span><span class="cname">מחסני השוק</span><span class="ctrack"><i class="cfill" style="--w:36.1%"></i></span><span class="ccells">14,560</span><span class="ccities">35 ערים</span></div>
+<div class="crow" data-cells="13061" data-cities="31" data-name="יוחננוף"><span class="rank">6</span><span class="cname">יוחננוף</span><span class="ctrack"><i class="cfill" style="--w:32.4%"></i></span><span class="ccells">13,061</span><span class="ccities">31 ערים</span></div>
+<div class="crow" data-cells="12311" data-cities="37" data-name="סופר ספיר"><span class="rank">7</span><span class="cname">סופר ספיר</span><span class="ctrack"><i class="cfill" style="--w:30.5%"></i></span><span class="ccells">12,311</span><span class="ccities">37 ערים</span></div>
+<div class="crow" data-cells="10195" data-cities="25" data-name="טיב טעם"><span class="rank">8</span><span class="cname">טיב טעם</span><span class="ctrack"><i class="cfill" style="--w:25.3%"></i></span><span class="ccells">10,195</span><span class="ccities">25 ערים</span></div>
+<div class="crow" data-cells="8446" data-cities="24" data-name="קינג סטור"><span class="rank">9</span><span class="cname">קינג סטור</span><span class="ctrack"><i class="cfill" style="--w:20.9%"></i></span><span class="ccells">8,446</span><span class="ccities">24 ערים</span></div>
+<div class="crow" data-cells="7545" data-cities="19" data-name="קשת טעמים"><span class="rank">10</span><span class="cname">קשת טעמים</span><span class="ctrack"><i class="cfill" style="--w:18.7%"></i></span><span class="ccells">7,545</span><span class="ccities">19 ערים</span></div>
+<div class="crow" data-cells="6975" data-cities="21" data-name="אושר עד"><span class="rank">11</span><span class="cname">אושר עד</span><span class="ctrack"><i class="cfill" style="--w:17.3%"></i></span><span class="ccells">6,975</span><span class="ccities">21 ערים</span></div>
+<div class="crow" data-cells="4448" data-cities="12" data-name="שוק העיר"><span class="rank">12</span><span class="cname">שוק העיר</span><span class="ctrack"><i class="cfill" style="--w:11.0%"></i></span><span class="ccells">4,448</span><span class="ccities">12 ערים</span></div>
+<div class="crow" data-cells="3536" data-cities="9" data-name="סופר ברקת"><span class="rank">13</span><span class="cname">סופר ברקת</span><span class="ctrack"><i class="cfill" style="--w:8.8%"></i></span><span class="ccells">3,536</span><span class="ccities">9 ערים</span></div>
+<div class="crow" data-cells="3520" data-cities="10" data-name="מעיין 2000"><span class="rank">14</span><span class="cname">מעיין 2000</span><span class="ctrack"><i class="cfill" style="--w:8.7%"></i></span><span class="ccells">3,520</span><span class="ccities">10 ערים</span></div>
+<div class="crow" data-cells="2951" data-cities="9" data-name="סופר יודה"><span class="rank">15</span><span class="cname">סופר יודה</span><span class="ctrack"><i class="cfill" style="--w:7.3%"></i></span><span class="ccells">2,951</span><span class="ccities">9 ערים</span></div>
+<div class="crow" data-cells="2931" data-cities="8" data-name="זול ובגדול"><span class="rank">16</span><span class="cname">זול ובגדול</span><span class="ctrack"><i class="cfill" style="--w:7.3%"></i></span><span class="ccells">2,931</span><span class="ccities">8 ערים</span></div>
+<div class="crow" data-cells="2828" data-cities="9" data-name="שפע ברכת השם"><span class="rank">17</span><span class="cname">שפע ברכת השם</span><span class="ctrack"><i class="cfill" style="--w:7.0%"></i></span><span class="ccells">2,828</span><span class="ccities">9 ערים</span></div>
+<div class="crow" data-cells="2805" data-cities="7" data-name="סטופ מרקט"><span class="rank">18</span><span class="cname">סטופ מרקט</span><span class="ctrack"><i class="cfill" style="--w:6.9%"></i></span><span class="ccells">2,805</span><span class="ccities">7 ערים</span></div>
+<div class="crow" data-cells="1967" data-cities="5" data-name="חצי חינם"><span class="rank">19</span><span class="cname">חצי חינם</span><span class="ctrack"><i class="cfill" style="--w:4.9%"></i></span><span class="ccells">1,967</span><span class="ccities">5 ערים</span></div>
+<div class="crow" data-cells="1643" data-cities="5" data-name="סלאח דבאח"><span class="rank">20</span><span class="cname">סלאח דבאח</span><span class="ctrack"><i class="cfill" style="--w:4.1%"></i></span><span class="ccells">1,643</span><span class="ccities">5 ערים</span></div>
+<div class="crow" data-cells="789" data-cities="2" data-name="ח. כהן"><span class="rank">21</span><span class="cname">ח. כהן</span><span class="ctrack"><i class="cfill" style="--w:2.0%"></i></span><span class="ccells">789</span><span class="ccities">2 ערים</span></div></div>
+  </div>
+</section>
+
+<section class="sec-line">
+  <div class="wrap">
+    <h2 class="reveal">איכות ההשוואה</h2>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card reveal d1">
+        <h3 style="color:var(--green)">78% מהתאים</h3>
+        <p style="color:var(--soft);margin:0">נבנים תחת שומר — ברקוד שכמה
+        רשתות מחזיקות, גודל האריזה הרגיל, או סינון זני הפרימיום. כלומר על
+        אותו מוצר ממש ולא על תמהיל המדף של כל רשת. השאר נופל לכל השורות
+        שיש, ומסומן ככזה.</p>
+      </div>
+      <div class="card reveal d2">
+        <h3 style="color:var(--green)">שער איכות</h3>
+        <p style="color:var(--soft);margin:0">כל בנייה עוברת שער שבודק את
+        הנתונים עצמם: עיר שחורגת מהארץ, רשת שתומחרה על פיד רעב, תא שנבנה
+        משורה אחת. בנייה שלא עוברת — לא נכנסת.</p>
+      </div>
+      <div class="card reveal d3">
+        <h3 style="color:var(--green)">ארבע ביקורות</h3>
+        <p style="color:var(--soft);margin:0">הבדיקות שואלות אם הקוד עושה
+        מה שכתוב. הביקורות שואלות אם המספר שיוצא שפוי — וזה המקום שבו כל
+        הבאגים של הפרויקט ישבו.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-line">
+  <div class="wrap narrow">
+    <h2 class="reveal">מה פתוח</h2>
+    <p class="lede reveal d1">שלושת הראשונים חוסמים יציאה לאוויר, ואף אחד
+      מהם אינו לוגיקה של הבוט — הם תשתית.</p>
+    <ul class="open-list" style="margin-top:24px"><li class="reveal d1"><span class="dot"></span><span><b>גשר וואטסאפ</b><em>הבוט מוכן ומחכה לחיבור. שלוש קריאות פונקציה.</em></span></li>
+<li class="reveal d2"><span class="dot"></span><span><b>שרת שרץ תמיד</b><em>היום המערכת רצה מקומית. נמצא שרת חינמי — טרם הוקם.</em></span></li>
+<li class="reveal d3"><span class="dot"></span><span><b>מספר הטלפון של הבוט</b><em>בלעדיו אין קישור התחלה, וקוד ההזמנה נשלח בלי קישור.</em></span></li>
+<li class="reveal d4"><span class="dot"></span><span><b>מים מינרליים בשלוש רשתות</b><em>אובחן במלואו. עד שיתוקן, נתיב ההערכה עונה ביושר.</em></span></li></ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+    <span>🛒 <b>זולי</b> · 21 רשתות בהשוואה</span>
+    <span style="flex:1"></span>
+    <a href="index.html">דף הבית</a>
+    <a href="marketing.html">ערכת שיווק</a>
+  </div>
+</footer>
+
+<!-- ------------------------------------------------ הטלפון הצף -->
+<button class="fab" id="fab" aria-expanded="false" aria-controls="chatbox" aria-label="לדבר עם זולי">
+  <span class="badge">1</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="#04170C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-3.9-.9L3 20.5l1.6-4.8A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/>
+  </svg>
+</button>
+
+<div class="chatbox" id="chatbox" role="dialog" aria-label="שיחה לדוגמה עם זולי">
+  <div class="cb-top">
+    <div>
+      <div class="t">זולי</div>
+      <div class="s">שיחה לדוגמה</div>
+    </div>
+    <button class="x" id="cbClose" aria-label="סגירה">&#10005;</button>
+  </div>
+  <div class="cb-body" id="cbBody"></div>
+  <div class="cb-sugg" id="cbSugg"></div>
+  <form class="cb-form" id="cbForm">
+    <input id="cbInput" type="text" autocomplete="off" placeholder="תכתבו לזולי…" aria-label="הודעה">
+    <button type="submit" aria-label="שליחה">&#10148;</button>
+  </form>
+  <p class="cb-note">הדגמה. התשובות הן הניסוחים האמיתיים של הבוט.</p>
+</div>
+
+<script>
+document.documentElement.classList.remove('no-js');
+
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------------------------------------------------------- חשיפה */
+(function () {
+  var els = document.querySelectorAll('.reveal, .crow');
+  if (!('IntersectionObserver' in window) || REDUCED) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('on');
+    countAll(document);
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('on');
+      countAll(e.target);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+  for (var j = 0; j < els.length; j++) io.observe(els[j]);
+})();
+
+/* ------------------------------------------------------- ספירת מספרים */
+function countAll(scope) {
+  var nums = scope.querySelectorAll ? scope.querySelectorAll('[data-count]') : [];
+  for (var i = 0; i < nums.length; i++) run(nums[i]);
+  if (scope.hasAttribute && scope.hasAttribute('data-count')) run(scope);
+
+  function run(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    var target = parseInt(el.dataset.count, 10);
+    if (!target || REDUCED) return;
+    var final = el.textContent, t0 = null, DUR = 1100;
+    function frame(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / DUR);
+      var eased = 1 - Math.pow(1 - p, 3);
+      if (p < 1) {
+        el.textContent = Math.round(target * eased).toLocaleString('he-IL');
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = final;   /* תמיד חוזרים למחרוזת המקורית */
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+}
+
+/* ---------------------------------------------------------------- מיון */
+(function () {
+  var box = document.getElementById('chains');
+  if (!box) return;
+  var chips = document.querySelectorAll('[data-sort]');
+  Array.prototype.forEach.call(chips, function (chip) {
+    chip.addEventListener('click', function () {
+      Array.prototype.forEach.call(chips, function (c) {
+        c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+      });
+      var key = chip.getAttribute('data-sort');
+      var rows = Array.prototype.slice.call(box.children);
+      rows.sort(function (a, b) {
+        if (key === 'name') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'), 'he');
+        }
+        return (+b.getAttribute('data-' + key)) - (+a.getAttribute('data-' + key));
+      });
+      rows.forEach(function (r, i) {
+        box.appendChild(r);
+        r.querySelector('.rank').textContent = i + 1;
+      });
+    });
+  });
+})();
+
+/* ------------------------------------------------------------ הטלפון
+ * ⚠️ התשובות כאן הן הניסוחים האמיתיים של הבוט (messages.py) ופלט מוקלט
+ * של הרצה אמיתית. לא להמציא כאן תשובות: דמו שמבטיח התנהגות שהבוט לא
+ * עושה הוא בדיוק השקר שהמוצר לא יכול להרשות לעצמו.
+ */
+(function () {
+  var fab = document.getElementById('fab'), box = document.getElementById('chatbox'),
+      body = document.getElementById('cbBody'), form = document.getElementById('cbForm'),
+      input = document.getElementById('cbInput'), sugg = document.getElementById('cbSugg'),
+      closeBtn = document.getElementById('cbClose');
+  if (!fab || !box) return;
+
+  var REPLIES = [
+    { k: ['מבצע','הנחה','הנחות'],
+      a: 'בשלב הזה אני משווה מחירי מדף רגילים, בלי מבצעים — ככה ההשוואה בין הרשתות אחידה והוגנת. מבצעים יתווספו בהמשך 😉' },
+    { k: ['מאיפה','מקור','מחירונים','אמין','נתונים'],
+      a: 'המחירים מגיעים מהמחירונים הרשמיים שכל רשת מחויבת בחוק לפרסם — אלה מחירי המדף האמיתיים בסניפים עצמם, ואני מושך אותם מחדש כל יום.' },
+    { k: ['אופייני','הכי זול','איזה מחיר'],
+      a: 'שתי הדרכים לחשב מחיר, כשלא ציינת מותג:\n1⃣ אופייני — מה שרוב המשפחות משלמות על המוצר, לפי אמצע המדף באותה רשת.\n2⃣ הכי זול — המותג הזול ביותר שיש על המדף באותה רשת.\nבשני המצבים אני משווה את אותו מוצר בין כל הרשתות.' },
+    { k: ['רשתות','מי בהשוואה'],
+      a: 'אני משווה 21 רשתות מכל רחבי הארץ — ובכל עיר נכנסות להשוואה אלה שבאמת יש להן סניף באזור.' },
+    { k: ['לסופר','תשווה','כמה יוצא','כמה עולה הסל'],
+      a: '📍 לפי המיקום שהגדרת, ברדיוס 20 ק"מ:\n\nרמי לוי · 19 ₪  ✅ הזול ביותר\n   אחוזה רעננה · 0.6 ק"מ\nמעיין 2000 · 19 ₪  ✅\nויקטורי · 20 ₪\nקרפור · 20 ₪\n\nועוד 11 רשתות יקרות יותר, עד 25 ₪.' },
+    { k: ['לשתף','שיתוף','בן זוג','אישתי','בעלי'],
+      a: 'תכתוב "לשתף" ואתן לך קוד קצר לשלוח. מאותו רגע שניכם מנהלים את אותה רשימה — שניכם מוסיפים, שניכם רואים.' }
+  ];
+
+  var ADD = /(תוסיף|נגמר|צריך|תכניס)/;
+
+  function reply(text) {
+    var t = text.trim();
+    for (var i = 0; i < REPLIES.length; i++) {
+      for (var j = 0; j < REPLIES[i].k.length; j++) {
+        if (t.indexOf(REPLIES[i].k[j]) !== -1) return REPLIES[i].a;
+      }
+    }
+    if (ADD.test(t)) {
+      /* חילוץ גס של שם המוצר — זו הדגמה, לא הפרסר של הבוט */
+      var item = t.replace(/^\s*זולי\s*/, '').replace(ADD, '')
+                  .replace(/^\s*(את|לי|ה)?\s*/, '').trim();
+      return '👍 ' + (item || 'נוסף לרשימה');
+    }
+    return 'אפשר לשאול אותי "מאיפה המחירים?", "יש מבצעים?", או פשוט לכתוב "נגמר החלב" ואני אוסיף לרשימה.';
+  }
+
+  function add(cls, text) {
+    var el = document.createElement('div');
+    el.className = 'msg ' + cls;
+    el.textContent = text;
+    body.appendChild(el);
+    body.scrollTop = body.scrollHeight;
+    return el;
+  }
+
+  function botSays(text, done) {
+    var dots = document.createElement('div');
+    dots.className = 'msg bot typing';
+    dots.innerHTML = '<i></i><i></i><i></i>';
+    body.appendChild(dots);
+    body.scrollTop = body.scrollHeight;
+    setTimeout(function () {
+      if (dots.parentNode) dots.parentNode.removeChild(dots);
+      add('bot', text);
+      if (done) done();
+    }, REDUCED ? 0 : 560);
+  }
+
+  ['מאיפה המחירים?', 'יש מבצעים?', 'אני יוצא לסופר', 'זולי תוסיף חלב'].forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = s;
+    b.addEventListener('click', function () { send(s); });
+    sugg.appendChild(b);
+  });
+
+  /* ⚠️ תור, ולא שליחה מיידית. בלעדיו לחיצה מהירה על שתי הצעות מציגה
+     את שתי ההודעות שלי ואז את שתי התשובות — שיחה שלא נראית כמו שיחה.
+     כל הודעה מחכה שהקודמת תיענה. */
+  var busy = false, queue = [];
+
+  function send(text) {
+    if (!text.trim()) return;
+    queue.push(text);
+    pump();
+  }
+
+  function pump() {
+    if (busy || !queue.length) return;
+    busy = true;
+    var text = queue.shift();
+    add('me', text);
+    botSays(reply(text), function () { busy = false; pump(); });
+  }
+
+  var opened = false;
+  function toggle(state) {
+    box.classList.toggle('open', state);
+    fab.classList.toggle('open', state);
+    fab.setAttribute('aria-expanded', state ? 'true' : 'false');
+    if (state && !opened) {
+      opened = true;
+      /* גם הפתיחה נועלת את התור, אחרת הודעה שנשלחת מיד עם הפתיחה
+         מקדימה אותה והשיחה מתחילה באמצע. */
+      busy = true;
+      botSays('היי! אני זולי 👋 שאלו אותי משהו, או תכתבו לי מה נגמר בבית.',
+              function () { busy = false; pump(); });
+    }
+    if (state) setTimeout(function () { input.focus(); }, 260);
+  }
+  fab.addEventListener('click', function () { toggle(!box.classList.contains('open')); });
+  closeBtn.addEventListener('click', function () { toggle(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) { toggle(false); fab.focus(); }
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    send(input.value);
+    input.value = '';
+  });
+})();
+
+/* ------------------------------------------------------------- הדמות */
+(function () {
+  var pupils = [
+    { el: document.getElementById('z-pupil-l'), cx: 99,  cy: 119 },
+    { el: document.getElementById('z-pupil-r'), cx: 141, cy: 119 }
+  ].filter(function (p) { return p.el; });
+  var svg = document.getElementById('zooli');
+  if (!pupils.length || !svg) return;
+
+  window.addEventListener('mousemove', function (e) {
+    var r = svg.getBoundingClientRect();
+    if (!r.width) return;
+    pupils.forEach(function (p) {
+      var ex = r.left + r.width * (p.cx / 240),
+          ey = r.top + r.height * (p.cy / 232),
+          dx = e.clientX - ex, dy = e.clientY - ey,
+          d = Math.sqrt(dx * dx + dy * dy) || 1,
+          k = Math.min(d, 260) / 260;
+      p.el.style.transform = 'translate(' + (dx / d * 4.5 * k).toFixed(2) + 'px,' +
+                                            (dy / d * 3.4 * k).toFixed(2) + 'px)';
+    });
+  }, { passive: true });
+
+  if (REDUCED) return;
+  var eyes = [document.getElementById('z-eye-l'), document.getElementById('z-eye-r')].filter(Boolean);
+  function shut(ms) {
+    eyes.forEach(function (e) { e.classList.add('shut'); });
+    setTimeout(function () { eyes.forEach(function (e) { e.classList.remove('shut'); }); }, ms);
+  }
+  (function loop() {
+    setTimeout(function () {
+      shut(115);
+      if (Math.random() < 0.28) setTimeout(function () { shut(105); }, 260);
+      loop();
+    }, 2400 + Math.random() * 3600);
+  })();
+})();
+</script>
+
+</body>
+</html>

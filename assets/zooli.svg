@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="zooli" id="zooli" viewBox="0 0 240 232" role="img" aria-label="זולי, עגלת קניות מחייכת">
+  <defs>
+    <linearGradient id="gBody" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0%" stop-color="#5CF29A"/><stop offset="45%" stop-color="#25D366"/><stop offset="100%" stop-color="#0E7C43"/>
+    </linearGradient>
+    <linearGradient id="gFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DDEBE3"/>
+    </linearGradient>
+    <linearGradient id="gHandle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7CF7AF"/><stop offset="100%" stop-color="#12A052"/>
+    </linearGradient>
+    <radialGradient id="gGloss" cx=".3" cy=".2" r=".7">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fSoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#02150B" flood-opacity=".55"/>
+    </filter>
+    <clipPath id="clipAbove"><rect x="-40" y="-120" width="320" height="208"/></clipPath>
+  </defs>
+
+  <ellipse id="z-shadow" cx="120" cy="216" rx="62" ry="9" fill="#000" opacity=".5"/>
+
+  <g id="z-all">
+    <g id="z-squash" filter="url(#fSoft)">
+      <path d="M22 44 h16 a14 14 0 0 1 13.4 9.8 L58 84" fill="none" stroke="url(#gHandle)" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="22" cy="44" r="7" fill="#7CF7AF"/>
+
+      <g id="z-arm-r">
+        <path d="M46 128 q-16 -4 -22 -16" fill="none" stroke="#12A052" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="23" cy="111" r="7.5" fill="#5CF29A"/>
+      </g>
+      <path d="M194 128 q16 -4 22 -16" fill="none" stroke="#0E7C43" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="217" cy="111" r="7.5" fill="#3ADE7C"/>
+
+      <path d="M44 84 h152 l-14 74 a16 16 0 0 1 -15.8 13.4 H73.8 A16 16 0 0 1 58 158 Z" fill="url(#gBody)"/>
+
+      <g clip-path="url(#clipAbove)">
+        <g class="z-drop" id="z-drop-1">
+          <rect x="106" y="84" width="27" height="33" rx="6" fill="#F2FAF6"/>
+          <rect x="106" y="84" width="27" height="11" rx="5" fill="#1FB855"/>
+          <rect x="112" y="97" width="15" height="4" rx="2" fill="#C8DED4"/>
+        </g>
+        <g class="z-drop" id="z-drop-2">
+          <circle cx="120" cy="98" r="13" fill="#FF6B6B"/>
+          <path d="M120 86 q4 -7 9 -8" fill="none" stroke="#2E7D4F" stroke-width="3.5" stroke-linecap="round"/>
+          <ellipse cx="115" cy="93" rx="4" ry="2.6" fill="#FFFFFF" opacity=".45"/>
+        </g>
+      </g>
+
+      <rect x="40" y="76" width="160" height="15" rx="7.5" fill="#4BEA8C"/>
+      <ellipse cx="86" cy="104" rx="34" ry="20" fill="url(#gGloss)"/>
+
+      <path d="M62 96 h116 l-10.5 52 a13 13 0 0 1 -12.8 10.4 H85.3 A13 13 0 0 1 72.5 148 Z" fill="url(#gFace)"/>
+
+      <g class="z-eye" id="z-eye-l">
+        <ellipse cx="99" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+        <g class="z-pupil" id="z-pupil-l">
+          <circle cx="99" cy="119" r="7.2" fill="#0A1F14"/>
+          <circle cx="101.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+        </g>
+      </g>
+      <g class="z-eye" id="z-eye-r">
+        <ellipse cx="141" cy="118" rx="13" ry="14.5" fill="#FFFFFF"/>
+        <g class="z-pupil" id="z-pupil-r">
+          <circle cx="141" cy="119" r="7.2" fill="#0A1F14"/>
+          <circle cx="143.6" cy="115.6" r="2.6" fill="#FFFFFF"/>
+        </g>
+      </g>
+
+      <ellipse cx="80" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+      <ellipse cx="160" cy="134" rx="8.5" ry="5.5" fill="#FF9AA6" opacity=".5"/>
+
+      <path id="z-mouth" d="M107 136 q13 12 26 0" fill="none" stroke="#0A1F14" stroke-width="4.5" stroke-linecap="round"/>
+
+      <path d="M92 170 v14 M148 170 v14" stroke="#0E7C43" stroke-width="8" stroke-linecap="round"/>
+    </g>
+
+    <g class="z-wheel-spin">
+      <circle cx="92" cy="194" r="15" fill="#0A1F14"/>
+      <circle cx="92" cy="194" r="5.5" fill="#EAF6F0"/>
+      <rect x="90.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+    </g>
+    <g class="z-wheel-spin" style="animation-delay:-.4s">
+      <circle cx="148" cy="194" r="15" fill="#0A1F14"/>
+      <circle cx="148" cy="194" r="5.5" fill="#EAF6F0"/>
+      <rect x="146.5" y="181" width="3" height="26" rx="1.5" fill="#22412F"/>
+    </g>
+  </g>
+</svg>
