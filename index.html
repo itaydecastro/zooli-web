@@ -55,6 +55,53 @@
       if (++n > 8 || touched) clearInterval(again);
     }, 250);
   })();
+
+  /* ⚠️ מדידה, ולא תיקון — ורק כשמבקשים אותה במפורש עם ?debug=1.
+     הדף הרגיל אינו מושפע בשום צורה.
+
+     נכתב אחרי שלושה ניסיונות תיקון שנכשלו, וכולם נשענו על השערה: אני
+     לא מצליח לשחזר את הקפיצה במחשב שלי, והיא קורית אצל איתי בטלפון.
+     **כשאי אפשר לשחזר, מודדים בסביבה שבה זה קורה** — אז שלוש
+     הפונקציות שיכולות לגלול את הדף מדווחות על עצמן, עם מאיפה נקראו,
+     והתוצאה מוצגת על המסך כדי שאפשר יהיה לצלם אותה. */
+  if (location.search.indexOf('debug=1') > -1) (function () {
+    var t0 = Date.now(), log = [];
+    function note(what, extra) {
+      var where = (new Error().stack || '').split('\n')[3] || '';
+      log.push((Date.now() - t0) + 'ms  ' + what + '  y=' +
+               Math.round(window.scrollY) + (extra ? '  ' + extra : '') +
+               '\n      ' + where.trim().slice(0, 90));
+      draw();
+    }
+    var _to = window.scrollTo;
+    window.scrollTo = function () { note('scrollTo(' + [].slice.call(arguments).join(',') + ')'); return _to.apply(window, arguments); };
+    var _siv = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function () { note('scrollIntoView', this.className || this.tagName); return _siv.apply(this, arguments); };
+    var _f = HTMLElement.prototype.focus;
+    HTMLElement.prototype.focus = function () { note('focus', this.id || this.tagName); return _f.apply(this, arguments); };
+
+    var last = 0;
+    setInterval(function () {
+      var y = Math.round(window.scrollY);
+      if (Math.abs(y - last) > 4) { last = y; note('— הדף זז ל-' + y + ' —'); }
+    }, 60);
+
+    var box;
+    function draw() {
+      if (!box) {
+        box = document.createElement('pre');
+        box.style.cssText = 'position:fixed;inset:0 0 auto 0;z-index:99999;' +
+          'background:#111;color:#0f0;font:11px/1.45 monospace;padding:8px;' +
+          'margin:0;max-height:52vh;overflow:auto;direction:ltr;text-align:left;' +
+          'white-space:pre-wrap;border-bottom:3px solid #0f0';
+        (document.body || document.documentElement).appendChild(box);
+      }
+      box.textContent = 'ZOOLI SCROLL PROBE — צלם את המסך הזה\n\n' +
+                        log.slice(-14).join('\n');
+    }
+    addEventListener('DOMContentLoaded', draw);
+    setTimeout(draw, 300);
+  })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
