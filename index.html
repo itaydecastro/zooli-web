@@ -17,14 +17,44 @@
      ⚠️ **וכיבוי זמני של הגלילה הרכה** — בלעדיו הקפיצה לראש הדף
      מונפשת, ונראית כאילו הדף ברח למשתמש. -->
 <script>
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  addEventListener('load', function () {
-    if (location.hash) return;
-    var h = document.documentElement, was = h.style.scrollBehavior;
-    h.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
-    h.style.scrollBehavior = was;
-  });
+  /* 🔴 הגרסה הקודמת תיקנה פעם אחת, על load — ואיתי דיווח שזה עדיין
+     נוחת באמצע, גם בטלפון. הסיבה היא התזמון ולא הלוגיקה:
+
+       · `load` מחכה שכל התמונות, הגופנים והסקריפטים ייגמרו. הדף הזה
+         הוא ~17,000 פיקסלים, ובטלפון זה שניות שלמות — וכל אותו זמן
+         הגלילה לא מתוקנת.
+       · והדף עוד **זז אחרי** התיקון: גופן שנטען מאוחר משנה גבהים,
+         והמיקום נשמר אבל התוכן שמתחתיו כבר אחר.
+
+     לכן: מתקנים מוקדם, מתקנים שוב במשך כשתי שניות — **ונעצרים
+     ברגע שהמשתמש נגע.** תיקון שממשיך לקפוץ לראש אחרי שאדם התחיל
+     לגלול גרוע פי כמה מהבעיה המקורית. */
+  (function () {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) return;          /* עוגן בכתובת עדיין מנצח */
+
+    var touched = false;
+    function mine() { touched = true; }
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) {
+      addEventListener(e, mine, { passive: true, once: true });
+    });
+
+    function top() {
+      if (touched || location.hash) return;
+      var h = document.documentElement, was = h.style.scrollBehavior;
+      h.style.scrollBehavior = 'auto';   /* אחרת הקפיצה מונפשת ונראית כבריחה */
+      window.scrollTo(0, 0);
+      h.style.scrollBehavior = was;
+    }
+
+    top();
+    document.addEventListener('DOMContentLoaded', top);
+    addEventListener('load', top);
+    var n = 0, again = setInterval(function () {
+      top();
+      if (++n > 8 || touched) clearInterval(again);
+    }, 250);
+  })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
