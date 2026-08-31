@@ -652,7 +652,12 @@ textarea.copy-target {
   // Two messages, not one, because they are two different instructions to
   // the bot: what came off the list, and what should go on to it. The bot
   // reads either on its own, so nothing here has to be clever.
-  function markMessage() { return "קניתי " + markedNames().join(", "); }
+  // A machine-shaped prefix on purpose (31.08): the old free-text
+  // "קניתי X, Y" re-entered the bot through its human-sentence reader,
+  // which re-GUESSED each name - and a line the shopper typed as
+  // "קולה זירו" came back as its category. The bot reads this prefix
+  // with exact matching and no guessing at all.
+  function markMessage() { return "סימנתי בדף: " + markedNames().join(", "); }
   function addMessage() { return "תוסיף " + addedNames().join(", "); }
 
   function toast(text) {
