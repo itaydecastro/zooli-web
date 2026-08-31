@@ -317,6 +317,23 @@ h1 .bub {
 .msg.me  { background: #D9FDD3; align-self: flex-start; border-top-right-radius: 3px; }
 .msg.bot { background: #fff;    align-self: flex-end;   border-top-left-radius: 3px; }
 .msg .tm { display: block; text-align: left; font-size: 10px; color: #667781; margin-top: 3px; }
+/* בועת צילום ברקוד בהדגמה: "תמונה" מצוירת — פסים והמספר מתחתם. */
+.msg.photo { padding: 8px; }
+.msg.photo .bc {
+  display: block; width: 148px; height: 54px; border-radius: 4px;
+  background:
+    repeating-linear-gradient(90deg,
+      #1B2327 0 2px, transparent 2px 4px, #1B2327 4px 7px,
+      transparent 7px 9px, #1B2327 9px 10px, transparent 10px 13px)
+    #fff;
+  background-clip: content-box; padding: 6px 10px; box-sizing: border-box;
+  border: 1px solid #d5cfc2;
+}
+.msg.photo .bc-num {
+  display: block; text-align: center; font-size: 11px;
+  letter-spacing: .12em; color: #3b4a52; margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+}
 .msg s { opacity: .55; }
 @keyframes pop { from { opacity: 0; transform: translateY(7px) scale(.98); } to { opacity: 1; transform: none; } }
 

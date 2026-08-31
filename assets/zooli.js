@@ -482,6 +482,23 @@
         queue.push(text);
         pump();
       },
+      /* בועת "צילום": פסי ברקוד מצוירים והמספר מתחתיהם, ואז הזיהוי.
+         הפיצ'ר האמיתי (31.08) מצלם את הפסים — אז גם ההדגמה מצלמת,
+         במקום להעמיד פנים שמקלידים 13 ספרות בעגלה. */
+      photo: function (caption, replyText, after) {
+        busy = true;
+        var el = document.createElement('div');
+        el.className = 'msg me photo';
+        el.innerHTML = '<span class="bc" aria-hidden="true"></span>' +
+                       '<span class="bc-num">' + caption + '</span>';
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        botSays(replyText, function () {
+          busy = false;
+          if (after) after();
+          pump();
+        });
+      },
       greet: function (text) {
         busy = true;
         botSays(text, function () { busy = false; pump(); });
@@ -522,7 +539,15 @@
     Array.prototype.forEach.call(chips, function (c) {
       c.addEventListener('click', function () {
         start();
-        chat.send(c.getAttribute('data-say'));
+        var say = c.getAttribute('data-say');
+        /* צ'יפ הברקוד שולח "צילום", לא ספרות — כמו הפיצ'ר האמיתי. */
+        if (/^\d{8,14}$/.test(say)) {
+          if (list.indexOf('חלב תנובה 3%') === -1) list.push('חלב תנובה 3%');
+          chat.photo(say,
+            '📷 זיהיתי והוספתי: חלב תנובה 3% שומן קרטון 1 ליטר מהדרין ✅');
+          return;
+        }
+        chat.send(say);
       });
     });
 
