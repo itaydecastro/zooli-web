@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הצהרת נגישות — זולי</title>
+<meta name="description" content="הצהרת הנגישות של זולי: מה נעשה כדי שהאתר יהיה נגיש, מה עדיין לא, ואיך לפנות אלינו.">
+<meta name="theme-color" content="#FFF6E9">
+<meta name="robots" content="index,follow">
+<style>
+/* ⚠️ **דף עצמאי, בכוונה.** הצהרת נגישות חייבת להיפתח גם כשגיליון
+   סגנון חיצוני לא נטען — היא הדף שמישהו מגיע אליו **כי משהו לא
+   עובד לו**. */
+:root{
+  --ink:#20211D; --ink-2:#54584E; --paper:#FFF6E9; --card:#FFFFFF;
+  --line:#E7DFCE; --green:#0B6B45; --green-bg:#E6F1EA;
+  --amber:#8A5A12; --amber-bg:#FBF1DE; --amber-line:#E7CFA0;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+    --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+    --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+  --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+  --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+  direction:rtl; text-align:right; line-height:1.7; font-size:17px;
+  padding:clamp(20px,5vw,56px) 18px 80px;
+}
+.wrap{max-width:760px; margin:0 auto}
+h1{font-size:clamp(26px,5vw,38px); margin:0 0 6px; line-height:1.2; text-wrap:balance}
+h2{font-size:clamp(19px,3vw,23px); margin:34px 0 4px; text-wrap:balance}
+p{margin:10px 0 0; max-width:62ch}
+.sub{color:var(--ink-2); margin-top:10px}
+ul{margin:10px 0 0; padding:0 22px 0 0; color:var(--ink-2)}
+li{margin:7px 0}
+li b{color:var(--ink)}
+.box{background:var(--card); border:1px solid var(--line); border-radius:13px;
+  padding:16px 18px; margin-top:16px}
+.box.warn{background:var(--amber-bg); border-color:var(--amber-line)}
+.box.warn h2{color:var(--amber); margin-top:0}
+.box h2{margin-top:0}
+a{color:var(--green); text-underline-offset:3px}
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:3px solid currentColor; outline-offset:3px; border-radius:4px}
+.skip{position:absolute; right:-9999px; top:0; z-index:9;
+  background:#0b3d2c; color:#fff; padding:12px 20px;
+  border-radius:0 0 10px 0; font-weight:700; text-decoration:none}
+.skip:focus{right:0}
+.back{display:inline-block; margin-top:32px; font-weight:700}
+.date{color:var(--ink-2); font-size:15px; margin-top:28px}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">דילוג לתוכן הראשי</a>
+
+<div class="wrap">
+<main id="main">
+
+  <h1>הצהרת נגישות</h1>
+  <p class="sub">זולי הוא שירות חינמי שמנהל רשימת קניות בוואטסאפ ומשווה
+  את מחירה בין רשתות הסופרמרקט. אנחנו רוצים שכל אחד יוכל להשתמש בו,
+  ובדף הזה כתוב מה עשינו בשביל זה — <b>ומה עדיין לא</b>.</p>
+
+  <h2>לאיזה תקן אנחנו מכוונים</h2>
+  <p>אנחנו מכוונים לתקן הישראלי <b>ת"י 5568</b> ברמה AA, המבוסס על
+  הנחיות <b>WCAG 2.0</b> של ארגון W3C.</p>
+
+  <h2>מה נעשה באתר</h2>
+  <ul>
+    <li><b>ניווט מלא במקלדת</b> — אפשר להגיע לכל קישור וכפתור בעזרת
+      מקש Tab, ויש סימון ברור איפה המיקוד נמצא.</li>
+    <li><b>קישור דילוג לתוכן</b> — ההקשה הראשונה על Tab מדלגת מעל
+      תפריט הניווט אל גוף הדף.</li>
+    <li><b>ניגודיות צבעים</b> — כל צמד של טקסט ורקע בדף נמדד מול
+      דרישת התקן (4.5:1 לטקסט רגיל, 3:1 לטקסט גדול).</li>
+    <li><b>טקסט חלופי</b> לכל התמונות.</li>
+    <li><b>מבנה כותרות תקין</b> — כותרת ראשית אחת, ותת־כותרות לפי סדר.</li>
+    <li><b>כיבוד העדפת "הפחתת תנועה"</b> — מי שהגדיר במערכת ההפעלה
+      שהוא מעדיף פחות אנימציות, לא יראה אותן.</li>
+    <li><b>האתר עובד גם בלי JavaScript</b> — כל התוכן נקרא.</li>
+  </ul>
+
+  <h2>והשירות עצמו — בוואטסאפ</h2>
+  <p>זולי פועל בתוך וואטסאפ, ולכן <b>הנגישות של השיחה עצמה היא זו של
+  אפליקציית וואטסאפ</b> — כולל הקראת הודעות בקורא מסך והגדלת טקסט.
+  מצידנו: כל תשובה של זולי היא <b>טקסט</b>, אין תפריטים שדורשים ראייה,
+  ואפשר להפעיל כל פעולה בכתיבה חופשית ולא רק בלחיצה על כפתור.</p>
+
+  <div class="box warn">
+    <h2>⚠️ מה שעדיין לא נעשה</h2>
+    <p>האתר <b>לא נבדק על ידי מורשה נגישות מוסמך</b>, ולא נערכה בו
+    בדיקה מלאה מול כל דרישות התקן. מה שמפורט למעלה נבדק על ידינו
+    בלבד.</p>
+    <p>ייתכנו דפים או רכיבים שאינם נגישים במלואם. אנחנו מתקנים
+    כל בעיה שמדווחת לנו.</p>
+  </div>
+
+  <div class="box">
+    <h2>נתקלתם בבעיה? נשמח שתגידו לנו</h2>
+    <p>הדרך המהירה ביותר: לכתוב לזולי בוואטסאפ את המילה
+    <b>"משוב"</b> ואחריה מה לא עבד — ההודעה מגיעה ישירות אלינו.</p>
+    <p>אנחנו מתייחסים לכל פנייה בנושא נגישות, ומשתדלים לענות
+    בתוך מספר ימי עסקים.</p>
+  </div>
+
+  <p class="date">ההצהרה עודכנה ב־4 בספטמבר 2026.</p>
+
+  <a class="back" href="index.html">→ חזרה לדף הבית</a>
+
+</main>
+</div>
+
+</body>
+</html>

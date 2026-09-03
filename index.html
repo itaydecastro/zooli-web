@@ -90,8 +90,26 @@
     .z-drop { animation: none !important; opacity: 0 !important; }
   }
 </style>
+<style>
+/* ⚠️ **מיקוד גלוי בכל דבר שאפשר להגיע אליו במקלדת.** עד 04.09 הוא
+   הוגדר רק על `.faq summary`, כלומר מי שגולש ב-Tab לא ראה איפה הוא
+   נמצא בשאר הדף. `:focus-visible` ולא `:focus` — כדי שלחיצת עכבר
+   לא תצייר מסגרת למי שלא ביקש אותה. */
+a:focus-visible, button:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible{outline:3px solid currentColor;
+  outline-offset:3px; border-radius:4px}
+.skip{position:absolute; right:-9999px; top:0; z-index:999;
+  background:#0b3d2c; color:#fff; padding:12px 20px;
+  border-radius:0 0 10px 0; font-weight:700; text-decoration:none}
+.skip:focus{right:0}
+</style>
 </head>
 <body data-chains="21">
+
+<!-- ⚠️ **דילוג לתוכן — WCAG 2.4.1, רמה A.** מי שגולש במקלדת או
+  בקורא מסך עובר את כל תפריט הניווט בכל טעינה. הקישור הזה בלתי
+  נראה עד שמקישים Tab, ואז הוא הדבר הראשון שמקבל מיקוד. -->
+<a class="skip" href="#main">דילוג לתוכן הראשי</a>
 
 <!-- ============================================================== ניווט
      גלולה צפה עם הדמות בעיגול. היא מקפצת תמיד ונשארת על המסך בכל
@@ -205,6 +223,7 @@
 </header>
 
 <!-- ============================================================ הבעיה -->
+<main id="main">
 <section class="sec-white">
   <div class="wrap narrow" style="text-align:center">
     <p class="eyebrow mid reveal">הבעיה</p>
@@ -621,11 +640,15 @@
   <a class="btn btn-wa btn-wide" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות את זולי — חינם</a>
 </div>
 
+</main>
+
 <footer>
   <div class="wrap" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center">
     <span><b>זולי</b> · רשימת קניות שמשווה מחירים</span>
     <span>·</span>
     <a href="dashboard.html">מצב המערכת</a>
+    <span>·</span>
+    <a href="accessibility.html">הצהרת נגישות</a>
     <span>·</span>
     <span>מחירים מ־<b data-stat="updated">02.09</b></span>
   </div>
