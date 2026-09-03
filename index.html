@@ -108,7 +108,7 @@
     <span class="nav-sp"></span>
     <a class="link hide-sm" href="#how">איך זה עובד</a>
     <a class="link hide-sm" href="#why">למה להאמין</a>
-    <a class="btn btn-wa" href="#top" data-open-demo>לנסות עכשיו</a>
+    <a class="btn btn-wa" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות עכשיו</a>
   </div>
 </nav>
 
@@ -141,7 +141,7 @@
         <span class="no"><i>✓</i> בלי סיסמה</span>
       </div>
       <div class="hero-cta reveal d4">
-        <a class="btn btn-wa" href="#top" data-open-demo>לנסות את זולי עכשיו</a>
+        <a class="btn btn-wa" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות את זולי עכשיו</a>
         <a class="btn btn-ghost" href="#how">איך זה עובד ←</a>
       </div>
     </div>
@@ -605,7 +605,7 @@
       <h2>רוצים להיות מהראשונים?<span class="bub">זה חינם.</span></h2>
       <p>אנחנו מצרפים עכשיו את המשפחות הראשונות. שיחה אחת בוואטסאפ,
          ומשם זה עובד לבד — בלי אפליקציה, בלי הרשמה.</p>
-      <a class="btn btn-wa" href="#top" data-open-demo>לנסות את זולי</a>
+      <a class="btn btn-wa" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות את זולי</a>
     </div>
   </div>
 </section>
@@ -614,7 +614,7 @@
      בוואטסאפ, בטלפון, ויגלול — והכפתור של הגיבור נשאר הרחק למעלה.
      הוא מופיע רק אחרי שהכפתור הראשון יצא מהמסך, כדי שלא יכסה אותו. -->
 <div class="sticky-cta" id="stickyCta">
-  <a class="btn btn-wa btn-wide" href="#top" data-open-demo>לנסות את זולי — חינם</a>
+  <a class="btn btn-wa btn-wide" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות את זולי — חינם</a>
 </div>
 
 <footer>
@@ -629,14 +629,17 @@
 
 <script src="assets/zooli.js?v=20260831d"></script>
 <script>
-  /* ⚠️ **המספר של הבוט עדיין לא קיים.** כשהוא יגיע — ממלאים כאן ספרות
-     בלבד (למשל "972501234567") וכל כפתורי הקריאה לפעולה הופכים לקישור
-     wa.me אמיתי, בלי לגעת בשום מקום אחר.
+  /* המספר האמיתי של זולי, מאומת מול מטא (03.09): השם המאושר הוא
+     `זולי - רשימת קניות`, ודירוג האיכות GREEN.
 
-     עד אז הם גוללים אל הטלפון שבגיבור ומתמקדים בשדה. **כפתור שמבטיח
-     שיחה ולא פותח אותה נשבר דווקא אצל מי שהכי רצה**, ולכן ברירת המחדל
-     היא להודות ולא להעמיד פנים. */
-  var BOT_NUMBER = "";
+     ⚠️ **הכתובת יושבת בשני מקומות בכוונה** — גם ב-`href` של כל ארבעת
+     הכפתורים ב-HTML וגם כאן. ה-HTML עובד **גם אם ה-JS לא רץ**,
+     והשורה כאן מוסיפה פתיחה בלשונית חדשה. **מי שמחליף מספר
+     מחליף את שניהם** — יש בדיקה שסופרת שהם זהים.
+
+     להחזיר לטלפון ההדגמה: לרוקן את `BOT_NUMBER` **ו**להחזיר את
+     ארבעת ה-`href` ל-`#top`. */
+  var BOT_NUMBER = "972552138724";
 
   (function () {
     var btns = document.querySelectorAll('[data-open-demo]');
@@ -654,7 +657,7 @@
 
 
     if (BOT_NUMBER) {
-      var url = 'https://wa.me/' + BOT_NUMBER + '?text=' + encodeURIComponent('היי זולי');
+      var url = 'https://wa.me/' + BOT_NUMBER + '?text=' + encodeURIComponent('היי');
       Array.prototype.forEach.call(btns, function (b) {
         b.setAttribute('href', url);
         b.setAttribute('target', '_blank');
