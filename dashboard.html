@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>זולי — מצב המערכת</title>
-<meta name="description" content="הדשבורד של זולי: כמה רשתות, ערים וקטגוריות נמצאות בהשוואה היום, ומה עוד פתוח.">
+<title>סופרלי — מצב המערכת</title>
+<meta name="description" content="הדשבורד של סופרלי: כמה רשתות, ערים וקטגוריות נמצאות בהשוואה היום, ומה עוד פתוח.">
 <meta name="theme-color" content="#25D366">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
 /* ==========================================================================
-   דשבורד זולי.
+   דשבורד סופרלי.
    כתב מעובה: Secular One לכותרות ולמספרים (כבד, ידידותי, ותומך עברית),
    Varela Round לכפתורים ולתוויות, Rubik לגוף הטקסט.
    ========================================================================== */
@@ -220,7 +220,7 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="brand" href="index.html">🛒 זולי</a>
+    <a class="brand" href="index.html">🛒 סופרלי</a>
     <a class="link" href="index.html">דף הבית</a>
     <span class="spacer"></span>
     <a class="link" href="marketing.html">ערכת שיווק</a>
@@ -241,7 +241,7 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
         <span class="pill">הדף נוצר <b>30.08.2026 · 13:24</b></span>
       </div>
     </div>
-    <div><svg xmlns="http://www.w3.org/2000/svg" class="zooli" id="zooli" viewBox="0 0 240 232" role="img" aria-label="זולי, עגלת קניות מחייכת">
+    <div><svg xmlns="http://www.w3.org/2000/svg" class="zooli" id="zooli" viewBox="0 0 240 232" role="img" aria-label="סופרלי, עגלת קניות מחייכת">
   <defs>
     <linearGradient id="gBody" x1=".2" y1="0" x2=".8" y2="1">
       <stop offset="0%" stop-color="#5CF29A"/><stop offset="45%" stop-color="#25D366"/><stop offset="100%" stop-color="#0E7C43"/>
@@ -424,7 +424,7 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 
 <footer>
   <div class="wrap" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
-    <span>🛒 <b>זולי</b> · 21 רשתות בהשוואה</span>
+    <span>🛒 <b>סופרלי</b> · 21 רשתות בהשוואה</span>
     <span style="flex:1"></span>
     <a href="index.html">דף הבית</a>
     <a href="marketing.html">ערכת שיווק</a>
@@ -432,17 +432,17 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 </footer>
 
 <!-- ------------------------------------------------ הטלפון הצף -->
-<button class="fab" id="fab" aria-expanded="false" aria-controls="chatbox" aria-label="לדבר עם זולי">
+<button class="fab" id="fab" aria-expanded="false" aria-controls="chatbox" aria-label="לדבר עם סופרלי">
   <span class="badge">1</span>
   <svg viewBox="0 0 24 24" fill="none" stroke="#04170C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-3.9-.9L3 20.5l1.6-4.8A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/>
   </svg>
 </button>
 
-<div class="chatbox" id="chatbox" role="dialog" aria-label="שיחה לדוגמה עם זולי">
+<div class="chatbox" id="chatbox" role="dialog" aria-label="שיחה לדוגמה עם סופרלי">
   <div class="cb-top">
     <div>
-      <div class="t">זולי</div>
+      <div class="t">סופרלי</div>
       <div class="s">שיחה לדוגמה</div>
     </div>
     <button class="x" id="cbClose" aria-label="סגירה">&#10005;</button>
@@ -450,7 +450,7 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
   <div class="cb-body" id="cbBody"></div>
   <div class="cb-sugg" id="cbSugg"></div>
   <form class="cb-form" id="cbForm">
-    <input id="cbInput" type="text" autocomplete="off" placeholder="תכתבו לזולי…" aria-label="הודעה">
+    <input id="cbInput" type="text" autocomplete="off" placeholder="תכתבו לסופרלי…" aria-label="הודעה">
     <button type="submit" aria-label="שליחה">&#10148;</button>
   </form>
   <p class="cb-note">הדגמה. התשובות הן הניסוחים האמיתיים של הבוט.</p>
@@ -571,7 +571,7 @@ function countAll(scope) {
     }
     if (ADD.test(t)) {
       /* חילוץ גס של שם המוצר — זו הדגמה, לא הפרסר של הבוט */
-      var item = t.replace(/^\s*זולי\s*/, '').replace(ADD, '')
+      var item = t.replace(/^\s*סופרלי\s*/, '').replace(ADD, '')
                   .replace(/^\s*(את|לי|ה)?\s*/, '').trim();
       return '👍 ' + (item || 'נוסף לרשימה');
     }
@@ -600,7 +600,7 @@ function countAll(scope) {
     }, REDUCED ? 0 : 560);
   }
 
-  ['מאיפה המחירים?', 'יש מבצעים?', 'אני יוצא לסופר', 'זולי תוסיף חלב'].forEach(function (s) {
+  ['מאיפה המחירים?', 'יש מבצעים?', 'אני יוצא לסופר', 'סופרלי תוסיף חלב'].forEach(function (s) {
     var b = document.createElement('button');
     b.type = 'button';
     b.textContent = s;
@@ -637,7 +637,7 @@ function countAll(scope) {
       /* גם הפתיחה נועלת את התור, אחרת הודעה שנשלחת מיד עם הפתיחה
          מקדימה אותה והשיחה מתחילה באמצע. */
       busy = true;
-      botSays('היי! אני זולי 👋 שאלו אותי משהו, או תכתבו לי מה נגמר בבית.',
+      botSays('היי! אני סופרלי 👋 שאלו אותי משהו, או תכתבו לי מה נגמר בבית.',
               function () { busy = false; pump(); });
     }
     if (state) setTimeout(function () { input.focus(); }, 260);
