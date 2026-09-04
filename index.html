@@ -89,7 +89,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Rubik+Bubbles&family=Assistant:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="assets/market.css">
+<!-- 🔴 **הסימן שאחרי `?v=` חייב לזוז בכל פעם שהקובץ משתנה.**
+     ב-04.09 הוחלף השם בהדגמה מ"זולי" ל"סופרלי", השרת הגיש את הקובץ
+     החדש — **והדפדפן המשיך להציג "היי! אני זולי" מהמטמון.**
+     ⚠️ **ו-curl לא יכול לתפוס את זה**, כי הוא לא מחזיק מטמון: הבדיקה
+     היחידה שראתה את זה הייתה פתיחת הדף בדפדפן אמיתי.
+     ⚠️ **ול-CSS לא הייתה גרסה בכלל** עד אז, כלומר כל שינוי עיצוב היה
+     נתקע אצל מי שכבר ביקר — והוא דווקא הקהל שחוזר. -->
+<link rel="stylesheet" href="assets/market.css?v=20260904a">
 <style>
   /* ---------------------------------------------- הדמות המרוגלת
      רק הדף הזה מריץ את הגרסה החיה של סופרלי (עיניים שעוקבות אחרי העכבר,
@@ -683,7 +690,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </footer>
 
-<script src="assets/zooli.js?v=20260831d"></script>
+<script src="assets/zooli.js?v=20260904a"></script>
 <script>
   /* המספר האמיתי של סופרלי, מאומת מול מטא (03.09): השם המאושר הוא
      `סופרלי - רשימת קניות`, ודירוג האיכות GREEN.
