@@ -1,32 +1,15 @@
 <meta charset="utf-8">
 <title>הרשימה שלי</title>
-<!-- Both of these are load-bearing for a page that has to stand on its own.
-     Without the charset a host that serves no encoding hands the browser
-     Latin-1 and every Hebrew word turns to mojibake; without the viewport a
-     phone renders it at desktop width and zooms out, which is the opposite
-     of what somebody holding a trolley needs. -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<!-- Rubik reads warmly in Hebrew and carries a friendly page better than the
-     system stack did. It rides in on the one load the page already needs -
-     the link has to be opened once, over a network, before anybody is in an
-     aisle - and it is declared display=swap behind a full system fallback,
-     so a slow or missing font never delays a single word. Ticking items
-     still touches the network exactly zero times. -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap">
 <title>הרשימה בסופר</title>
 <style>
-/* ---------------------------------------------------------------------
-   Everything else is inline, on purpose.
 
-   This page does its work in an aisle, where the signal is bad or gone.
-   The one external thing is the typeface above, which loads during the
-   same first visit that fetches the page itself and falls back to system
-   type if it does not arrive. Nothing after that - ticking, adding,
-   saving - touches the network at all.
-   --------------------------------------------------------------------- */
 :root {
   --paper:     #F7F7F3;
   --card:      #FFFFFF;
@@ -83,13 +66,11 @@ body {
   font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 17px;
   line-height: 1.5;
-  /* Room for the sticky footer, plus the phone's own home indicator. */
+
   padding-bottom: calc(9rem + env(safe-area-inset-bottom, 0px));
 }
 
 .wrap { max-width: 34rem; margin: 0 auto; }
-
-/* ------------------------------------------------------------- header */
 
 header {
   position: sticky;
@@ -142,8 +123,6 @@ h1 {
 }
 @media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
 
-/* -------------------------------------------------------------- rows */
-
 ul { list-style: none; margin: 0; padding: 0; }
 
 li {
@@ -151,7 +130,6 @@ li {
   background: var(--card);
 }
 
-/* The whole row is the target: one hand, trolley in the other. */
 .row {
   display: flex;
   align-items: center;
@@ -179,9 +157,6 @@ li {
 }
 .box svg { width: 17px; height: 17px; stroke: #fff; display: none; }
 
-/* The emoji does the recognising, so the eye can find "לחם" without
-   reading the whole list. Fixed width so every name still starts on the
-   same line - a ragged left edge is harder to scan, not easier. */
 .pic {
   flex: 0 0 auto;
   width: 1.9rem;
@@ -216,8 +191,6 @@ li.added .name::after {
   display: inline-block;
 }
 
-/* --------------------------------------------------------------- add */
-
 .add {
   display: flex;
   gap: .5rem;
@@ -248,8 +221,6 @@ li.added .name::after {
   color: var(--go-deep);
   cursor: pointer;
 }
-
-/* ------------------------------------------------------------ footer */
 
 footer {
   position: fixed;
@@ -285,8 +256,6 @@ footer {
 }
 
 .hint { font-size: .8rem; color: var(--ink-soft); text-align: center; }
-
-/* --------------------------------------------------------------- misc */
 
 .empty { padding: 3rem 1.5rem; text-align: center; color: var(--ink-soft); }
 .empty h2 { font-size: 1.1rem; color: var(--ink); margin: 0 0 .5rem; }
@@ -344,19 +313,6 @@ textarea.copy-target {
 (function () {
   "use strict";
 
-  // The list travels in the part of the URL after the "#".
-  //
-  // That is the whole privacy design and it is not cosmetic: a fragment is
-  // never sent to the server that hosts the page. Whoever ends up hosting
-  // this - us, a static host, anyone - never sees a single shopping list.
-  // base64url -> the original text, Hebrew included.
-  //
-  // ⚠️ atob alone is not enough and the bug it causes is silent: it hands
-  // back one character per BYTE, so every Hebrew letter - two bytes in UTF-8
-  // - arrives as two pieces of mojibake. JSON.parse would still succeed on
-  // the punctuation and hand back a list of unreadable names. The escape /
-  // decodeURIComponent pair rebuilds the characters, and works in every
-  // browser that has ever run this page.
   function fromBase64Url(text) {
     var padded = text.replace(/-/g, "+").replace(/_/g, "/");
     while (padded.length % 4) padded += "=";
@@ -371,21 +327,14 @@ textarea.copy-target {
   function readPayload() {
     var raw = (location.hash || "").replace(/^#/, "");
     if (raw) {
-      // v2 is base64url; v1 was the JSON percent-encoded, which spent six
-      // characters on every Hebrew letter and made a link nine lines long.
-      // Both are read, because a v1 link may still be sitting in somebody's
-      // chat, open in a tab, or saved to a home screen.
+
       try {
         return JSON.parse(fromBase64Url(raw));
       } catch (e) {
-        try { return JSON.parse(decodeURIComponent(raw)); } catch (e2) { /* on */ }
+        try { return JSON.parse(decodeURIComponent(raw)); } catch (e2) {}
       }
     }
-    // A list baked into the page itself, for the two cases where a fragment
-    // cannot arrive: a host that renders the list in server-side, and any
-    // viewer that shows this page inside a frame - a frame has its own
-    // address, so the "#" stays with the page outside it and never reaches
-    // us here. Same shape either way, so nothing below knows the difference.
+
     var inline = document.getElementById("superlist-data");
     if (inline) {
       try { return JSON.parse(inline.textContent); } catch (e) { return null; }
@@ -409,17 +358,12 @@ textarea.copy-target {
   var listId = payload.id || "default";
   var STORE = "superlist:" + listId;
 
-  // What the shopper has done here, kept on the phone. This is what makes
-  // the page survive a screen lock, a stray back button, or the browser
-  // deciding to reload it - none of which should cost somebody the ticks
-  // they made in the last three aisles.
   var saved = { done: [], added: [] };
   try {
     var fromDisk = JSON.parse(localStorage.getItem(STORE) || "null");
     if (fromDisk && Array.isArray(fromDisk.done)) saved = fromDisk;
-  } catch (e) { /* a broken record costs the ticks, never the page */ }
+  } catch (e) {}
 
-  // Anything the bot already had ticked starts ticked.
   (payload.done || []).forEach(function (name) {
     if (saved.done.indexOf(name) === -1) saved.done.push(name);
   });
@@ -434,13 +378,6 @@ textarea.copy-target {
     }));
   }
 
-
-  // An emoji per line, so the eye finds "לחם" without reading the list.
-  //
-  // Matched on the text rather than on category names from the bot, which
-  // means a thing typed here by hand - "אבטיח" - gets its picture too. The
-  // longest match wins, so ביסלי is not answered by the rule for לחם, and
-  // anything unmatched simply gets no picture rather than a wrong one.
   var PICTURES = [
     ["גבינה צהובה","🧀"],["גבינה לבנה","🧀"],["גבינת שמנת","🧀"],
     ["גבינה בולגרית","🧀"],["שמנת חמוצה","🥛"],["מעדן חלב","🍮"],
@@ -529,16 +466,11 @@ textarea.copy-target {
       btn.appendChild(pic);
       btn.appendChild(name);
 
-      // No separate quantity here on purpose: the label the bot sends is
-      // already the finished line ("בננה (ק\"ג) × 3"), and rendering the
-      // number again beside it printed the quantity twice. One list, shown
-      // the same way in both places.
-
       btn.addEventListener("click", function () {
         var at = saved.done.indexOf(item.n);
         if (at === -1) saved.done.push(item.n);
         else saved.done.splice(at, 1);
-        sent.marks = false;      // something changed, so there is more to send
+        sent.marks = false;
         persist();
         render();
       });
@@ -547,8 +479,6 @@ textarea.copy-target {
       list.appendChild(li);
     });
 
-    // Adding, because a phone call in aisle four is the normal case:
-    // "תקשיב, אני צריכה גם אבטיח".
     var add = document.createElement("form");
     add.className = "add";
     add.innerHTML =
@@ -565,7 +495,7 @@ textarea.copy-target {
       field.value = "";
       persist();
       render();
-      // Keep the keyboard up: people add two or three things at once.
+
       var again = document.getElementById("newItem");
       if (again) again.focus();
     });
@@ -595,17 +525,6 @@ textarea.copy-target {
     return saved.added.slice();
   }
 
-  // ---------------------------------------------------------------- steps
-  //
-  // One button at a time, always.
-  //
-  // The bot needs two separate instructions - what came off the list, and
-  // what should go on to it - and the first version simply put both on
-  // screen at once. Two buttons that both said "שלח" is our problem handed
-  // to the shopper, who then has to work out which one is theirs. Now the
-  // page asks for one thing, and only mentions the second after the first
-  // is done - and only if they actually added something, which most trips
-  // will not.
   var sent = { marks: false, adds: false };
 
   function nextStep() {
@@ -649,14 +568,6 @@ textarea.copy-target {
     }
   }
 
-  // Two messages, not one, because they are two different instructions to
-  // the bot: what came off the list, and what should go on to it. The bot
-  // reads either on its own, so nothing here has to be clever.
-  // A machine-shaped prefix on purpose (31.08): the old free-text
-  // "קניתי X, Y" re-entered the bot through its human-sentence reader,
-  // which re-GUESSED each name - and a line the shopper typed as
-  // "קולה זירו" came back as its category. The bot reads this prefix
-  // with exact matching and no guessing at all.
   function markMessage() { return "סימנתי בדף: " + markedNames().join(", "); }
   function addMessage() { return "תוסיף " + addedNames().join(", "); }
 
@@ -669,9 +580,7 @@ textarea.copy-target {
   }
 
   function hand_over(text) {
-    // A wa.me link only works once the bot has a number of its own. Until
-    // then the honest fallback is the clipboard, which needs no setup and
-    // no permission from anybody.
+
     if (payload.p) {
       location.href = "https://wa.me/" + payload.p + "?text=" + encodeURIComponent(text);
       return;

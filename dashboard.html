@@ -11,17 +11,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Varela+Round&family=Rubik:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-/* ==========================================================================
-   דשבורד זולי.
-   כתב מעובה: Secular One לכותרות ולמספרים (כבד, ידידותי, ותומך עברית),
-   Varela Round לכפתורים ולתוויות, Rubik לגוף הטקסט.
-   ========================================================================== */
 
 h1, h2, h3, .tile .num, .btn, .chip2 { font-family: "Secular One", "Varela Round", sans-serif; }
 h1 { font-size: clamp(38px, 8.5vw, 76px); letter-spacing: -1px; }
 h2 { font-size: clamp(27px, 5.2vw, 44px); }
 
-/* -------------------------------------------------- ראש הדף */
 .head { position: relative; overflow: hidden; padding: clamp(28px,5vw,54px) 0 clamp(22px,4vw,40px); }
 .head::before {
   content:""; position:absolute; inset:-40% -20% auto -20%; height:640px; pointer-events:none;
@@ -41,7 +35,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 }
 @keyframes pulse { 70%{ box-shadow:0 0 0 9px rgba(37,211,102,0);} 100%{ box-shadow:0 0 0 0 rgba(37,211,102,0);} }
 
-/* -------------------------------------------------- הדמות */
 .zooli { width: min(280px, 62vw); height:auto; overflow:visible; display:block; margin:0 auto; }
 #z-all    { animation: z-float 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin:120px 200px; transform-box:fill-box; }
 #z-squash { animation: z-squash 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin:120px 190px; transform-box:fill-box; }
@@ -62,7 +55,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
   46%,100%{transform:translateY(34px) rotate(10deg);opacity:1}
 }
 
-/* -------------------------------------------------- אריחים */
 .tiles { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); }
 .tile {
   border-radius: 26px; padding: 22px 20px; position:relative; overflow:hidden;
@@ -75,9 +67,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 .tile .lab { color: var(--ink); font-size: 15px; opacity:.9; }
 .tile .sub { color: var(--soft); font-size: 12.5px; margin-top:4px; }
 
-/* -------------------------------------------------- כפתורי בועה
-   הקצה התחתון הוא "עובי" הכפתור, והוא נעלם בלחיצה — ככה כפתור פיזי
-   מתנהג, וזה מה שנותן את התחושה הצעצועית שאיתי ביקש. */
 .chips { display:flex; gap:10px; flex-wrap:wrap; margin: 22px 0 26px; }
 .chip2 {
   cursor:pointer; font-size:15.5px; padding:11px 22px; border-radius:999px;
@@ -94,7 +83,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 .btn { box-shadow: 0 5px 0 #0B7A3C, 0 14px 34px rgba(37,211,102,.22); }
 .btn:active { transform: translateY(5px); box-shadow: 0 0 0 #0B7A3C, 0 6px 16px rgba(37,211,102,.18); }
 
-/* -------------------------------------------------- שורות הרשתות */
 .chains { display:flex; flex-direction:column; gap:9px; }
 .crow {
   display:grid; align-items:center; gap:12px;
@@ -120,7 +108,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
   .crow .ccities { display:none; }
 }
 
-/* -------------------------------------------------- מה פתוח */
 .open-list { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
 .open-list li {
   display:flex; gap:14px; align-items:flex-start;
@@ -130,7 +117,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 .open-list b { display:block; font-family:"Varela Round",sans-serif; font-size:17px; }
 .open-list em { font-style:normal; color:var(--soft); font-size:14.5px; }
 
-/* -------------------------------------------------- הטלפון הצף */
 .fab {
   position:fixed; inset-inline-end:20px; inset-block-end:20px; z-index:60;
   width:66px; height:66px; border-radius:50%; border:0; cursor:pointer;
@@ -150,10 +136,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
 }
 .fab.open .badge { display:none; }
 
-/* ⚠️ הגובה חייב תקרה שתלויה במסך ולא מספר קבוע. בגרסה הראשונה הפאנל
-   היה 538px בגובה קבוע, ובחלון של 550px הוא גלש מעל הניווט וכיסה את
-   ראש הדף — כלומר נשבר בדיוק במסכים הנמוכים (חלון קטן, טלפון לרוחב).
-   flex column + max-height נותנים לגוף השיחה להתכווץ במקום לדחוף. */
 .chatbox {
   position:fixed; inset-inline-end:20px; inset-block-end:96px; z-index:60;
   width:min(340px, calc(100vw - 40px)); background:var(--chat);
@@ -431,7 +413,6 @@ h2 { font-size: clamp(27px, 5.2vw, 44px); }
   </div>
 </footer>
 
-<!-- ------------------------------------------------ הטלפון הצף -->
 <button class="fab" id="fab" aria-expanded="false" aria-controls="chatbox" aria-label="לדבר עם סופרלי">
   <span class="badge">1</span>
   <svg viewBox="0 0 24 24" fill="none" stroke="#04170C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -461,7 +442,6 @@ document.documentElement.classList.remove('no-js');
 
 var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------------------------------------------------------------- חשיפה */
 (function () {
   var els = document.querySelectorAll('.reveal, .crow');
   if (!('IntersectionObserver' in window) || REDUCED) {
@@ -480,7 +460,6 @@ var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: r
   for (var j = 0; j < els.length; j++) io.observe(els[j]);
 })();
 
-/* ------------------------------------------------------- ספירת מספרים */
 function countAll(scope) {
   var nums = scope.querySelectorAll ? scope.querySelectorAll('[data-count]') : [];
   for (var i = 0; i < nums.length; i++) run(nums[i]);
@@ -500,14 +479,13 @@ function countAll(scope) {
         el.textContent = Math.round(target * eased).toLocaleString('he-IL');
         requestAnimationFrame(frame);
       } else {
-        el.textContent = final;   /* תמיד חוזרים למחרוזת המקורית */
+        el.textContent = final;
       }
     }
     requestAnimationFrame(frame);
   }
 }
 
-/* ---------------------------------------------------------------- מיון */
 (function () {
   var box = document.getElementById('chains');
   if (!box) return;
@@ -533,11 +511,6 @@ function countAll(scope) {
   });
 })();
 
-/* ------------------------------------------------------------ הטלפון
- * ⚠️ התשובות כאן הן הניסוחים האמיתיים של הבוט (messages.py) ופלט מוקלט
- * של הרצה אמיתית. לא להמציא כאן תשובות: דמו שמבטיח התנהגות שהבוט לא
- * עושה הוא בדיוק השקר שהמוצר לא יכול להרשות לעצמו.
- */
 (function () {
   var fab = document.getElementById('fab'), box = document.getElementById('chatbox'),
       body = document.getElementById('cbBody'), form = document.getElementById('cbForm'),
@@ -570,7 +543,7 @@ function countAll(scope) {
       }
     }
     if (ADD.test(t)) {
-      /* חילוץ גס של שם המוצר — זו הדגמה, לא הפרסר של הבוט */
+
       var item = t.replace(/^\s*(?:סופרלי|זולי)\s*/, '').replace(ADD, '')
                   .replace(/^\s*(את|לי|ה)?\s*/, '').trim();
       return '👍 ' + (item || 'נוסף לרשימה');
@@ -608,9 +581,6 @@ function countAll(scope) {
     sugg.appendChild(b);
   });
 
-  /* ⚠️ תור, ולא שליחה מיידית. בלעדיו לחיצה מהירה על שתי הצעות מציגה
-     את שתי ההודעות שלי ואז את שתי התשובות — שיחה שלא נראית כמו שיחה.
-     כל הודעה מחכה שהקודמת תיענה. */
   var busy = false, queue = [];
 
   function send(text) {
@@ -634,8 +604,7 @@ function countAll(scope) {
     fab.setAttribute('aria-expanded', state ? 'true' : 'false');
     if (state && !opened) {
       opened = true;
-      /* גם הפתיחה נועלת את התור, אחרת הודעה שנשלחת מיד עם הפתיחה
-         מקדימה אותה והשיחה מתחילה באמצע. */
+
       busy = true;
       botSays('היי! אני סופרלי 👋 שאלו אותי משהו, או תכתבו לי מה נגמר בבית.',
               function () { busy = false; pump(); });
@@ -654,7 +623,6 @@ function countAll(scope) {
   });
 })();
 
-/* ------------------------------------------------------------- הדמות */
 (function () {
   var pupils = [
     { el: document.getElementById('z-pupil-l'), cx: 99,  cy: 119 },

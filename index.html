@@ -9,12 +9,6 @@
 <meta property="og:description" content="רשימת קניות בוואטסאפ שמשווה את כל הסל בין הרשתות שסביבכם, לפי מחירי המדף הרשמיים. חינם לגמרי.">
 <meta property="og:type" content="website">
 
-<!-- ⚠️ **הכתובת המוחלטת, ולא יחסית.** מי ששולח את הקישור בוואטסאפ
-     או בפייסבוק — השרת שלהם מושך את התמונה מבחוץ, ונתיב יחסי אינו
-     אומר לו כלום. וזה גם הרגע שבו זה סוף-סוף אפשרי: עד היום לא
-     הייתה כתובת קבועה שאפשר להצביע עליה.
-     ⚠️ **ו-`og:image:alt` אינו קישוט** — הוא מה שקורא מסך מקריא
-     כשהתמונה מגיעה, ובלעדיו הקישור מגיע כתמונה בלי שם. -->
 <meta property="og:url" content="https://superly.co.il/">
 <meta property="og:site_name" content="סופרלי">
 <meta property="og:locale" content="he_IL">
@@ -24,43 +18,17 @@
 <meta property="og:image:alt" content="סופרלי — רשימת הקניות של הבית, בוואטסאפ. ואיפה היא הכי זולה.">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- 🔴 **הקנוני, וזה מה שמונע מגוגל לפצל את הדף לשניים.**
-     אותו דף הוגש עד היום גם מ-itaydecastro.github.io/zooli-web ועדיין
-     נגיש משם, ושתי כתובות עם אותו תוכן מתחרות זו בזו על אותו חיפוש.
-     השורה הזאת אומרת מי המקור. -->
 <link rel="canonical" href="https://superly.co.il/">
 
-<!-- ⚠️ **אימות הבעלות מול Google Search Console — אסור להסיר.**
-     גוגל בודק אותו מחדש מדי פעם, ולא רק פעם אחת: הסרה מבטלת את
-     האימות ואיתו את הגישה לדוחות ולבקשות האינדוקס.
-     יש גם קובץ `google1bc50150bfaaa103.html` בשורש, כשיטה שנייה —
-     שתיהן במקום בכוונה, כדי שהאימות לא ייפול על שינוי אחד. -->
 <meta name="google-site-verification" content="Zr6vMqsxvCZfDxHa5AnizbsH__iixSRTeGVo6vhl1IM">
 
 <meta name="theme-color" content="#FFF6E9">
 
-<!-- ⚠️ **דף נחיתה נפתח בהתחלה, תמיד.** הדפדפן משחזר לבדו את מיקום
-     הגלילה מהביקור הקודם, ובדף באורך הזה זה אומר שמי שכבר היה כאן
-     נוחת באמצע — רואה חצי משפט במקום את הפתיחה, ולא מבין מה זה.
-     ⚠️ **ועוגן בכתובת עדיין עובד:** מי שהגיע ל-#how מגיע ל-#how.
-     ⚠️ **וכיבוי זמני של הגלילה הרכה** — בלעדיו הקפיצה לראש הדף
-     מונפשת, ונראית כאילו הדף ברח למשתמש. -->
 <script>
-  /* 🔴 הגרסה הקודמת תיקנה פעם אחת, על load — ואיתי דיווח שזה עדיין
-     נוחת באמצע, גם בטלפון. הסיבה היא התזמון ולא הלוגיקה:
 
-       · `load` מחכה שכל התמונות, הגופנים והסקריפטים ייגמרו. הדף הזה
-         הוא ~17,000 פיקסלים, ובטלפון זה שניות שלמות — וכל אותו זמן
-         הגלילה לא מתוקנת.
-       · והדף עוד **זז אחרי** התיקון: גופן שנטען מאוחר משנה גבהים,
-         והמיקום נשמר אבל התוכן שמתחתיו כבר אחר.
-
-     לכן: מתקנים מוקדם, מתקנים שוב במשך כשתי שניות — **ונעצרים
-     ברגע שהמשתמש נגע.** תיקון שממשיך לקפוץ לראש אחרי שאדם התחיל
-     לגלול גרוע פי כמה מהבעיה המקורית. */
   (function () {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    if (location.hash) return;          /* עוגן בכתובת עדיין מנצח */
+    if (location.hash) return;
 
     var touched = false;
     function mine() { touched = true; }
@@ -71,7 +39,7 @@
     function top() {
       if (touched || location.hash) return;
       var h = document.documentElement, was = h.style.scrollBehavior;
-      h.style.scrollBehavior = 'auto';   /* אחרת הקפיצה מונפשת ונראית כבריחה */
+      h.style.scrollBehavior = 'auto';
       window.scrollTo(0, 0);
       h.style.scrollBehavior = was;
     }
@@ -89,19 +57,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Rubik+Bubbles&family=Assistant:wght@400;600;700;800&display=swap">
-<!-- 🔴 **הסימן שאחרי `?v=` חייב לזוז בכל פעם שהקובץ משתנה.**
-     ב-04.09 הוחלף השם בהדגמה מ"זולי" ל"סופרלי", השרת הגיש את הקובץ
-     החדש — **והדפדפן המשיך להציג "היי! אני זולי" מהמטמון.**
-     ⚠️ **ו-curl לא יכול לתפוס את זה**, כי הוא לא מחזיק מטמון: הבדיקה
-     היחידה שראתה את זה הייתה פתיחת הדף בדפדפן אמיתי.
-     ⚠️ **ול-CSS לא הייתה גרסה בכלל** עד אז, כלומר כל שינוי עיצוב היה
-     נתקע אצל מי שכבר ביקר — והוא דווקא הקהל שחוזר. -->
+
 <link rel="stylesheet" href="assets/market.css?v=20260904a">
 <style>
-  /* ---------------------------------------------- הדמות המרוגלת
-     רק הדף הזה מריץ את הגרסה החיה של סופרלי (עיניים שעוקבות אחרי העכבר,
-     פריטים שנופלים לסל). שאר הדפים מציגים אותה כתמונה, ולכן זה כאן
-     ולא בגיליון המשותף. */
+
   .zooli { width: min(230px, 58vw); height: auto; overflow: visible; display: block; margin: 0 auto 4px; }
   #z-all    { animation: z-float 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin: 120px 200px; transform-box: fill-box; }
   #z-squash { animation: z-squash 3.4s cubic-bezier(.45,0,.55,1) infinite; transform-origin: 120px 190px; transform-box: fill-box; }
@@ -127,10 +86,7 @@
   }
 </style>
 <style>
-/* ⚠️ **מיקוד גלוי בכל דבר שאפשר להגיע אליו במקלדת.** עד 04.09 הוא
-   הוגדר רק על `.faq summary`, כלומר מי שגולש ב-Tab לא ראה איפה הוא
-   נמצא בשאר הדף. `:focus-visible` ולא `:focus` — כדי שלחיצת עכבר
-   לא תצייר מסגרת למי שלא ביקש אותה. */
+
 a:focus-visible, button:focus-visible, summary:focus-visible,
 [tabindex]:focus-visible{outline:3px solid currentColor;
   outline-offset:3px; border-radius:4px}
@@ -142,14 +98,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
 </head>
 <body data-chains="21">
 
-<!-- ⚠️ **דילוג לתוכן — WCAG 2.4.1, רמה A.** מי שגולש במקלדת או
-  בקורא מסך עובר את כל תפריט הניווט בכל טעינה. הקישור הזה בלתי
-  נראה עד שמקישים Tab, ואז הוא הדבר הראשון שמקבל מיקוד. -->
 <a class="skip" href="#main">דילוג לתוכן הראשי</a>
 
-<!-- ============================================================== ניווט
-     גלולה צפה עם הדמות בעיגול. היא מקפצת תמיד ונשארת על המסך בכל
-     גלילה — הבקשה של איתי, וגם מה שמזהים לפני שקוראים מילה. -->
 <nav class="nav">
   <div class="nav-in">
     <a class="brand" href="#top">
@@ -166,18 +116,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </nav>
 
-<!-- ============================================================= גיבור -->
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
       <span class="tag-free reveal">🎉 חינם לגמרי · בבטא</span>
-      <!-- ⚠️ **הכותרת נוקבת במוצר בשורה הראשונה.** הקודמת נפתחה ב"אותו
-           סל. מחיר אחר בכל סופר." — כלומר דיברה על **השוואת מחירים בלבד**,
-           ומי שקרא אותה לא ידע שיש כאן רשימה שמנהלים כל השבוע, שהיא חצי
-           מהמוצר. איתי: "לוקח לקורא קצת זמן להבין שמדובר ברשימת קניות".
-           הניסוח כאן הוא כמעט מילה במילה ה-<title> שכבר היה בראש הקובץ —
-           הוא נכתב נכון מלכתחילה ופשוט לא הופיע על המסך.
-           ⚠️ והמשפט הקודם לא נמחק: הוא עבר לשורת התיאור ונוחת שם כמסקנה. -->
+
       <h1 class="reveal d1">
         <span class="l">רשימת הקניות של הבית,</span>
         <span class="bub">בוואטסאפ.</span>
@@ -200,10 +143,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
       </div>
     </div>
 
-    <!-- ================================================== הטלפון
-         ⚠️ זו **ההדגמה החיה** ולא תמונה. אפשר להקליד בה, והיא מחזיקה
-         מצב: מי שמוסיף שמפו ואז מבקש "הצג רשימה" רואה אותו שם.
-         התשובות הן פלט מוקלט מהבוט האמיתי — ראה assets/zooli.js. -->
     <div class="phone-wrap reveal d2">
       <div>
         <div class="phone demo-phone">
@@ -219,10 +158,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
               <span class="icons" aria-hidden="true">⋮</span>
             </div>
             <div class="wa-body" id="demoBody"></div>
-            <!-- ⚠️ **השבבים בתוך הטלפון ולא מתחתיו.** מתחת לטלפון הם
-                 מחוץ לשדה הראייה כשגוללים — רואים מסך שיחה, לא יודעים
-                 שיש מה ללחוץ עליו, ולא מנסים. כאן הם יושבים בדיוק
-                 מעל שורת ההקלדה, במקום שבו וואטסאפ מציג תשובות מהירות. -->
+
             <div class="wa-chips" id="demoChips">
               <button type="button" data-say="תוסיף שמפו">תוסיף שמפו</button>
               <button type="button" data-say="הצג רשימה">הצג רשימה</button>
@@ -242,23 +178,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
     </div>
   </div>
 
-  <!-- ההיקף הוא הטיעון, ורשימה זורמת אומרת אותו בלי משפט אחד.
-       ⚠️ **הייתה כאן שורת הסבר מעל, והיא ירדה בהכרעת איתי** —
-       *"כל השורה הזאת לא מעניינת"*. היא אמרה **למה** השמות כאן
-       (מחירונים רשמיים, נמשכים כל לילה) ואת תאריך המשיכה.
-       ⚠️ **המחיר המוצהר:** השמות צפים עכשיו בלי הקשר מיידי. הטענה
-       עצמה לא אבדה — היא נאמרת בשלושה מקומות אחרים בדף (כרטיס
-       "מתעדכן כל יום", סעיף מקורות המחיר, והשאלות הנפוצות).
-       ⚠️ **ותאריך המשיכה עבר לפוטר** ולא נמחק: הוא העוגן היחיד של
-       `updated` ב-sync_landing.py, ובלעדיו המסנכרן נכשל — וחשוב
-       מזה, הוא ההוכחה לטענה "מתעדכן כל יום". -->
   <div class="ticker" aria-label="הרשתות שבהשוואה">
     <div class="ticker-track">
     <span><i aria-hidden="true"></i>שופרסל</span><span><i aria-hidden="true"></i>רמי לוי</span><span><i aria-hidden="true"></i>ויקטורי</span><span><i aria-hidden="true"></i>קרפור</span><span><i aria-hidden="true"></i>מחסני השוק</span><span><i aria-hidden="true"></i>יוחננוף</span><span><i aria-hidden="true"></i>סופר ספיר</span><span><i aria-hidden="true"></i>טיב טעם</span><span><i aria-hidden="true"></i>קינג סטור</span><span><i aria-hidden="true"></i>קשת טעמים</span><span><i aria-hidden="true"></i>אושר עד</span><span><i aria-hidden="true"></i>שוק העיר</span><span><i aria-hidden="true"></i>סופר ברקת</span><span><i aria-hidden="true"></i>מעיין 2000</span><span><i aria-hidden="true"></i>סטופ מרקט</span><span><i aria-hidden="true"></i>סופר יודה</span><span><i aria-hidden="true"></i>זול ובגדול</span><span><i aria-hidden="true"></i>שפע ברכת השם</span><span><i aria-hidden="true"></i>חצי חינם</span><span><i aria-hidden="true"></i>סלאח דבאח</span><span><i aria-hidden="true"></i>ח. כהן</span><span aria-hidden="true"><i aria-hidden="true"></i>שופרסל</span><span aria-hidden="true"><i aria-hidden="true"></i>רמי לוי</span><span aria-hidden="true"><i aria-hidden="true"></i>ויקטורי</span><span aria-hidden="true"><i aria-hidden="true"></i>קרפור</span><span aria-hidden="true"><i aria-hidden="true"></i>מחסני השוק</span><span aria-hidden="true"><i aria-hidden="true"></i>יוחננוף</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ספיר</span><span aria-hidden="true"><i aria-hidden="true"></i>טיב טעם</span><span aria-hidden="true"><i aria-hidden="true"></i>קינג סטור</span><span aria-hidden="true"><i aria-hidden="true"></i>קשת טעמים</span><span aria-hidden="true"><i aria-hidden="true"></i>אושר עד</span><span aria-hidden="true"><i aria-hidden="true"></i>שוק העיר</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר ברקת</span><span aria-hidden="true"><i aria-hidden="true"></i>מעיין 2000</span><span aria-hidden="true"><i aria-hidden="true"></i>סטופ מרקט</span><span aria-hidden="true"><i aria-hidden="true"></i>סופר יודה</span><span aria-hidden="true"><i aria-hidden="true"></i>זול ובגדול</span><span aria-hidden="true"><i aria-hidden="true"></i>שפע ברכת השם</span><span aria-hidden="true"><i aria-hidden="true"></i>חצי חינם</span><span aria-hidden="true"><i aria-hidden="true"></i>סלאח דבאח</span><span aria-hidden="true"><i aria-hidden="true"></i>ח. כהן</span></div>
   </div>
 </header>
 
-<!-- ============================================================ הבעיה -->
 <main id="main">
 <section class="sec-white">
   <div class="wrap narrow" style="text-align:center">
@@ -271,11 +196,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
     <p class="lede mid reveal d4" style="max-width:32em">
       וב-<b data-stat="over25">36%</b> מהערים הפער עובר את ה-25%.
     </p>
-
-    <!-- ⚠️ שלושת מספרי ההתפלגות (מעל 20% בעיר אחת מארבע · 180 ₪
-         לקנייה · 34% באילת) ירדו בבקשת איתי — "יותר מדי מלל". הם
-         נמדדים בכל הרצה של sync_landing.py ומודפסים לטרמינל, אז אם
-         ירצו להחזיר אותם המספר טרי ולא צריך למדוד מחדש. -->
 
     <p class="lede mid reveal d4" style="max-width:34em;margin-top:26px">
       משפחה שמוציאה כ־3,000 ₪ בחודש על מזון משאירה על השולחן
@@ -305,7 +225,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ======================================================= איך זה עובד -->
 <section id="how">
   <div class="wrap">
     <div style="text-align:center">
@@ -316,25 +235,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
       </p>
     </div>
 
-    <!-- ⚠️ **טלפון נעוץ במקום חמישה בלוקים.** קודם היו כאן חמש קבוצות
-         בועות שגוללים דרכן אחת אחרי השנייה, והדף היה 10,812px בטלפון.
-         עכשיו זה מסך אחד שהתוכן שלו מתחלף לפי הגלילה — פחות גלילה,
-         ונראה כאילו זה קורה עכשיו.
-
-         ⚠️ **בלי חטיפת גלילה.** הדף לא מאט ולא לוקח שליטה; הטלפון רק
-         מגיב למה שכבר קרה. עמוד שנלחם בגלילה מאבד את המבקר.
-
-         ⚠️ **ומי שמבקש הפחתת תנועה** מקבל את כל ההודעות בבת אחת, בלי
-         הנפשה — וזה גם מה שיקרה אם ה-JS ייפול. -->
     <div class="reel">
       <div class="reel-stage">
-        <!-- ⚠️ **מוסתר מקוראי מסך, בכוונה.** התוכן כאן **מתחלף לבד**
-             לפי הגלילה, וקורא מסך שהגיע אליו שומע תמלול של שיחה
-             שהתחלפה בזמן שהוא ירד אליה — כלומר רעש, לא מידע.
-             המשמעות יושבת בטקסט שלצידו, וזו הסיבה שהוא נוסח כך
-             שהוא עומד בלי הטלפון.
-             ⚠️ **המחיר המוצהר:** מי שמשתמש בקורא מסך מקבל את ההסבר
-             ולא את הדוגמה עצמה. -->
+
         <div class="phone reel-phone" aria-hidden="true">
           <div class="screen">
             <div class="wa-top">
@@ -343,9 +246,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
               <span class="who"><b>סופרלי</b><span>מקוון</span></span>
               <span class="icons" aria-hidden="true">⋮</span>
             </div>
-            <!-- tabindex="-1": גוף השיחה ניתן לגלילה, וכרום מכניס
-                 אזורים כאלה לסדר ה-Tab. אלמנט שאפשר להגיע אליו
-                 במקלדת בתוך תת-עץ aria-hidden הוא שגיאה. -->
+
             <div class="wa-body" id="reelBody" tabindex="-1"></div>
           </div>
         </div>
@@ -381,7 +282,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ========================================================== יתרונות -->
 <section class="sec-soft">
   <div class="wrap">
     <div style="text-align:center">
@@ -446,7 +346,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ======================================================= למה להאמין -->
 <section id="why">
   <div class="wrap">
     <div style="text-align:center">
@@ -485,7 +384,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ============================================================ בכנות -->
 <section class="sec-white">
   <div class="wrap narrow">
     <p class="eyebrow reveal">בכנות</p>
@@ -513,14 +411,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ==================================================== בקרוב
-     ⚠️ **רק מה שכבר נמדד או הוכרע, ובלי תאריכים.** דף שמבטיח
-     תאריך הופך כל שבוע שעובר להבטחה שהופרה, ורשימת משאלות ארוכה
-     קוראת כמו מוצר שעוד לא קיים. כל אחד כזה שאיתי כבר בחר לבנות.
-     ⚠️ **וכשמשהו כאן נבנה — הוא יוצא מכאן ונכנס לכרטיסים.** ב-03.09
-     יצאו שניים: "כמה הוצאתי החודש" ובדיקת הקבלה. רשימת "בקרוב"
-     שמחזיקה פיצ'ר שכבר עובד מקטינה את המוצר בדיוק כמו שהבטחת
-     תאריך מגדילה אותו. -->
 <section class="sec-soft">
   <div class="wrap narrow">
     <p class="eyebrow reveal">בקרוב</p>
@@ -539,16 +429,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ==================================================== שאלות נפוצות
-     ⚠️ **התשובות הן של הבוט, לא של הדף.** כל אחת היא ניסוח מ-
-     messages.py (FAQ_FREE, FAQ_SOURCE, FAQ_PRIVACY, FAQ_WHY_LOCATION,
-     FAQ_MODES) מותאם לגוף שני רבים. הסיבה: דף שעונה תשובה אחת והבוט
-     עונה אחרת הוא בדיוק סוג הפער שאיש לא רואה — ומי שנתקל בו מפסיק
-     להאמין לשניהם.
-
-     ⚠️ **ו-<details> ולא אקורדיון ב-JS**, בכוונה: הוא נפתח גם בלי
-     שורת JS אחת, נגיש מהמקלדת בחינם, ועולה שורה אחת בטלפון כשהוא
-     סגור — כלומר שאלת הפרטיות נכנסה בלי לעלות מקום. -->
 <section class="sec-soft">
   <div class="wrap narrow">
     <p class="eyebrow reveal">שאלות</p>
@@ -579,7 +459,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ============================================================= סיום -->
 <section>
   <div class="wrap narrow">
     <div class="final reveal">
@@ -669,9 +548,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
   </div>
 </section>
 
-<!-- ⚠️ **סרגל דביק במובייל בלבד.** רוב מי שיגיע לדף יגיע מקישור
-     בוואטסאפ, בטלפון, ויגלול — והכפתור של הגיבור נשאר הרחק למעלה.
-     הוא מופיע רק אחרי שהכפתור הראשון יצא מהמסך, כדי שלא יכסה אותו. -->
 <div class="sticky-cta" id="stickyCta">
   <a class="btn btn-wa btn-wide" href="https://wa.me/972552138724?text=%D7%94%D7%99%D7%99" target="_blank" rel="noopener" data-open-demo>לנסות את סופרלי — חינם</a>
 </div>
@@ -692,24 +568,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
 
 <script src="assets/zooli.js?v=20260904a"></script>
 <script>
-  /* המספר האמיתי של סופרלי, מאומת מול מטא (03.09): השם המאושר הוא
-     `סופרלי - רשימת קניות`, ודירוג האיכות GREEN.
 
-     ⚠️ **הכתובת יושבת בשני מקומות בכוונה** — גם ב-`href` של כל ארבעת
-     הכפתורים ב-HTML וגם כאן. ה-HTML עובד **גם אם ה-JS לא רץ**,
-     והשורה כאן מוסיפה פתיחה בלשונית חדשה. **מי שמחליף מספר
-     מחליף את שניהם** — יש בדיקה שסופרת שהם זהים.
-
-     להחזיר לטלפון ההדגמה: לרוקן את `BOT_NUMBER` **ו**להחזיר את
-     ארבעת ה-`href` ל-`#top`. */
   var BOT_NUMBER = "972552138724";
 
   (function () {
     var btns = document.querySelectorAll('[data-open-demo]');
 
-    /* ⚠️ הסרגל הדביק מופיע **רק אחרי** שהכפתור של הגיבור יצא מהמסך —
-       אחרת שני כפתורים זהים יושבים זה על זה בפתיחה, וזה נראה כמו
-       תקלה ולא כמו הזמנה. */
     var bar = document.getElementById('stickyCta');
     var heroBtn = document.querySelector('.hero-cta .btn-wa');
     if (bar && heroBtn && 'IntersectionObserver' in window) {
@@ -717,7 +581,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible,
         bar.classList.toggle('on', !e[0].isIntersecting);
       }, { threshold: 0 }).observe(heroBtn);
     }
-
 
     if (BOT_NUMBER) {
       var url = 'https://wa.me/' + BOT_NUMBER + '?text=' + encodeURIComponent('היי');
