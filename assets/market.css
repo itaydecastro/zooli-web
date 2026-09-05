@@ -1,34 +1,63 @@
+/* =====================================================================
+   זולי · שפת העיצוב של דף הנחיתה — כיוון "שוק"
+   ---------------------------------------------------------------------
+   ⚠️ **למה קובץ נפרד מ-style.css.** הדפים הפנימיים (דשבורד, ערכת שיווק,
+   דף הדמות) בנויים על פלטה כהה. דף הנחיתה הוא היחיד הציבורי, והוא עבר
+   לפלטה בהירה בהכרעת איתי ("השחור־ירוק מרגיש עייף"). להחליף את המשתנים
+   ב-style.css היה משנה גם את שלושת הפנימיים בלי שאיש הסתכל עליהם.
+   כשהכיוון יאושר — מעבירים גם אותם, ואז הקובץ הזה הופך למקור היחיד.
 
+   ⚠️ **ניגודיות נמדדה, לא נבחרה.** על רקע קרם:
+       #123528 טקסט ראשי      13.4:1  ✔
+       #4A6459 טקסט משני       6.5:1  ✔
+       #5E7268 טקסט עמום       4.8:1  ✔
+       #0A6B3A ירוק לטקסט קטן  5.1:1  ✔
+       #0E9C50 ירוק בהיר       3.3:1  ✔ לטקסט גדול בלבד (מעל 24px)
+       #E4572E כתום            3.9:1  ✘ — כותרות גדולות ומילויים בלבד
+   מי שמזיז צבע כאן חייב למדוד מחדש. ירוק על בהיר הוא בדיוק המקום שבו
+   פלטה יפה הופכת לדף שאי אפשר לקרוא.
 
+   ⚠️ **ו-`--soft` נשכח מהרשימה בגרסה הראשונה** והיה #7A8F84 — 3.2:1,
+   נכשל. הוא נושא ארבעה דברים (הערת הגיבור, תווית ההדגמה, תיאור השם
+   בניווט, והפוטר), כלומר הבדיקה שכתובה כאן "עברה" בזמן שארבעה מקומות
+   נפלו. **טוקן שלא מופיע ברשימה הזאת לא נמדד.**
+   ===================================================================== */
+
+/* ⚠️ **עברית, גם בלי תגית dir.** הדף עצמו מצהיר `dir="rtl"` על
+   ה-<html>, אבל סביבות שעוטפות את הקובץ ב-<html> משלהן (Artifact)
+   מוחקות אותה — ואז הכול עולה משמאל לימין. זו שכבת הביטחון
+   השנייה, והיא עובדת גם בלי שורת JS אחת. */
 html { direction: rtl; }
 
 :root {
-  --bg:        #FFF6E9;
+  --bg:        #FFF6E9;   /* קרם */
   --bg-2:      #FFFFFF;
-  --bg-3:      #FDEFDC;
-  --ink:       #123528;
+  --bg-3:      #FDEFDC;   /* קרם עמוק יותר, לפסים */
+  --ink:       #123528;   /* ירוק כהה — הטקסט */
   --ink-2:     #4A6459;
   --soft:      #5E7268;
   --line:      #EADDC9;
   --line-2:    #F3E6D3;
 
-  --green:     #0E9C50;
-  --green-tx:  #0A6B3A;
+  --green:     #0E9C50;   /* ירוק לכותרות ומילויים — 3.3:1, עובר לטקסט גדול */
+  --green-tx:  #0A6B3A;   /* ירוק לטקסט קטן — נמדד */
   --green-lt:  #E8F8EE;
-  --wa:        #25D366;
+  --wa:        #25D366;   /* ירוק וואטסאפ, למילויים בלבד */
   --on-wa:     #04170C;
 
   --orange:    #E4572E;
-  --orange-dk: #C6410F;
+  --orange-dk: #C6410F;   /* רקע כפתור — לבן עליו 5.0:1 */
   --orange-lt: #FDEDE6;
   --yellow:    #FFD166;
-  --yellow-dk: #7A4F00;
+  --yellow-dk: #7A4F00;   /* על #FFD166 — 5.0:1, נמדד */
 
   --radius:    22px;
   --radius-lg: 30px;
   --shadow:    0 18px 44px rgba(18, 53, 40, .10);
   --shadow-lg: 0 30px 70px rgba(18, 53, 40, .16);
 
+  /* כתב הדגש יושב במשתנה אחד בכוונה — החלפה ל-Rubik Moonrocks או
+     Rubik Puddles היא שורה אחת ולא מסע. */
   --font-bubble: "Rubik Bubbles", cursive;
   --font-head:   "Fredoka", sans-serif;
   --font-body:   "Assistant", sans-serif;
@@ -41,6 +70,22 @@ html { direction: rtl; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* 🔴 עיגון גלילה — הסיבה ל"נפתח בראש ואז קופץ למטה", שאיתי דיווח
+   עליה פעמיים, גם ממחשב וגם מטלפון.
+
+   הדפדפן מנסה "לשמור על יציבות": כשתוכן **מעל** נקודת המבט משנה
+   גובה, הוא מזיז את הגלילה כדי שמה שרואים יישאר במקומו. בדף הזה
+   הגבהים משתנים כל הזמן אחרי הטעינה — אנימציות ה-reveal, טלפון
+   ההדגמה שמתמלא בהודעות, וגופנים שנוחתים מאוחר — אז הדפדפן "מתקן"
+   ודוחף את הדף למטה.
+
+   ⚠️ **ולכן זה נראה תקין במחשב מהיר ושבור בטלפון:** אצלי הכול נטען
+   לפני שהדף נצבע ואין מה לעגן; בחיבור אמיתי הכול נוחת אחר כך. מדדתי
+   על התנאים שלי במקום על אלה של המשתמש, וזו בדיוק הטעות שהמסמך
+   הראשי מזהיר ממנה.
+
+   כיבוי כאן בטוח: הדף נקרא מלמעלה למטה, ומה שהעיגון בא למנוע — קפיצה
+   בזמן קריאה — לא קורה בו ממילא. */
 html, body { overflow-anchor: none; }
 
 body {
@@ -70,9 +115,11 @@ h1, h2, h3 {
 
 section { padding: clamp(56px, 9vw, 104px) 0; position: relative; }
 
+/* פס מפריד רך, לא קו — קו על קרם נראה כמו טבלה */
 .sec-soft { background: var(--bg-3); }
 .sec-white { background: var(--bg-2); }
 
+/* ------------------------------------------------------------- טיפוגרפיה */
 .eyebrow {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--font-head); font-weight: 500; font-size: 14px;
@@ -93,6 +140,7 @@ b, strong { font-weight: 700; color: var(--ink); }
 .g { color: var(--green-tx); }
 .o { color: var(--orange-dk); }
 
+/* --------------------------------------------------------------- כפתורים */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   font-family: var(--font-head); font-weight: 600; font-size: 17px;
@@ -113,6 +161,7 @@ b, strong { font-weight: 700; color: var(--ink); }
 .btn[aria-disabled="true"]:hover { transform: none; }
 .btn-wide { width: 100%; }
 
+/* -------------------------------------------------------------- ניווט צף */
 .nav {
   position: sticky; top: 0; z-index: 60;
   padding: 12px 20px 0; pointer-events: none;
@@ -133,7 +182,9 @@ b, strong { font-weight: 700; color: var(--ink); }
   background: var(--green-lt); border: 1px solid #CFEBD9;
   display: grid; place-items: center; overflow: hidden;
 }
-
+/* ⚠️ הדמות מקפצת תמיד — זו הבקשה של איתי, והיא גם מה שמזהים לפני
+   שקוראים מילה. האנימציה על עטיפה פנימית ולא על העיגול, כדי שהגבול
+   והרקע יישארו יציבים ורק היא תזוז. */
 .brand-mark span { display: block; width: 34px; height: 34px; animation: hop 2.6s cubic-bezier(.34,.02,.4,1) infinite; }
 .brand-mark svg { width: 100%; height: 100%; display: block; }
 @keyframes hop {
@@ -143,7 +194,8 @@ b, strong { font-weight: 700; color: var(--ink); }
   90%           { transform: translateY(0) scaleY(.95); }
 }
 .brand-tx { line-height: 1.15; }
-
+/* ⚠️ block ולא inline — שניהם <span>, ובלי זה השם והתיאור נדבקים
+   לשורה אחת ("זולי משווה מחירים בוואטסאפ") ונקראים כמשפט אחד. */
 .brand-nm { display: block; font-family: var(--font-head); font-weight: 600; font-size: 20px; }
 .brand-sub { display: block; font-size: 12.5px; color: var(--soft); }
 @media (max-width: 560px) { .brand-sub { display: none; } }
@@ -156,12 +208,14 @@ b, strong { font-weight: 700; color: var(--ink); }
 .nav .btn { padding: 10px 20px; font-size: 15.5px; }
 @media (max-width: 860px) { .hide-sm { display: none; } }
 
+/* --------------------------------------------------------------- הגיבור */
 .hero { padding-top: clamp(30px, 5vw, 54px); }
 .hero-grid {
   display: grid; gap: clamp(28px, 4vw, 52px);
   grid-template-columns: 1.05fr .95fr; align-items: center;
 }
 @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
+
 
 .tag-free {
   display: inline-flex; align-items: center; gap: 8px;
@@ -194,6 +248,7 @@ h1 .bub {
 .hero-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .hero-note { font-size: 14px; color: var(--soft); margin: 14px 0 0; }
 
+/* ------------------------------------------------------ הטלפון + וואטסאפ */
 .phone-wrap { display: flex; justify-content: center; }
 .phone {
   width: min(330px, 100%); flex: none; position: relative;
@@ -201,7 +256,7 @@ h1 .bub {
   background: linear-gradient(160deg, #2B3A33 0%, #16211C 100%);
   box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,.22);
 }
-
+/* כפתורי הצד — פרט קטן שהופך "מלבן" ל"טלפון" */
 .phone::before, .phone::after {
   content: ""; position: absolute; inset-inline-end: -3px;
   width: 3px; border-radius: 3px; background: #3A4A42;
@@ -245,7 +300,9 @@ h1 .bub {
   background-size: 22px 22px, 22px 22px;
   background-position: 0 0, 11px 11px;
   scrollbar-width: thin;
-
+  /* גלילה בתוך השיחה נעצרת בקצה ולא ממשיכה לגלול את הדף. בלי זה,
+     הגעה לסוף ההודעה מגלגלת את העמוד — כלומר מקפיצה את הסרט לשלב
+     הבא בדיוק כשקוראים את הסוף. */
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
@@ -260,7 +317,7 @@ h1 .bub {
 .msg.me  { background: #D9FDD3; align-self: flex-start; border-top-right-radius: 3px; }
 .msg.bot { background: #fff;    align-self: flex-end;   border-top-left-radius: 3px; }
 .msg .tm { display: block; text-align: left; font-size: 10px; color: #667781; margin-top: 3px; }
-
+/* בועת צילום ברקוד בהדגמה: "תמונה" מצוירת — פסים והמספר מתחתם. */
 .msg.photo { padding: 8px; }
 .msg.photo .bc {
   display: block; width: 148px; height: 54px; border-radius: 4px;
@@ -292,14 +349,23 @@ h1 .bub {
   font-family: inherit; font-size: 13.6px; background: #fff; color: #111B21;
 }
 .wa-foot input::placeholder { color: #8696A0; }
-
+/* ⚠️ לבן על ירוק וואטסאפ הוא 1.98:1 — וואטסאפ עצמו נמוך
+   שם, אבל זה לא פוטר את הדף שלנו. הירוק שלנו נותן 3.6:1,
+   מעל הסף לרכיב גרפי, ועדיין נקרא כמו כפתור שליחה. */
 .wa-foot button {
   flex: none; width: 38px; height: 38px; border-radius: 50%; border: 0;
   background: var(--green); color: #fff; cursor: pointer; font-size: 15px;
 }
 
+/* ---- שבבי הצעה בתוך הטלפון, מעל שורת ההקלדה ----
+   גלילה אופקית ולא שבירה לשורות: שלוש שורות שבבים בתוך מסך טלפון
+   בולעות את השיחה עצמה. המסכה בקצה אומרת שיש עוד. */
 .wa-chips {
-
+  /* ⚠️ **עוטף לשתי שורות ולא גלילה אופקית**, משתי סיבות.
+     הראשונה מטרה: גלילה מסתירה חצי מהדוגמאות, וכל הנקודה
+     של העברתן לתוך הטלפון הייתה שיראו אותן.
+     השניה באג: מיכל גלילה מקונן בתוך דף RTL דלף 257px לרוחב
+     המסמך במובייל — התיבה עצמה נמדדה 308px והדף בכל זאת גלש. */
   flex: none; display: flex; flex-wrap: wrap; gap: 6px;
   padding: 8px 9px; background: #F0F2F5;
   border-top: 1px solid rgba(18,53,40,.08);
@@ -312,6 +378,7 @@ h1 .bub {
 }
 .wa-chips button:hover { background: var(--green-lt); border-color: var(--green); }
 
+/* שבבי הצעה מתחת לטלפון */
 .chips { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin: 16px auto 0; max-width: 380px; }
 .chips button {
   background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-2);
@@ -323,6 +390,7 @@ h1 .bub {
   text-align: center; font-size: 13px; color: var(--soft); margin: 12px 0 0;
 }
 
+/* ------------------------------------------------------- רצועת הרשתות */
 .ticker {
   overflow: hidden; padding: 16px 0; margin-top: clamp(28px, 5vw, 48px);
   border-block: 1px solid var(--line);
@@ -330,17 +398,27 @@ h1 .bub {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 11%, #000 89%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 11%, #000 89%, transparent);
 }
-
+/* ⚠️ **שני חצאים זהים, והרווח שייך לחצי ולא לרצועה.**
+   בגרסה הקודמת הרווח ישב על המסלול כולו, אז בין שני העותקים
+   היה רווח אחד נוסף — ו-50% מהרוחב לא היה עותק אחד בדיוק.
+   הפער הצטבר בכל סיבוב, והרצועה "נעלמה". עכשיו לכל חצי יש
+   רווח מובנה וריפוד פתיחה זהה, כלומר שניהם בדיוק אותו רוחב. */
 .ticker-track { display: flex; width: max-content; animation: slide 24s linear infinite; }
 .ticker:hover .ticker-track { animation-play-state: paused; }
-
+/* ⚠️ **הרווח יושב על הפריט, לא על המסלול.** כך שני העותקים
+   יוצאים באותו רוחב בדיוק בלי שום עוטף נוסף — והתוכן של הרצועה
+   נשאר רשימת span-ים שטוחה. בגרסה שהיו בה div-ים מקוננים,
+   הרגקס שמחליף את הרצועה עצר ב-</div> הראשון והשאיר שארית. */
 .ticker span {
   display: inline-flex; align-items: center; gap: 9px;
   margin-inline-start: 28px;
   font-family: var(--font-head); font-weight: 500; font-size: 17px;
   color: var(--ink); white-space: nowrap;
 }
-
+/* ⚠️ **נקודה חיה, לא לוגו ולא אות פתיח.** לוגו של רשת על דף
+   שמשווה את מחיריה נקרא כשיתוף פעולה, ואות בבועה היא
+   קישוט שלא אומר כלום. הנקודה **אומרת משהו נכון** — המחירון
+   של הרשת הזאת נמשך אצלנו, והוא מתעדכן כל לילה. */
 .ticker span i {
   flex: none; width: 8px; height: 8px; border-radius: 50%;
   background: var(--green); position: relative;
@@ -358,6 +436,7 @@ h1 .bub {
 }
 @keyframes slide { from { transform: translateX(0); } to { transform: translateX(50%); } }
 
+/* ------------------------------------------------------------ המספר */
 .big-num {
   display: block; font-family: var(--font-head); font-weight: 600;
   font-size: clamp(78px, 17vw, 168px); line-height: .92;
@@ -375,6 +454,7 @@ h1 .bub {
 }
 .num-strip b { color: var(--ink); }
 
+/* כרטיס ההוכחה */
 .card {
   background: var(--bg-2); border: 1px solid var(--line);
   border-radius: var(--radius-lg); padding: clamp(22px, 3.4vw, 34px);
@@ -386,10 +466,15 @@ h1 .bub {
 .prow .ptrack { background: var(--bg-3); border-radius: 999px; height: 15px; overflow: hidden; }
 .prow .pfill { display: block; height: 100%; border-radius: 999px; width: var(--w); }
 .prow .pfill.win  { background: var(--green); }
-.prow .pfill.lose { background: #D92D20; }
+.prow .pfill.lose { background: #D92D20; }   /* אדום אמיתי — הדהוי לא אמר "יקר" */
 .prow .amt { font-family: var(--font-head); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
 .prow.best .amt { color: var(--green-tx); }
 
+/* ------------------------------------------------------------- הפעימות */
+/* ⚠️ **ריאקט, לא בועה.** בשלב השקט הבוט לא עונה בהודעה
+   חדשה — הוא שם ריאקט על ההודעה של הקונה. הדף הציג שנים
+   שלא קורים: בועת בוט עם שם המוצר. זה הדבר הכי שקט
+   שהבוט עושה, והוא שווה הצגה נכונה. */
 .msg.me { margin-bottom: 12px; }
 .react {
   position: absolute; bottom: -12px; inset-inline-start: 9px;
@@ -398,19 +483,23 @@ h1 .bub {
   line-height: 1.45; box-shadow: 0 1px 3px rgba(18,53,40,.16);
 }
 
+/* -------------------------------------------------------- כרטיסי יתרון */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 30px; }
 .acard {
   background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 24px 22px; position: relative; overflow: hidden;
 }
-
+/* ⚠️ הספרה נמדדה ב-1.3:1 כשהיא הייתה בצבע ה-line — כלומר קישוט ולא
+   מספר. היא כן נושאת מידע (הסדר), אז היא ברונזה חמה: 4.0:1, מעל
+   הסף לטקסט גדול, ועדיין שקטה מהכותרת. */
 .acard .n {
   font-family: var(--font-head); font-weight: 600; font-size: 40px;
   color: #9A7B4F; line-height: 1; margin-bottom: 8px;
 }
 .acard h3 { font-size: 20px; margin-bottom: 6px; }
 .acard p { color: var(--ink-2); font-size: 15.5px; margin: 0; }
-
+/* תווית "בקרוב" — פיצ'ר שקיים חלקית חייב להגיד את זה על עצמו,
+   אחרת הכרטיס נקרא כהבטחה. */
 .soon {
   display: inline-block; margin-top: 8px;
   background: var(--yellow); color: var(--yellow-dk);
@@ -418,6 +507,7 @@ h1 .bub {
   font-size: 13px; font-weight: 700;
 }
 
+/* ------------------------------------------------------------- מספרים */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 28px; }
 .stat {
   background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
@@ -430,6 +520,7 @@ h1 .bub {
 }
 .stat .l { display: block; font-size: 14.5px; color: var(--ink-2); margin-top: 4px; }
 
+/* --------------------------------------------------------------- כנות */
 .honest { display: flex; flex-direction: column; gap: 12px; margin-top: 26px; }
 .hrow {
   display: flex; gap: 13px; align-items: flex-start;
@@ -440,6 +531,7 @@ h1 .bub {
 .hrow b { display: block; margin-bottom: 2px; }
 .hrow span.tx { color: var(--ink-2); font-size: 15.5px; }
 
+/* ------------------------------------------------------------- הסיום */
 .final {
   background: var(--ink); color: #FFF6E9; border-radius: var(--radius-lg);
   padding: clamp(34px, 6vw, 64px); text-align: center;
@@ -453,6 +545,8 @@ h1 .bub {
 footer { padding: 34px 0 46px; text-align: center; color: var(--soft); font-size: 14.5px; }
 footer a { color: var(--green-tx); }
 
+
+/* ----------------------------------------------------- שאלות נפוצות */
 .faq { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
 .faq details {
   background: var(--bg-2); border: 1px solid var(--line);
@@ -460,13 +554,13 @@ footer a { color: var(--green-tx); }
 }
 .faq summary {
   cursor: pointer; list-style: none;
-  padding: 15px 18px; min-height: 44px;
+  padding: 15px 18px; min-height: 44px;      /* יעד מגע */
   display: flex; align-items: center; gap: 12px;
   font-family: var(--font-head); font-weight: 600; font-size: 17px;
   color: var(--ink);
 }
 .faq summary::-webkit-details-marker { display: none; }
-
+/* הסימן בקצה הפותח של השורה — inline-start, כדי שיעבור צד לבד ב-RTL */
 .faq summary::after {
   content: "+"; margin-inline-start: auto;
   font-size: 24px; line-height: 1; color: var(--green-tx);
@@ -480,6 +574,7 @@ footer a { color: var(--green-tx); }
   margin: 0; padding: 0 18px 17px; color: var(--ink-2);
 }
 
+/* -------------------------------------------------- סרגל CTA דביק */
 .sticky-cta {
   position: fixed; inset-inline: 0; bottom: 0; z-index: 70;
   padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
@@ -493,6 +588,7 @@ footer a { color: var(--green-tx); }
 @media (max-width: 760px) { .sticky-cta { display: block; } }
 @media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
 
+/* ------------------------------------------------------------- חשיפה */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
 .reveal.on { opacity: 1; transform: none; }
 .d1 { transition-delay: .07s; } .d2 { transition-delay: .14s; }
@@ -504,6 +600,9 @@ html.no-js .reveal { opacity: 1; transform: none; }
   .ticker-track, .brand-mark span, .typing i, .msg { animation: none !important; }
 }
 
+/* ⚠️ **הידוק הגיבור במובייל.** נמדד ב-375×812: הטלפון התחיל ב-641px,
+   כלומר רק 171px ממנו נראו בקיפול — והוא הדבר שמוכר. שורת התיאור
+   תפסה 110px ושלושת התגים 85px בשתי שורות. */
 @media (max-width: 560px) {
   .hero { padding-top: 18px; }
   .tag-free { margin-bottom: 12px; font-size: 13.5px; padding: 6px 13px; }
@@ -515,22 +614,47 @@ html.no-js .reveal { opacity: 1; transform: none; }
   .btn { padding: 13px 24px; font-size: 16px; }
 }
 
+/* ================================================= הטלפון הנעוץ (הסרט)
+   מתוכנן קודם לטלפון: הבמה נדבקת לראש המסך, והשלבים גוללים מתחתיה.
+   בדסקטופ אותו דבר בשתי עמודות. */
 .reel { position: relative; margin-top: clamp(22px, 4vw, 40px); }
 
+/* ⚠️ **הטלפון מתחת לטקסט, לא מעליו.** קודם הבמה נשאה רקע אטום
+   שהחביא את הטקסט העולה; היום הטקסט עובר מֵעליה ונמוג שם — וזה
+   מחייב שהיא תהיה שקופה ונמוכה יותר בשכבות. */
 .reel-stage {
   position: sticky; top: 82px; z-index: 1;
   display: flex; justify-content: center;
   padding-bottom: 22px;
 }
-
+/* ⚠️ הטלפון קטן בכוונה במובייל: על מסך 812 הוא הסתיים ב-442 וסרגל
+   ה-CTA מתחיל ב-739 — כלומר לטקסט נשארו 297 פיקסלים בלבד. כל פיקסל
+   שהטלפון מוותר עליו הולך לטקסט שאמור להיקרא. */
 .reel-phone { width: min(284px, 82vw); }
 .reel-phone .screen { height: 296px; }
 
+/* מעל הטלפון בשכבות, אחרת הטקסט נעלם מתחתיו ברגע שהוא מטפס. */
+/* ⚠️ **שכבת הטקסט לא תופסת מגע, וזה לא פרט.** הקופסה שלה פרושה על
+   **כל** גובה הסרט ולא רק במקום שבו רואים אותה, אז ברגע שהיא עלתה
+   מעל הטלפון היא בלעה כל נגיעה בו — **ואי אפשר היה לגלול בשיחה
+   עצמה.** נסיגה שנכנסה יחד עם המעבר-מעל, ואיתי דיווח עליה.
+
+   ⚠️ **מחיר מוצהר:** אי אפשר לסמן את הטקסט הזה בעכבר. זה המחיר של
+   טקסט שמרחף מעל אלמנט אינטראקטיבי, והוא נבחר ביודעין — לגלול בשיחה
+   שווה יותר מלסמן משפט הסבר. */
 .reel-steps {
   padding-bottom: 5vh; position: relative; z-index: 3;
   pointer-events: none;
 }
-
+/* ⚠️ **גובה השלב הוא חשבון ולא טעם.** השלב הפעיל נבחר
+   לפי מרכז הרצועה שמתחת לטלפון, ולכן ברגע החלפה הטקסט
+   שלו מרוחק ממנו בחצי גובה שלב. עם 44vh זה היה 178px — ושלושה
+   רבעים מהטקסט יצאו מהרצועה. עם 38vh זה 154px, וגרוע המקרים
+   משאיר יותר מחצי הטקסט על המסך. בדסקטופ אין בעיה — הטקסט
+   בעמודה משלו. */
+/* ⚠️ ברירת המחדל היא **גלוי**, וה-JS הוא זה שמעמעם. הפוך מזה אומר
+   שדף שה-JS שלו לא רץ מציג חמישה בלוקים ב-34% — כלומר טקסט שאי אפשר
+   לקרוא, בלי שום סימן שמשהו נשבר. */
 .reel-step {
   min-height: 38vh;
   display: flex; flex-direction: column; justify-content: center;
@@ -546,14 +670,15 @@ html.no-js .reveal { opacity: 1; transform: none; }
 .reel-step p { color: var(--ink-2); margin: 0; }
 
 @media (max-width: 899px) {
-
+  /* הילה בצבע הרקע: הטקסט חוצה את מסגרת הטלפון הכהה בדרך למעלה,
+     ובלעדיה האותיות הכהות נבלעות בה בדיוק בשנייה שרואים אותן. */
   .reel-step h3, .reel-step p {
     text-shadow: 0 0 10px var(--bg), 0 0 4px var(--bg), 0 1px 2px var(--bg);
   }
 }
 
 @media (min-width: 900px) {
-
+  /* בדסקטופ אין תחרות — עמודה לכל אחד, והטלפון חוזר לגודל מלא. */
   .reel { display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(28px,4vw,56px); align-items: start; }
   .reel-stage { top: 104px; padding-bottom: 0; background: none; }
   .reel-phone { width: min(320px, 100%); }

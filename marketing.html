@@ -2,8 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <!-- אייקון האתר — זה שגוגל מציג ליד כל תוצאת חיפוש. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
@@ -12,6 +12,10 @@
 <title>סופרלי — ערכת שיווק</title>
 <meta name="description" content="הטקסטים המוכנים להעתקה, המספרים המאושרים, וכרטיסי השיתוף של סופרלי.">
 
+<!-- 🔴 **ערכת עבודה פנימית, ולא דף שיווק.** יש כאן ניסוחים בעריכה
+     ומספרים לפני אישור, ומי שיחפש בגוגל "סופרלי" צריך לנחות בדף
+     הנחיתה ולא כאן. הדף נשאר נגיש למי שיש לו הקישור — noindex אומר
+     "אל תציג בתוצאות", לא "אל תגיש". -->
 <meta name="robots" content="noindex,follow">
 
 <meta name="theme-color" content="#25D366">
@@ -30,10 +34,12 @@
   .no  { color: var(--warn); }
   .yes { color: var(--green); }
 
+  /* כרטיסי שיתוף — נועדו לצילום מסך, לכן במידות אמיתיות */
   .cards { display: flex; gap: 22px; flex-wrap: wrap; }
   .shot-wrap { }
   .shot-lab { color: var(--soft); font-size: 14px; margin: 0 0 8px; }
-
+  /* הפלטה של סופרלי: שחור, ירוק וואטסאפ, לבן. הגרסה הקודמת הייתה ירוק
+     כהה מלא — צבע שאינו מופיע בשום מקום אחר במוצר. */
   .shot {
     background:
       radial-gradient(120% 130% at 88% -10%, rgba(37,211,102,.30) 0%, transparent 58%),
@@ -55,7 +61,7 @@
   .shot .mid em { font-style: normal; color: var(--green); }
   .shot .bot { font-size: 25px; color: #C9D8D0; line-height: 1.45; }
   .shot .foot { font-family: "Varela Round", sans-serif; font-size: 21px; color: #7C8D85; }
-
+  /* הדמות מציצה מהפינה — היא מה שמזהים לפני שקוראים מילה. */
   .shot .peek {
     position: absolute; inset-inline-start: -54px; bottom: -58px;
     width: 260px; opacity: .16; pointer-events: none;
@@ -97,6 +103,7 @@
   </div>
 </section>
 
+<!-- ======================================================== המספרים -->
 <section class="sec-line">
   <div class="wrap narrow">
     <h2>המספרים המאושרים</h2>
@@ -106,7 +113,7 @@
       <p class="num-strip">
         <span><b data-count="21" data-stat="chains">21</b> רשתות</span>
         <span><b data-count="146" data-stat="cities">146</b> ערים</span>
-        <span><b data-count="802" data-stat="categories">802</b> קטגוריות</span>
+        <span><b data-count="803" data-stat="categories">803</b> קטגוריות</span>
         <span><b data-count="1261" data-stat="stores">1,261</b> סניפים</span>
         <span><b>כל יום</b> עדכון</span>
         <span><b data-stat="gap">20%</b> פער בין הזולה ליקרה</span>
@@ -115,6 +122,7 @@
   </div>
 </section>
 
+<!-- ======================================================== כללי הברזל -->
 <section class="sec-line">
   <div class="wrap narrow">
     <h2>מה שלא אומרים</h2>
@@ -155,6 +163,7 @@
   </div>
 </section>
 
+<!-- ======================================================== טקסטים -->
 <section class="sec-line">
   <div class="wrap narrow">
     <h2>טקסטים מוכנים</h2>
@@ -213,6 +222,7 @@
   </div>
 </section>
 
+<!-- ======================================================== כרטיסים -->
 <section class="sec-line">
   <div class="wrap">
     <h2>כרטיסי שיתוף</h2>
@@ -255,6 +265,7 @@
   </div>
 </section>
 
+<!-- ======================================================== חומר גלם -->
 <section class="sec-line">
   <div class="wrap narrow">
     <h2>חומר גלם להדגמות</h2>
@@ -286,7 +297,9 @@
 </footer>
 
 <script>
-
+/* העתקה ללוח. navigator.clipboard לא זמין ב-file:// בחלק מהדפדפנים,
+   ולכן יש נפילה ל-execCommand — אחרת הכפתור נראה שבור דווקא במצב
+   שבו הדף ייפתח הכי הרבה פעמים: קובץ מקומי. */
 document.addEventListener('click', function (e) {
   var btn = e.target.closest('[data-copy]');
   if (!btn) return;

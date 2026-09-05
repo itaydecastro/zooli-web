@@ -1,9 +1,27 @@
+/* ==========================================================================
+   זולי — שפת העיצוב.
 
+   שלושה צבעים, כפי שאיתי ביקש: שחור, ירוק וואטסאפ, ולבן.
 
+   ⚠️ **האתר כהה בלבד, וזו הכרעה ולא עצלנות.** ירוק הוואטסאפ (#25D366)
+   על שחור נותן ניגודיות 9.7:1 — מצוין. אותו ירוק בדיוק על לבן נותן
+   2.0:1 ונכשל בכל תקן. כלומר פלטה של "שחור ירוק ולבן" יכולה להיות
+   נגישה רק אם הרקע הוא השחור. מצב בהיר היה מכריח ירוק כהה אחר, כלומר
+   מותג שני.
+
+   ⚠️ **הפונטים נבחרו לפי עברית ולא לפי מראה.** מנוע העיצוב הציע
+   Fredoka/Nunito — יפים, ובלי אות עברית אחת. Varela Round הוא כתב
+   הבועה העברי, ו-Rubik נותן את המשקלים הכבדים שחסרים לו.
+   ========================================================================== */
+
+/* ⚠️ **עברית, גם בלי תגית dir.** הדף עצמו מצהיר `dir="rtl"` על
+   ה-<html>, אבל סביבות שעוטפות את הקובץ ב-<html> משלהן (Artifact)
+   מוחקות אותה — ואז הכול עולה משמאל לימין. זו שכבת הביטחון
+   השנייה, והיא עובדת גם בלי שורת JS אחת. */
 html { direction: rtl; }
 
 :root {
-
+  /* משטחים — שחור עם נטייה ירקרקה, כדי שהירוק יישב עליו ולא יצוף מעליו */
   --bg:       #070B09;
   --panel:    #0F1613;
   --panel-2:  #141E19;
@@ -11,11 +29,13 @@ html { direction: rtl; }
   --bot:      #141E19;
   --user:     #10402A;
 
+  /* טקסט */
   --ink:      #FFFFFF;
   --soft:     #9AAAA1;
 
   --line:     #22302A;
 
+  /* ירוק וואטסאפ */
   --green:    #25D366;
   --green-2:  #5AE68C;
   --green-dk: #128C4A;
@@ -47,6 +67,7 @@ body {
   overflow-x: hidden;
 }
 
+/* כתב הבועה. Varela Round רק לכותרות ולשבבים — במשפט שלם הוא מתעייף. */
 h1, h2, h3, .round {
   font-family: "Varela Round", "Rubik", system-ui, sans-serif;
   line-height: 1.16;
@@ -63,6 +84,7 @@ a:hover { color: var(--green-2); }
 
 ::selection { background: var(--green); color: var(--on-green); }
 
+/* מיקוד גלוי — נדרש, ונמחק בטעות בכל עיצוב כהה שמסתמך על ברירת המחדל */
 :focus-visible {
   outline: 3px solid var(--green);
   outline-offset: 3px;
@@ -83,6 +105,7 @@ section { padding: clamp(56px, 10vw, 120px) 0; position: relative; }
 }
 .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--soft); }
 
+/* -------------------------------------------------- כפתורים */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   background: var(--green); color: var(--on-green); border: 0;
@@ -104,6 +127,7 @@ section { padding: clamp(56px, 10vw, 120px) 0; position: relative; }
 }
 .btn.soon:hover { transform: none; background: var(--panel); color: var(--soft); }
 
+/* -------------------------------------------------- קופסאות */
 .card {
   background: var(--panel); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 26px;
@@ -133,6 +157,7 @@ section { padding: clamp(56px, 10vw, 120px) 0; position: relative; }
 .pill.ok   { color: var(--green); border-color: rgba(37,211,102,.35); }
 .pill.warn { color: var(--warn); border-color: rgba(245,184,77,.35); }
 
+/* -------------------------------------------------- ניווט */
 .nav {
   position: sticky; top: 0; z-index: 40;
   background: rgba(7,11,9,.82); backdrop-filter: blur(14px);
@@ -151,6 +176,7 @@ section { padding: clamp(56px, 10vw, 120px) 0; position: relative; }
 .nav a.link:hover { color: var(--green); }
 .nav .spacer { flex: 1; }
 
+/* -------------------------------------------------- טבלה */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 460px; }
 th, td { text-align: right; padding: 11px 13px; border-bottom: 1px solid var(--line); }
@@ -174,6 +200,7 @@ footer {
 footer a { color: var(--soft); text-decoration: none; }
 footer a:hover { color: var(--green); }
 
+/* -------------------------------------------------- העתקה (ערכת שיווק) */
 .copy-row { display: flex; gap: 12px; align-items: flex-start; }
 .copy-btn {
   flex: none; background: var(--panel-2); border: 1px solid var(--line);
@@ -188,6 +215,11 @@ footer a:hover { color: var(--green); }
   padding: 16px 18px; white-space: pre-wrap; font-size: 15.5px; flex: 1; color: var(--ink);
 }
 
+/* -------------------------------------------------- חשיפה בגלילה
+   כל אלמנט עם .reveal מתחיל שקוף ומוזז, ונחשף כשהוא נכנס למסך.
+   ⚠️ ה-JS מוסיף .on. אם ה-JS לא רץ מסיבה כלשהי, `no-js` על ה-html
+   מבטל את ההסתרה — דף שכל תוכנו בלתי נראה בגלל סקריפט שנפל הוא
+   התקלה הגרועה ביותר שאנימציית גלילה יכולה לגרום. */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
 .reveal.on { opacity: 1; transform: none; }
 .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; }
