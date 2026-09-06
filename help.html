@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מה סופרלי יודע לעשות</title>
+<meta name="description" content="כל מה שאפשר לכתוב לסופרלי בוואטסאפ — הוספה לרשימה, השוואת מחירים בין הרשתות, מה קרוב אליך, סימון בסופר, ורשימה משותפת.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Heebo:wght@400;500;700&display=swap">
@@ -15,38 +16,46 @@
 :root{
   --paper:#EFE9DF; --card:#FFFDFA; --ink:#1B2327; --ink-soft:#5D6B71;
   --rule:#DCD2C3; --green:#1B7A54; --green-ink:#0E4A32; --wash:#E6F0E9;
-  --amber:#A5601A; --chip:#F3EEE5;
+  --amber:#A5601A; --amber-wash:#F7EEDF; --chip:#F3EEE5;
   --shadow:0 1px 2px rgba(27,35,39,.08), 0 10px 26px rgba(27,35,39,.06);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#11161A; --card:#1A2126; --ink:#E7ECEA; --ink-soft:#95A4AB;
     --rule:#2C383F; --green:#4CC08D; --green-ink:#A9E3C8; --wash:#1D2E27;
-    --amber:#E0A45C; --chip:#232C32;
+    --amber:#E0A45C; --amber-wash:#2A2318; --chip:#232C32;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(0,0,0,.3);
   }
 }
 :root[data-theme="dark"]{
   --paper:#11161A; --card:#1A2126; --ink:#E7ECEA; --ink-soft:#95A4AB;
   --rule:#2C383F; --green:#4CC08D; --green-ink:#A9E3C8; --wash:#1D2E27;
-  --amber:#E0A45C; --chip:#232C32;
+  --amber:#E0A45C; --amber-wash:#2A2318; --chip:#232C32;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Heebo",system-ui,sans-serif; line-height:1.55; font-size:16px;
 }
+.skip{position:absolute; inset-inline-start:-999px; top:8px; background:var(--green); color:#fff;
+  padding:8px 14px; border-radius:8px; z-index:9; text-decoration:none}
+.skip:focus{inset-inline-start:12px}
 .wrap{max-width:680px; margin:0 auto; padding:34px 18px 70px}
 .mark{font-family:"Varela Round","Heebo",sans-serif; color:var(--green);
   font-size:1.1rem; margin:0 0 4px; font-weight:700}
 h1{font-family:"Varela Round","Heebo",sans-serif; font-size:1.9rem;
   margin:0 0 8px; line-height:1.2; text-wrap:balance}
-.standfirst{color:var(--ink-soft); margin:0 0 8px; max-width:52ch}
+.standfirst{color:var(--ink-soft); margin:0 0 14px; max-width:52ch}
+nav.toc{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 6px}
+nav.toc a{background:var(--card); border:1px solid var(--rule); border-radius:999px;
+  padding:4px 12px; font-size:.86rem; color:var(--ink); text-decoration:none}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--green); color:var(--green-ink)}
 .tip{background:var(--wash); border-radius:12px; padding:10px 14px;
   font-size:.92rem; margin:14px 0 4px; color:var(--green-ink)}
 h2{font-family:"Varela Round","Heebo",sans-serif; font-size:1.2rem;
-  margin:34px 0 4px; color:var(--green)}
+  margin:34px 0 6px; color:var(--green); scroll-margin-top:12px}
 .cards{display:grid; gap:8px}
 .row{background:var(--card); border:1px solid var(--rule); border-radius:12px;
   padding:10px 14px; box-shadow:var(--shadow);
@@ -59,104 +68,133 @@ h2{font-family:"Varela Round","Heebo",sans-serif; font-size:1.2rem;
 .row.new::after{content:"חדש"; background:var(--green); color:#fff;
   border-radius:6px; padding:0 7px; font-size:.7rem; font-weight:700;
   align-self:center}
+.soon{background:var(--amber-wash); border:1px dashed var(--amber); border-radius:12px;
+  padding:12px 14px; display:grid; gap:8px}
+.soon .item{display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline}
+.soon .item b{color:var(--amber); white-space:nowrap}
+.soon .item span{color:var(--ink-soft); font-size:.92rem}
 .foot{margin-top:44px; color:var(--ink-soft); font-size:.85rem;
   border-top:1px solid var(--rule); padding-top:14px}
-@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">דילוג לתוכן</a>
 <div class="wrap">
 <p class="mark"><span aria-hidden="true">🛒</span>‏ סופרלי</p>
 <h1>מה אפשר להגיד לי</h1>
-<p class="standfirst">כל שורה כאן היא משהו שאפשר לכתוב לי בוואטסאפ — בדיוק במילים האלה, או בכל ניסוח דומה. אני מבין עברית של בני אדם.</p>
+<p class="standfirst">כל שורה כאן היא משהו שאפשר לכתוב לי בוואטסאפ — במילים האלה או בכל ניסוח דומה. אני מבין עברית של בני אדם.</p>
 
-<h2>📝 להוסיף לרשימה</h2>
+<nav class="toc" aria-label="קפיצה לנושא">
+  <a href="#add">📝 להוסיף</a>
+  <a href="#fix">✂️ לתקן</a>
+  <a href="#price">💰 איפה הכי זול</a>
+  <a href="#near">📍 מה קרוב</a>
+  <a href="#store">🛒 בסופר</a>
+  <a href="#paid">🧾 כמה יצא</a>
+  <a href="#regular">🔁 קבועים</a>
+  <a href="#together">👫 ביחד</a>
+  <a href="#settings">⚙️ הגדרות</a>
+  <a href="#about">❓ שאלות</a>
+  <a href="#soon">✨ בקרוב</a>
+</nav>
+
+<main id="main">
+
+<h2 id="add">📝 להוסיף לרשימה</h2>
 <div class="cards">
-  <div class="row"><code>חלב</code><code>נגמר החלב</code><span class="what">כל ניסוח עובד — גם רק שם המוצר</span></div>
+  <div class="row"><code>חלב</code><code>נגמר החלב</code><span class="what">שם המוצר מספיק, בכל ניסוח</span></div>
+  <div class="row"><code>חלב, לחם, ביצים</code><span class="what">כמה מוצרים בהודעה אחת — בפסיקים, בשורות, או בלי</span></div>
   <div class="row"><code>3 חלב</code><code>חצי קילו בשר טחון</code><span class="what">כמויות וגדלים</span></div>
-  <div class="row"><code>חלב, לחם, ביצים</code><span class="what">כמה מוצרים בהודעה אחת — גם בלי פסיקים</span></div>
   <div class="row"><code>חלב תנובה</code><code>קולה זירו</code><span class="what">מותג מסוים? אשווה בדיוק אותו</span></div>
-  <div class="row new"><code>סלט</code><code>רוטב</code><code>קרם</code><span class="what">מילה כללית? אשאל איזה בדיוק, עם רשימה ממוספרת</span></div>
-  <div class="row new"><b>📷 צילום ברקוד</b><span class="what">תצלם את הפסים שעל האריזה — אזהה את המוצר המדויק. גם הקלדת הספרות עובדת</span></div>
+  <div class="row"><code>סלט</code><span class="what">מילה כללית? אשאל איזה בדיוק, עם כפתורים</span></div>
+  <div class="row"><b>📷 צילום ברקוד</b><span class="what">תצלם את הפסים שעל האריזה ואזהה את המוצר המדויק. גם הקלדת הספרות עובדת</span></div>
 </div>
 
-<h2>✂️ לתקן ולמחוק</h2>
+<h2 id="fix">✂️ לתקן ולמחוק</h2>
 <div class="cards">
-  <div class="row"><code>תוריד חלב</code><span class="what">פריט אחד יורד</span></div>
-  <div class="row new"><code>תמחק את מספרים 2 3</code><span class="what">מחיקה לפי המספרים שברשימה</span></div>
-  <div class="row new"><code>מחק את האחרון</code><span class="what">הפריט האחרון שנכנס</span></div>
-  <div class="row new"><code>במקום חלב תשים סויה</code><span class="what">מחליף אחד בשני במשפט אחד — גם "תמחק חלב ותוסיף לחם"</span></div>
-  <div class="row new"><code>תשנה לחלב רגיל</code><span class="what">מחליף את השורה שכבר ברשימה, בלי לחזור על מה שכתוב בה</span></div>
-  <div class="row new"><code>תוריד את שלוש ארבע</code><span class="what">מספרי השורות — גם במילים, לא רק בספרות</span></div>
+  <div class="row"><code>תוריד חלב</code><code>מחק את האחרון</code><span class="what">פריט אחד יורד</span></div>
+  <div class="row"><code>תוריד את שלוש ארבע</code><span class="what">לפי מספרי השורות — בספרות או במילים</span></div>
+  <div class="row"><code>במקום חלב תשים סויה</code><code>תשנה לחלב רגיל</code><span class="what">מחליף במשפט אחד</span></div>
   <div class="row"><code>תמחק הכל</code><span class="what">טעות? <b>תחזיר</b> — והכול חוזר</span></div>
 </div>
 
-<h2>💰 איפה הכי זול</h2>
+<h2 id="price">💰 איפה הכי זול</h2>
 <div class="cards">
-  <div class="row"><code>אני יוצא לסופר</code><span class="what">משווה את כל הרשימה בין הרשתות באזור שלך</span></div>
-  <div class="row new"><code>תעשה לי השוואה</code><span class="what">אותו דבר, וזה גם מה שכתוב על הכפתור</span></div>
-  <div class="row"><code>כל הרשתות</code><span class="what">הרשימה המלאה של ההשוואה</span></div>
+  <div class="row"><code>תעשה לי השוואה</code><code>אני יוצא לסופר</code><span class="what">כמה הסל עולה בכל רשת באזור שלך, כולל מבצעים</span></div>
+  <div class="row"><code>כל הרשתות</code><span class="what">ההשוואה המלאה, לא רק הזולות</span></div>
   <div class="row"><code>תשווה רמי לוי לשופרסל</code><span class="what">שתיים זו מול זו, פריט-פריט</span></div>
-  <div class="row"><code>כמה עולה חלב</code><span class="what">מחיר של מוצר אחד בכל רשת</span></div>
-  <div class="row new"><code>מה הכי זול פה?</code><span class="what">גם ככה אפשר לשאול</span></div>
-  <div class="row new"><code>כמה עולה קפה</code><span class="what">ואם הוא במבצע באחת הרשתות באזור — אגיד גם את זה 🔖</span></div>
+  <div class="row"><code>כמה עולה חלב</code><span class="what">מחיר של מוצר אחד בכל רשת — ואם הוא במבצע, גם את זה 🔖</span></div>
+  <div class="row new"><code>הרשימה שלי ברמי לוי</code><span class="what">הרשימה ברשת מסוימת, עם המותג הזול לכל פריט</span></div>
 </div>
 
-<h2>🛒 בתוך הסופר</h2>
+<h2 id="near">📍 מה קרוב אליי</h2>
 <div class="cards">
-  <div class="row"><code>אני בסופר</code><span class="what">פותח את הרשימה לסימון — עם קישור לדף נוח לעגלה</span></div>
-  <div class="row"><code>קניתי חלב</code><code>2</code><span class="what">מסמן מה שנלקח — במילים או במספר</span></div>
+  <div class="row new"><code>מה הכי קרוב אליי</code><code>תסדר לפי מרחק</code><span class="what">הרשתות לפי המרחק ממך. עם שיתוף מיקום זה מדויק; עם שם עיר — מה שבעיר ומה שבסביבה</span></div>
+  <div class="row new"><code>איפה נמצא אושר עד</code><span class="what">הסניפים הקרובים של רשת, עם כתובת</span></div>
+  <div class="row new"><code>כמה רחוק רמי לוי</code><span class="what">המרחק אליה, אחרי ששיתפת מיקום</span></div>
+</div>
+
+<h2 id="store">🛒 בתוך הסופר</h2>
+<div class="cards">
+  <div class="row"><code>אני בסופר</code><span class="what">פותח את הרשימה לסימון, מסודרת לפי המחלקות — עם קישור לדף נוח לעגלה</span></div>
+  <div class="row"><code>קניתי חלב</code><code>2</code><code>1-3</code><span class="what">מסמן מה שנלקח — במילים, במספר, או בטווח</span></div>
   <div class="row"><code>לא קניתי חלב</code><span class="what">מוריד סימון בטעות</span></div>
-  <div class="row new"><code>אין להם ביצים</code><span class="what">נגמר להם? הפריט נשאר ברשימה לפעם הבאה</span></div>
-  <div class="row"><code>סיימתי</code><span class="what">המסומנים יורדים, מה שלא נלקח נשאר</span></div>
-  <div class="row new"><code>תסמן הכל</code><span class="what">קנית את כל הרשימה? זה מוריד את כולה בבת אחת</span></div>
+  <div class="row"><code>אין להם ביצים</code><span class="what">נגמר להם? הפריט נשאר לפעם הבאה</span></div>
+  <div class="row"><code>סיימתי</code><code>קניתי הכל</code><span class="what">המסומנים יורדים, מה שלא נלקח נשאר</span></div>
 </div>
 
-<h2>🧾 כמה יצא לי</h2>
+<h2 id="paid">🧾 כמה יצא לי</h2>
 <div class="cards">
-  <div class="row new"><code>שילמתי 312</code><span class="what">אחרי הקנייה — ואגיד לכם אם זה מה שחזיתי</span></div>
-  <div class="row new"><code>כמה הוצאתי החודש</code><span class="what">הסיכום של החודש, מהסכומים שדיווחתם 💰</span></div>
-  <div class="row new"><code>כמה הוצאתי בחודש שעבר</code><span class="what">וגם אחורה — להשוות חודש לחודש</span></div>
+  <div class="row"><code>שילמתי 312</code><span class="what">אחרי הקנייה — ואגיד אם זה מה שחזיתי</span></div>
+  <div class="row"><code>כמה הוצאתי החודש</code><code>כמה הוצאתי בחודש שעבר</code><span class="what">הסיכום החודשי, מהסכומים שדיווחת 💰</span></div>
 </div>
 
-<h2>🔁 מה שקונים כל שבוע</h2>
+<h2 id="regular">🔁 מה שקונים כל שבוע</h2>
 <div class="cards">
-  <div class="row"><code>חלב זה קבוע</code><span class="what">נכנס לרשימה הקבועה, חוזר אחרי כל קנייה</span></div>
+  <div class="row"><code>חלב זה קבוע</code><span class="what">נכנס לרשימה הקבועה, וחוזר אחרי כל קנייה</span></div>
   <div class="row"><code>הרשימה הקבועה</code><code>תביא את הקבועים</code><span class="what">לראות ולהחזיר</span></div>
+  <div class="row new"><code>תבנה לי רשימה</code><span class="what">רשימה שנבנית לבד ממה שאתה קונה בדרך כלל</span></div>
 </div>
 
-<h2>👫 ביחד</h2>
+<h2 id="together">👫 ביחד</h2>
 <div class="cards">
-  <div class="row"><code>לצרף</code><span class="what">מצרף את בן/בת הזוג <b>לרשימה שלך</b> — שני טלפונים, עגלה אחת</span></div>
-  <div class="row new"><code>לשתף</code><span class="what">קישור להעביר לחברים — כל אחד פותח שיחה משלו, עם רשימה משלו</span></div>
-  <div class="row new"><code>מי ברשימה</code><span class="what">מי מנהל איתך את הרשימה — עד ארבעה אנשים</span></div>
-  <div class="row new"><code>מי הוסיף דבש</code><span class="what">מי בבית שם את זה ברשימה — ואם זה היית אתה, גם את זה אגיד</span></div>
-  <div class="row new"><code>קוראים לי דני</code><span class="what">ואז השני יראה את השם שלך ליד מה שהוספת</span></div>
-  <div class="row new"><code>תוציא אותי</code><span class="what">יציאה מהרשימה המשותפת, עם עותק שנשאר אצלך</span></div>
+  <div class="row"><code>לצרף</code><span class="what">מצרף את בן/בת הזוג לרשימה שלך — שני טלפונים, עגלה אחת, עד ארבעה אנשים</span></div>
+  <div class="row"><code>מי ברשימה</code><code>מי הוסיף דבש</code><span class="what">מי מנהל איתך את הרשימה, ומי שם מה</span></div>
+  <div class="row"><code>קוראים לי דני</code><span class="what">ואז השני יראה את השם שלך ליד מה שהוספת</span></div>
+  <div class="row"><code>לשתף</code><span class="what">קישור להעביר לחברים — כל אחד פותח שיחה משלו</span></div>
+  <div class="row"><code>תוציא אותי</code><span class="what">יציאה מהרשימה המשותפת, עם עותק שנשאר אצלך</span></div>
 </div>
 
-<h2>⚙️ הגדרות</h2>
+<h2 id="settings">⚙️ הגדרות</h2>
 <div class="cards">
-  <div class="row"><code>אני בחיפה</code><span class="what">שינוי עיר — או פשוט לשתף מיקום 📎</span></div>
-  <div class="row new"><code>הכי זול</code><span class="what">מספיק לכתוב את זה — וגם <b>אופייני</b> להחזרה</span></div>
-  <div class="row"><code>תשנה מחיר להכי זול</code><span class="what">בין מחיר אופייני להכי זול שעל המדף</span></div>
-  <div class="row new"><code>לאפס את הכל</code><span class="what">התחלה נקייה — רשימה, הגדרות, או שניהם</span></div>
+  <div class="row"><code>אני בחיפה</code><span class="what">שינוי עיר — אשאל לפני שאני מחליף. או פשוט לשתף מיקום 📎</span></div>
+  <div class="row"><code>הכי זול</code><code>אופייני</code><span class="what">בין המחיר האופייני להכי זול שעל המדף</span></div>
   <div class="row"><code>בלי מותג</code><span class="what">חזרה למחיר הרגיל של הקטגוריה</span></div>
+  <div class="row"><code>לאפס את הכל</code><span class="what">התחלה נקייה — רשימה, הגדרות, או שניהם</span></div>
 </div>
 
-<h2>❓ שאלות עליי</h2>
+<h2 id="about">❓ שאלות עליי</h2>
 <div class="cards">
-  <div class="row"><code>מה זה אופייני?</code><span class="what">ההסבר על שתי שיטות המחיר</span></div>
-  <div class="row"><code>מאיפה המחירים שלך?</code><span class="what">מהמחירונים הרשמיים שהרשתות מחויבות לפרסם, מתעדכן כל יום</span></div>
-  <div class="row new"><code>איך מצלמים ברקוד</code><span class="what">וגם "יש לך אפליקציה?", "אתה עובד בכל הארץ?"</span></div>
+  <div class="row new"><code>כל היכולות שלי</code><code>מה אתה יודע לעשות</code><span class="what">הקישור לדף הזה, מתוך השיחה</span></div>
+  <div class="row"><code>מאיפה המחירים שלך?</code><span class="what">מהמחירונים שהרשתות מחויבות לפרסם בחוק, מתעדכן כל יום</span></div>
+  <div class="row new"><code>אתה יודע מחירים?</code><code>איזה מותג אתה לוקח</code><span class="what">כן — ולפי איזה מחיר אני מחשב</span></div>
+  <div class="row"><code>מה זה אופייני?</code><code>יש מבצעים?</code><span class="what">ההסבר על שיטות המחיר, ומה נכנס לחישוב</span></div>
+  <div class="row new"><code>מה זה סופרלי</code><span class="what">מי אני, במשפט</span></div>
+  <div class="row"><code>אתה שומר לי את המידע?</code><code>תמחק אותי</code><span class="what">מה נשמר — ואיך מוחקים הכול</span></div>
   <div class="row"><code>משוב יש לי רעיון</code><span class="what">כל מה שאחרי "משוב" מגיע ישירות אליי 🙏</span></div>
-  <div class="row new"><code>יש לי משוב</code><span class="what">גם ככה — ואז פשוט תכתבו לי מה רציתם להגיד</span></div>
-  <div class="row new"><code>אתה שומר לי את המידע?</code><span class="what">מה נשמר, ומה לא — התשובה המלאה</span></div>
-  <div class="row new"><code>תמחק אותי</code><span class="what">הכול נמחק — הרשימה, העיר וההיסטוריה</span></div>
-  <div class="row new"><code>יש מבצעים?</code><span class="what">מבצעים נכנסים לחישוב — וסופרלי אומר כמה מהסכום הגיע מהם</span></div>
+</div>
+
+<h2 id="soon">✨ בקרוב</h2>
+<div class="soon" role="list" aria-label="יכולות בבנייה">
+  <div class="item" role="listitem"><b>🎤 הודעה קולית</b><span>תגיד מה נגמר, ואני אכתוב את זה לרשימה</span></div>
+  <div class="item" role="listitem"><b>📷 צילום רשימה</b><span>תצלם פתק או רשימה מודפסת — וכל השורות ייכנסו</span></div>
 </div>
 
 <p class="tip">💡 לא בטוחים? פשוט תכתבו מה שבא לכם — אם לא אבין, אשאל.</p>
+
+</main>
 
 <p class="foot">סופרלי משווה מחירים בין רשתות השיווק בישראל, מהמחירונים שהחוק מחייב לפרסם. חינם, בלי אפליקציה ובלי הרשמה.</p>
 </div>
