@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+  <!-- אייקון האתר — זה שגוגל מציג ליד כל תוצאת חיפוש. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מדיניות פרטיות — סופרלי</title>
+<meta name="description" content="מה סופרלי שומר עליך, למי זה מועבר, כמה זמן זה נשמר, ואיך מוחקים הכול בהודעה אחת.">
+<meta name="theme-color" content="#FFF6E9">
+<meta name="robots" content="index,follow">
+<style>
+/* ⚠️ **דף עצמאי, בכוונה** — אותו נימוק כמו הצהרת הנגישות: מדיניות
+   פרטיות היא מסמך שמישהו מגיע אליו כי הוא **חושד במשהו**, והיא חייבת
+   להיפתח גם כשגיליון סגנון חיצוני לא נטען. */
+:root{
+  --ink:#20211D; --ink-2:#54584E; --paper:#FFF6E9; --card:#FFFFFF;
+  --line:#E7DFCE; --green:#0B6B45; --green-bg:#E6F1EA;
+  --amber:#8A5A12; --amber-bg:#FBF1DE; --amber-line:#E7CFA0;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+    --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+    --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+  --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+  --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+  direction:rtl; text-align:right; line-height:1.7; font-size:17px;
+  padding:clamp(20px,5vw,56px) 18px 80px;
+}
+.wrap{max-width:760px; margin:0 auto}
+h1{font-size:clamp(26px,5vw,38px); margin:0 0 6px; line-height:1.2; text-wrap:balance}
+h2{font-size:clamp(19px,3vw,23px); margin:34px 0 4px; text-wrap:balance}
+h3{font-size:17.5px; margin:18px 0 2px}
+p{margin:10px 0 0; max-width:62ch}
+.sub{color:var(--ink-2); margin-top:10px}
+ul{margin:10px 0 0; padding:0 22px 0 0; color:var(--ink-2)}
+li{margin:7px 0}
+li b{color:var(--ink)}
+.box{background:var(--card); border:1px solid var(--line); border-radius:13px;
+  padding:16px 18px; margin-top:16px}
+.box.warn{background:var(--amber-bg); border-color:var(--amber-line)}
+.box.warn h2{color:var(--amber); margin-top:0}
+.box.good{background:var(--green-bg); border-color:var(--green)}
+.box.good h2{color:var(--green); margin-top:0}
+.box h2{margin-top:0}
+a{color:var(--green); text-underline-offset:3px}
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:3px solid currentColor; outline-offset:3px; border-radius:4px}
+.skip{position:absolute; right:-9999px; top:0; z-index:9;
+  background:#0b3d2c; color:#fff; padding:12px 20px;
+  border-radius:0 0 10px 0; font-weight:700; text-decoration:none}
+.skip:focus{right:0}
+.back{display:inline-block; margin-top:32px; font-weight:700}
+.date{color:var(--ink-2); font-size:15px; margin-top:28px}
+.who{background:var(--card); border:1px solid var(--line); border-radius:13px;
+  padding:14px 18px; margin-top:16px; overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-size:16px}
+th,td{text-align:right; padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-size:14px; color:var(--ink-2); font-weight:700}
+tr:last-child td{border-bottom:none}
+code{background:var(--paper); border:1px solid var(--line); padding:1px 5px;
+  border-radius:4px; font-size:15px}
+.cmd{font-weight:700; color:var(--green)}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">דילוג לתוכן הראשי</a>
+
+<div class="wrap">
+<main id="main">
+
+  <h1>מדיניות פרטיות</h1>
+  <p class="sub">סופרלי הוא שירות חינמי שמנהל רשימת קניות בוואטסאפ ומשווה
+  את מחירה בין רשתות הסופרמרקט. הדף הזה אומר בדיוק <b>מה נשמר עליך, למי
+  זה מועבר, כמה זמן, ואיך מוחקים הכול</b> — בלי נוסח משפטי שאי אפשר לקרוא.</p>
+
+  <div class="box good" id="tldr">
+    <h2>בקצרה — חמש שורות</h2>
+    <ul>
+      <li><b>מה נשמר:</b> רשימת הקניות, העיר שהגדרת, והשיחה איתי.</li>
+      <li><b>למה השיחה:</b> רק כדי לגלות איפה טעיתי ולתקן. לשום דבר אחר.</li>
+      <li><b>מה עובר לגוגל:</b> רק טקסט של הודעה שלא הבנתי — <b>בלי המספר שלך, בלי השם ובלי הרשימה.</b></li>
+      <li><b>מה לא קורה:</b> לא נמכר לאף אחד, אין פרסום, ואין לי גישה לשום דבר אחר בוואטסאפ שלך.</li>
+      <li><b>למחוק הכול:</b> לכתוב לסופרלי <span class="cmd">"תמחק אותי"</span>. עובד מיד, בלי לבקש רשות.</li>
+    </ul>
+    <p style="color:var(--ink-2);font-size:15px">מי שרוצה לדעת בדיוק — <b>הפירוט המלא כאן למטה.</b></p>
+  </div>
+
+  <h2>מי אחראי למידע</h2>
+  <p>סופרלי מופעל על ידי <b>איתי דה קסטרו דקל</b>. לכל שאלה, בקשה לראות
+  מה שמור עליך או בקשת מחיקה:
+  <a href="mailto:itayde111@gmail.com">itayde111@gmail.com</a>, או פשוט
+  לכתוב לסופרלי בוואטסאפ.</p>
+
+  <h2>מה נשמר עליך</h2>
+  <p>רק מה שנדרש כדי שהשירות יעבוד, וזה הכול:</p>
+  <ul>
+    <li><b>מספר הטלפון</b> שממנו כתבת. הוא מה שמאפשר לזהות שהרשימה
+      היא שלך ולא של מישהו אחר.</li>
+    <li><b>שם הפרופיל בוואטסאפ</b>, אם הגדרת אחד. וואטסאפ שולח אותו
+      לצד כל הודעה.</li>
+    <li><b>העיר שהגדרת</b>, או המיקום ששיתפת אם בחרת לשתף. בלי אזור,
+      השוואת המחירים הייתה ממוצע ארצי שלא עוזר לאף אחד.</li>
+    <li><b>תוכן ההודעות</b> שכתבת לסופרלי.</li>
+    <li><b>רשימת הקניות</b>, הרשימה הקבועה, ומה שסימנת כנקנה.</li>
+    <li><b>סכומים שהקלדת בעצמך</b> — אם כתבת "שילמתי 312". סופרלי
+      <b>אינו</b> מתחבר לחשבון בנק, לכרטיס אשראי או לחשבונית.</li>
+    <li><b>יומן השיחה</b> — מה נכתב ומה סופרלי ענה.</li>
+  </ul>
+
+  <div class="box warn">
+    <h2>⚠️ ולמה נשמר גם יומן השיחה</h2>
+    <p>זו הסיבה היחידה, והיא אמיתית: <b>סופרלי לא תמיד מבין נכון.</b>
+    הדרך היחידה לגלות שהוא ענה לא נכון למישהו — ולתקן — היא לקרוא מה
+    נכתב ומה הוא ענה.</p>
+    <p>היומן משמש <b>רק לזה</b>. הוא לא משמש לפרסום, לא נמכר, ולא נבדק
+    כדי לדעת מה מישהו קונה.</p>
+  </div>
+
+  <h2>למי המידע מועבר</h2>
+  <p>לשלושה גורמים, וכל אחד מהם רק כדי שהשירות יעבוד:</p>
+
+  <div class="who">
+    <table>
+      <thead>
+        <tr><th>למי</th><th>מה בדיוק עובר</th><th>למה</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>מטא / WhatsApp</b></td>
+          <td>ההודעות עצמן, בשני הכיוונים</td>
+          <td>וואטסאפ הוא הצינור. בלעדיו אין שירות בכלל.</td>
+        </tr>
+        <tr>
+          <td><b>גוגל</b><br><span style="color:var(--ink-2);font-size:15px">Gemini</span></td>
+          <td><b>טקסט של הודעה שסופרלי לא הבין — ורק הוא.</b>
+            לא מספר הטלפון, לא השם, לא הרשימה ולא המיקום.</td>
+          <td>כדי לקרוא הודעה שהכללים הרגילים לא הצליחו להבין,
+            במקום לענות "לא הבנתי".</td>
+        </tr>
+        <tr>
+          <td><b>גוגל</b><br><span style="color:var(--ink-2);font-size:15px">Cloud</span></td>
+          <td>המידע יושב על שרת שמאוחסן אצלם</td>
+          <td>שם השירות רץ.</td>
+        </tr>
+        <tr>
+          <td><b>OpenStreetMap</b></td>
+          <td><b>שמות של יישובים וסניפים בלבד</b> — שום פרט עליך</td>
+          <td>כדי לדעת איזה סניף קרוב לאיזו עיר.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box good">
+    <h2>✅ ומה שלא קורה</h2>
+    <ul>
+      <li><b>המידע לא נמכר לאף אחד</b>, בשום צורה ולעולם.</li>
+      <li><b>אין פרסום ואין דיוור</b>. סופרלי לא שולח הודעות שיווק,
+        ולא יוזם הודעות בכלל — <b>כל הודעה שלו היא תשובה למישהו
+        שכתב אליו.</b></li>
+      <li><b>אין לסופרלי גישה לשום דבר אחר בוואטסאפ שלך</b> — לא
+        לאנשי הקשר, לא לקבוצות ולא לשיחות אחרות. הוא רואה רק את מה
+        שכתבת לו.</li>
+      <li><b>ובמפתח שסופרלי משתמש בו, גוגל אינה מאמנת מודלים על
+        ההודעות.</b> זה כתוב בתנאים של השירות בתשלום שנבחר במכוון,
+        ולא בשכבה החינמית.</li>
+    </ul>
+  </div>
+
+  <h2>מידע שיוצא מישראל</h2>
+  <p>מטא וגוגל מעבדות מידע גם מחוץ לישראל, ולכן <b>חלק מהמידע יוצא
+  מגבולות המדינה</b> — זה חלק מהשימוש בוואטסאפ ובשרת. מה שיוצא מוגבל
+  למה שכתוב בטבלה למעלה, ושתי החברות כפופות להתחייבויות הגנת מידע
+  משלהן. <b>עצם השימוש בסופרלי הוא הסכמה לזה</b>, ומי שאינו מסכים
+  יכול לכתוב <span class="cmd">"תמחק אותי"</span> בכל רגע.</p>
+
+  <h2>כמה זמן זה נשמר</h2>
+  <ul>
+    <li><b>הרשימה וההגדרות</b> — כל עוד אתה משתמש בסופרלי.</li>
+    <li><b>יומן השיחות</b> — עד <b>12 חודשים</b>, ואז נמחק.</li>
+    <li><b>מי שכתב "תמחק אותי"</b> — נמחק <b>מיד</b>, ולא בסוף החודש.</li>
+  </ul>
+
+  <h2>הזכויות שלך, ואיך מפעילים אותן</h2>
+  <h3>למחוק הכול</h3>
+  <p>לכתוב לסופרלי <span class="cmd">"תמחק אותי"</span>. זה מוחק את
+  הרשימה, את ההגדרות ואת המיקום. <b>לא צריך לבקש ממני, לא צריך לחכות
+  לתשובה, וזה עובד מיד.</b></p>
+  <h3>לראות מה שמור עליך</h3>
+  <p>לכתוב לסופרלי <span class="cmd">"משוב"</span> ואחריו את הבקשה, או
+  לשלוח מייל. תקבל את מה ששמור עליך.</p>
+  <h3>לתקן משהו לא נכון</h3>
+  <p>את העיר אפשר להחליף בכל רגע בכתיבה חופשית ("אני קונה בחיפה"),
+  ופריט מהרשימה יורד ב"תוריד את X". לכל דבר אחר — במייל.</p>
+  <h3>ואם משהו לא בסדר</h3>
+  <p>אפשר לפנות ל<b>רשות להגנת הפרטיות</b> במשרד המשפטים. אבל קודם
+  שווה לכתוב לי — כמעט כל דבר נסגר באותו יום.</p>
+
+  <h2>איך המידע נשמר</h2>
+  <ul>
+    <li>השרת עובד ב<b>חיבור מוצפן</b> (HTTPS) בלבד.</li>
+    <li>קובץ המידע יושב <b>מחוץ לתיקיית הקוד</b>, כך ששום עדכון של
+      השירות לא מתקרב אליו.</li>
+    <li>בכלי העבודה הפנימיים <b>מספרי הטלפון מוצגים כקוד ולא כמספר</b>.</li>
+    <li>סופרלי <b>לעולם לא מבקש</b> סיסמה, מספר כרטיס אשראי, תעודת
+      זהות או פרטי בנק. <b>אם הודעה מבקשת מזה משהו — היא לא ממני.</b></li>
+  </ul>
+
+  <h2>גילאים</h2>
+  <p>השירות מיועד לבני 16 ומעלה. אם מתחת לגיל הזה נשמר כאן מידע,
+  אפשר לכתוב לי והוא יימחק.</p>
+
+  <h2>שינויים במדיניות</h2>
+  <p>סופרלי מתפתח, והמדיניות תתעדכן איתו. <b>שינוי מהותי — כמו גורם
+  חדש שהמידע מועבר אליו — ייכתב כאן ותאריך העדכון למטה ישתנה.</b>
+  אפשר לשאול את סופרלי "מה עם הפרטיות שלי" בכל רגע ולקבל את התמצית.</p>
+
+  <p class="date">עודכן ב־10 בספטמבר 2026.</p>
+
+  <p><a href="terms.html">→ תקנון ותנאי שימוש</a></p>
+
+  <a class="back" href="index.html">→ חזרה לדף הבית</a>
+
+</main>
+</div>
+
+</body>
+</html>

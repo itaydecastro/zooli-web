@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+  <!-- אייקון האתר — זה שגוגל מציג ליד כל תוצאת חיפוש. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תקנון ותנאי שימוש — סופרלי</title>
+<meta name="description" content="מה סופרלי מבטיח ומה לא: מאיפה המחירים, למה המחיר בקופה הוא הקובע, ומה הקשר לרשתות.">
+<meta name="theme-color" content="#FFF6E9">
+<meta name="robots" content="index,follow">
+<style>
+/* ⚠️ **דף עצמאי, בכוונה** — כמו הצהרת הנגישות ומדיניות הפרטיות. */
+:root{
+  --ink:#20211D; --ink-2:#54584E; --paper:#FFF6E9; --card:#FFFFFF;
+  --line:#E7DFCE; --green:#0B6B45; --green-bg:#E6F1EA;
+  --amber:#8A5A12; --amber-bg:#FBF1DE; --amber-line:#E7CFA0;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+    --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+    --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EDEAE2; --ink-2:#ADB3A7; --paper:#14150F; --card:#1D1F18;
+  --line:#2E3128; --green:#5CD49B; --green-bg:#12271D;
+  --amber:#DFA85C; --amber-bg:#2A2013; --amber-line:#4A3A1E;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+  direction:rtl; text-align:right; line-height:1.7; font-size:17px;
+  padding:clamp(20px,5vw,56px) 18px 80px;
+}
+.wrap{max-width:760px; margin:0 auto}
+h1{font-size:clamp(26px,5vw,38px); margin:0 0 6px; line-height:1.2; text-wrap:balance}
+h2{font-size:clamp(19px,3vw,23px); margin:34px 0 4px; text-wrap:balance}
+h3{font-size:17.5px; margin:18px 0 2px}
+p{margin:10px 0 0; max-width:62ch}
+.sub{color:var(--ink-2); margin-top:10px}
+ul{margin:10px 0 0; padding:0 22px 0 0; color:var(--ink-2)}
+li{margin:7px 0}
+li b{color:var(--ink)}
+ol{margin:10px 0 0; padding:0 22px 0 0; color:var(--ink-2)}
+.box{background:var(--card); border:1px solid var(--line); border-radius:13px;
+  padding:16px 18px; margin-top:16px}
+.box.warn{background:var(--amber-bg); border-color:var(--amber-line)}
+.box.warn h2{color:var(--amber); margin-top:0}
+.box.good{background:var(--green-bg); border-color:var(--green)}
+.box.good h2{color:var(--green); margin-top:0}
+.box h2{margin-top:0}
+a{color:var(--green); text-underline-offset:3px}
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:3px solid currentColor; outline-offset:3px; border-radius:4px}
+.skip{position:absolute; right:-9999px; top:0; z-index:9;
+  background:#0b3d2c; color:#fff; padding:12px 20px;
+  border-radius:0 0 10px 0; font-weight:700; text-decoration:none}
+.skip:focus{right:0}
+.back{display:inline-block; margin-top:32px; font-weight:700}
+.date{color:var(--ink-2); font-size:15px; margin-top:28px}
+.cmd{font-weight:700; color:var(--green)}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">דילוג לתוכן הראשי</a>
+
+<div class="wrap">
+<main id="main">
+
+  <h1>תקנון ותנאי שימוש</h1>
+  <p class="sub">בקצרה: <b>סופרלי אומר לך איפה הסל שלך זול יותר, לפי
+  מחירונים שהרשתות מחויבות בחוק לפרסם.</b> הוא לא מוכר כלום, לא מקבל
+  עמלה מאף רשת, ו<b>המחיר בקופה הוא תמיד הקובע</b>. כל השאר כאן הוא
+  הפירוט.</p>
+
+  <h2>1. מה השירות עושה</h2>
+  <p>סופרלי הוא בוט וואטסאפ שמנהל רשימת קניות במהלך השבוע, ומחשב כמה
+  הסל שברשימה יעלה בכל אחת מרשתות הסופרמרקט שיש להן סניף באזור שהגדרת.
+  <b>השימוש הוא בכתיבה חופשית בוואטסאפ</b>, ואין צורך להתקין אפליקציה
+  או להירשם.</p>
+
+  <h2>2. המחירים — וזה הסעיף החשוב כאן</h2>
+  <p>המחירים מגיעים <b>מהמחירונים הרשמיים שכל רשת מחויבת לפרסם לפי
+  חוק מחיר לצרכן, התשע"ד־2014</b>. אלה מחירי המדף שהרשת עצמה פרסמה,
+  והם נמשכים מחדש כל יום.</p>
+
+  <div class="box warn">
+    <h2>⚠️ המחיר בקופה הוא הקובע</h2>
+    <p>סופרלי מציג <b>אומדן לפי המחירון שפורסם</b>, ולא את החיוב בקופה.
+    ייתכנו פערים, ואלה הסיבות האמיתיות:</p>
+    <ul>
+      <li><b>הרשת עדכנה מחיר</b> אחרי שהמחירון פורסם.</li>
+      <li><b>סניפים שונים של אותה רשת</b> מחזיקים מחירים שונים, ולא
+        לכל סניף יש מחירון מפורסם.</li>
+      <li><b>מבצעים, מועדוני לקוחות וכפל הנחות</b> — ההשוואה בין
+        הרשתות היא <b>מחירי מדף</b>, במכוון, כדי שתהיה הוגנת.</li>
+      <li><b>המוצר המדויק</b> שתיקח מהמדף עשוי להיות אריזה או מותג
+        אחר מזה שסופרלי חישב.</li>
+    </ul>
+    <p><b>ולכן: סופרלי אינו מתחייב שהמחיר שהוא הציג הוא המחיר שתשלם,
+    ואינו אחראי לפער בין השניים.</b> מה שהוא כן עושה — ובזה אפשר
+    להיאחז — הוא <b>לאמר מאיפה כל מספר בא</b>, ולסמן במפורש כל מחיר
+    שהוערך ולא נמדד באזור שלך.</p>
+  </div>
+
+  <h2>3. אין לסופרלי שום קשר לרשתות</h2>
+  <ul>
+    <li>סופרלי <b>אינו מוכר מוצרים</b> ואינו צד לשום קנייה.</li>
+    <li>סופרלי <b>אינו מקבל עמלה, תשלום או טובת הנאה</b> מאף רשת,
+      ואף רשת אינה יכולה לשלם כדי להופיע גבוה יותר בהשוואה.
+      <b>הדירוג הוא לפי המחיר, ורק לפיו.</b></li>
+    <li>שמות הרשתות והמותגים המופיעים בשירות הם <b>של בעליהם</b>,
+      ומשמשים לזיהוי בלבד.</li>
+    <li>סופרלי אינו מתחזה לאף רשת ואינו מייצג אותה.</li>
+  </ul>
+
+  <h2>4. השירות ניתן כמות שהוא</h2>
+  <p>סופרלי הוא שירות חינמי בפיתוח מתמשך. הוא מסופק <b>כמות שהוא</b>,
+  בלי התחייבות לזמינות רצופה, ובלי אחריות לכך שיבין כל ניסוח או
+  שיזהה כל מוצר. <b>ייתכנו תקלות, ואפשר שהשירות לא יהיה זמין
+  לפרקים.</b></p>
+  <p>סופרלי אינו תחליף לבדיקה שלך: <b>ההחלטה איפה לקנות ומה לקנות היא
+  שלך.</b> אין באמור בשירות ייעוץ מכל סוג.</p>
+
+  <h2>5. הרשימה שלך</h2>
+  <ul>
+    <li>הרשימה נשמרת כדי שתחזור אליה בשבוע הבא. איך היא נשמרת ומה
+      עוד נשמר — ב<a href="privacy.html">מדיניות הפרטיות</a>.</li>
+    <li><b>רשימה משותפת</b>: מי שמצטרף בקוד רואה את הרשימה, מוסיף
+      ומוריד ממנה. <b>שיתוף קוד עם מישהו הוא הסכמה שהוא יראה את
+      הרשימה</b>, אז כדאי לשתף רק את מי שקונה איתך.</li>
+    <li>לסיים בכל רגע: לכתוב <span class="cmd">"תמחק אותי"</span>.</li>
+  </ul>
+
+  <h2>6. מה אסור לעשות</h2>
+  <ul>
+    <li>לא להשתמש בשירות <b>לשימוש מסחרי</b> או למכירה מחדש של
+      הנתונים שהוא מציג.</li>
+    <li>לא לשלוח שאילתות אוטומטיות בהיקף שפוגע בשירות לאחרים.</li>
+    <li>לא להשתמש בשירות למטרה בלתי חוקית או להטרדה של אחרים.</li>
+  </ul>
+  <p>שימוש כזה עלול להוביל לחסימה, בלי הודעה מוקדמת.</p>
+
+  <h2>7. עלות</h2>
+  <p><b>סופרלי חינמי.</b> אם ייווסף בעתיד רכיב בתשלום, הוא יוצג
+  במפורש עם מחירו ותנאיו, <b>ולא יגבה כסף בלי בחירה מפורשת שלך</b>.
+  שירות שכבר בשימוש לא יהפוך לתשלום בשקט.</p>
+
+  <div class="box good">
+    <h2>✅ ואין הודעות שיווק</h2>
+    <p>סופרלי <b>אינו יוזם הודעות</b>. כל הודעה שהוא שולח היא תשובה
+    להודעה שכתבת לו. <b>אין ניוזלטר, אין תזכורות שלא ביקשת, ואין
+    פרסומות.</b></p>
+  </div>
+
+  <h2>8. שינויים בתקנון</h2>
+  <p>התקנון יתעדכן ככל שהשירות מתפתח. <b>הנוסח המחייב הוא זה
+  שמופיע בדף הזה</b>, ותאריך העדכון למטה אומר מאיזה יום הוא בתוקף.</p>
+
+  <h2>9. דין ומקום שיפוט</h2>
+  <p>על השימוש בסופרלי חלים <b>דיני מדינת ישראל</b>, וסמכות השיפוט
+  הייחודית בכל עניין הנוגע לשירות היא לבתי המשפט המוסמכים
+  ב<b>מחוז תל אביב</b>.</p>
+
+  <h2>10. יצירת קשר</h2>
+  <p>לכל שאלה, תקלה או טענה — לכתוב לסופרלי בוואטסאפ את המילה
+  <span class="cmd">"משוב"</span> ואחריה מה קרה (ההודעה מגיעה ישירות
+  אליי), או במייל:
+  <a href="mailto:itayde111@gmail.com">itayde111@gmail.com</a>.</p>
+
+  <p class="date">עודכן ב־10 בספטמבר 2026.</p>
+
+  <p><a href="privacy.html">→ מדיניות פרטיות</a></p>
+
+  <a class="back" href="index.html">→ חזרה לדף הבית</a>
+
+</main>
+</div>
+
+</body>
+</html>
