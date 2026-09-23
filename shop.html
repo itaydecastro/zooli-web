@@ -344,19 +344,13 @@ textarea.copy-target {
 (function () {
   "use strict";
 
-  // The list travels in the part of the URL after the "#".
-  //
-  // That is the whole privacy design and it is not cosmetic: a fragment is
-  // never sent to the server that hosts the page. Whoever ends up hosting
-  // this - us, a static host, anyone - never sees a single shopping list.
-  // base64url -> the original text, Hebrew included.
-  //
-  // ⚠️ atob alone is not enough and the bug it causes is silent: it hands
-  // back one character per BYTE, so every Hebrew letter - two bytes in UTF-8
-  // - arrives as two pieces of mojibake. JSON.parse would still succeed on
-  // the punctuation and hand back a list of unreadable names. The escape /
-  // decodeURIComponent pair rebuilds the characters, and works in every
-  // browser that has ever run this page.
+  // 07.09: the page is LIVE. Served at /l/<token>, it talks to the server:
+  //   GET  /l/<token>/state   the list as it is right now (both partners see it)
+  //   POST /l/<token>/tick    {name, done}  a tick is a tick on the shared list
+  //   POST /l/<token>/add     {text}        goes through the bot like a message
+  //   POST /l/<token>/finish              "סיימתי" - the ticked lines come off
+  // The old fragment links (list after the "#") still work, one-way, as before.
+
   function fromBase64Url(text) {
     var padded = text.replace(/-/g, "+").replace(/_/g, "/");
     while (padded.length % 4) padded += "=";
@@ -371,21 +365,9 @@ textarea.copy-target {
   function readPayload() {
     var raw = (location.hash || "").replace(/^#/, "");
     if (raw) {
-      // v2 is base64url; v1 was the JSON percent-encoded, which spent six
-      // characters on every Hebrew letter and made a link nine lines long.
-      // Both are read, because a v1 link may still be sitting in somebody's
-      // chat, open in a tab, or saved to a home screen.
-      try {
-        return JSON.parse(fromBase64Url(raw));
-      } catch (e) {
-        try { return JSON.parse(decodeURIComponent(raw)); } catch (e2) { /* on */ }
-      }
+      try { return JSON.parse(fromBase64Url(raw)); }
+      catch (e) { try { return JSON.parse(decodeURIComponent(raw)); } catch (e2) { /* on */ } }
     }
-    // A list baked into the page itself, for the two cases where a fragment
-    // cannot arrive: a host that renders the list in server-side, and any
-    // viewer that shows this page inside a frame - a frame has its own
-    // address, so the "#" stays with the page outside it and never reaches
-    // us here. Same shape either way, so nothing below knows the difference.
     var inline = document.getElementById("superlist-data");
     if (inline) {
       try { return JSON.parse(inline.textContent); } catch (e) { return null; }
@@ -396,6 +378,9 @@ textarea.copy-target {
   var payload = readPayload();
   var body = document.getElementById("body");
   var footer = document.getElementById("footer");
+  var tokenMatch = location.pathname.match(/^\/l\/([A-Za-z0-9]{6,12})\/?$/);
+  var TOKEN = tokenMatch ? tokenMatch[1] : "";
+  var LIVE = !!TOKEN && !(location.hash || "").replace(/^#/, "");
 
   if (!payload || !Array.isArray(payload.items)) {
     body.innerHTML =
@@ -409,22 +394,23 @@ textarea.copy-target {
   var listId = payload.id || "default";
   var STORE = "superlist:" + listId;
 
-  // What the shopper has done here, kept on the phone. This is what makes
-  // the page survive a screen lock, a stray back button, or the browser
-  // deciding to reload it - none of which should cost somebody the ticks
-  // they made in the last three aisles.
+  // Live mode keeps the truth on the server; the phone only remembers ticks
+  // it could not deliver yet (a basement without reception), and retries.
   var saved = { done: [], added: [] };
-  try {
-    var fromDisk = JSON.parse(localStorage.getItem(STORE) || "null");
-    if (fromDisk && Array.isArray(fromDisk.done)) saved = fromDisk;
-  } catch (e) { /* a broken record costs the ticks, never the page */ }
-
-  // Anything the bot already had ticked starts ticked.
+  var pending = [];            // [{n, done}] not yet acknowledged by the server
+  var stamp = payload.stamp || "";
+  if (!LIVE) {
+    try {
+      var fromDisk = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (fromDisk && Array.isArray(fromDisk.done)) saved = fromDisk;
+    } catch (e) { /* a broken record costs the ticks, never the page */ }
+  }
   (payload.done || []).forEach(function (name) {
     if (saved.done.indexOf(name) === -1) saved.done.push(name);
   });
 
   function persist() {
+    if (LIVE) return;
     try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {}
   }
 
@@ -434,13 +420,6 @@ textarea.copy-target {
     }));
   }
 
-
-  // An emoji per line, so the eye finds "לחם" without reading the list.
-  //
-  // Matched on the text rather than on category names from the bot, which
-  // means a thing typed here by hand - "אבטיח" - gets its picture too. The
-  // longest match wins, so ביסלי is not answered by the rule for לחם, and
-  // anything unmatched simply gets no picture rather than a wrong one.
   var PICTURES = [
     ["גבינה צהובה","🧀"],["גבינה לבנה","🧀"],["גבינת שמנת","🧀"],
     ["גבינה בולגרית","🧀"],["שמנת חמוצה","🥛"],["מעדן חלב","🍮"],
@@ -496,6 +475,60 @@ textarea.copy-target {
              'stroke-linecap="round" stroke-linejoin="round">' +
              '<path d="M20 6 9 17l-5-5"/></svg>';
 
+  function toast(text) {
+    var el = document.getElementById("toast");
+    el.textContent = text;
+    el.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.classList.remove("show"); }, 2600);
+  }
+
+  // ---- talking to the server (live mode only) ------------------------------
+  function api(method, what, data) {
+    return fetch("/l/" + TOKEN + "/" + what, {
+      method: method,
+      headers: { "Content-Type": "application/json" },
+      body: data ? JSON.stringify(data) : undefined,
+      cache: "no-store"
+    }).then(function (r) {
+      if (!r.ok) throw new Error("http " + r.status);
+      return r.json();
+    });
+  }
+
+  function absorb(state) {
+    // The server's list wins, except for ticks still on their way there.
+    if (!state || !Array.isArray(state.items)) return;
+    payload.items = state.items;
+    saved.done = (state.done || []).slice();
+    pending.forEach(function (p) {
+      var at = saved.done.indexOf(p.n);
+      if (p.done && at === -1) saved.done.push(p.n);
+      if (!p.done && at !== -1) saved.done.splice(at, 1);
+    });
+    stamp = state.stamp || stamp;
+    render();
+  }
+
+  function flush() {
+    if (!pending.length) return Promise.resolve();
+    var p = pending[0];
+    return api("POST", "tick", { name: p.n, done: p.done }).then(function (state) {
+      pending.shift();
+      absorb(state);
+      return flush();
+    });
+  }
+
+  function poll() {
+    if (!LIVE || document.visibilityState !== "visible") return;
+    flush().then(function () {
+      return api("GET", "state").then(function (state) {
+        if (state && state.stamp !== stamp) absorb(state);
+      });
+    }).catch(function () { /* no reception: the next poll retries */ });
+  }
+
   function render() {
     var rows = allRows();
     var list = document.createElement("ul");
@@ -515,7 +548,6 @@ textarea.copy-target {
       box.innerHTML = TICK;
 
       var label = item.l || item.n;
-
       var pic = document.createElement("span");
       pic.className = "pic";
       pic.setAttribute("aria-hidden", "true");
@@ -529,26 +561,23 @@ textarea.copy-target {
       btn.appendChild(pic);
       btn.appendChild(name);
 
-      // No separate quantity here on purpose: the label the bot sends is
-      // already the finished line ("בננה (ק\"ג) × 3"), and rendering the
-      // number again beside it printed the quantity twice. One list, shown
-      // the same way in both places.
-
       btn.addEventListener("click", function () {
         var at = saved.done.indexOf(item.n);
-        if (at === -1) saved.done.push(item.n);
-        else saved.done.splice(at, 1);
-        sent.marks = false;      // something changed, so there is more to send
+        var nowDone = at === -1;
+        if (nowDone) saved.done.push(item.n); else saved.done.splice(at, 1);
+        sent.marks = false;
         persist();
         render();
+        if (LIVE && !item.added) {
+          pending.push({ n: item.n, done: nowDone });
+          flush().catch(function () { toast("אין קליטה — אסמן ברגע שתחזור"); });
+        }
       });
 
       li.appendChild(btn);
       list.appendChild(li);
     });
 
-    // Adding, because a phone call in aisle four is the normal case:
-    // "תקשיב, אני צריכה גם אבטיח".
     var add = document.createElement("form");
     add.className = "add";
     add.innerHTML =
@@ -560,12 +589,19 @@ textarea.copy-target {
       var field = document.getElementById("newItem");
       var value = (field.value || "").trim();
       if (!value) return;
+      field.value = "";
+      if (LIVE) {
+        toast("מוסיף…");
+        api("POST", "add", { text: value }).then(function (out) {
+          if (out && out.state) absorb(out.state);
+          if (out && out.reply) toast(out.reply);
+        }).catch(function () { toast("אין קליטה — נסה שוב עוד רגע"); });
+        return;
+      }
       var seen = allRows().some(function (r) { return r.n === value; });
       if (!seen) { saved.added.push(value); sent.adds = false; }
-      field.value = "";
       persist();
       render();
-      // Keep the keyboard up: people add two or three things at once.
       var again = document.getElementById("newItem");
       if (again) again.focus();
     });
@@ -574,9 +610,7 @@ textarea.copy-target {
     body.appendChild(list);
     body.appendChild(add);
 
-    var done = rows.filter(function (r) {
-      return saved.done.indexOf(r.n) !== -1;
-    }).length;
+    var done = rows.filter(function (r) { return saved.done.indexOf(r.n) !== -1; }).length;
     document.getElementById("count").textContent = done + " מתוך " + rows.length;
     document.getElementById("bar").style.width =
       (rows.length ? (done / rows.length) * 100 : 0) + "%";
@@ -590,22 +624,8 @@ textarea.copy-target {
       .filter(function (r) { return saved.done.indexOf(r.n) !== -1 && !r.added; })
       .map(function (r) { return r.n; });
   }
+  function addedNames() { return saved.added.slice(); }
 
-  function addedNames() {
-    return saved.added.slice();
-  }
-
-  // ---------------------------------------------------------------- steps
-  //
-  // One button at a time, always.
-  //
-  // The bot needs two separate instructions - what came off the list, and
-  // what should go on to it - and the first version simply put both on
-  // screen at once. Two buttons that both said "שלח" is our problem handed
-  // to the shopper, who then has to work out which one is theirs. Now the
-  // page asks for one thing, and only mentions the second after the first
-  // is done - and only if they actually added something, which most trips
-  // will not.
   var sent = { marks: false, adds: false };
 
   function nextStep() {
@@ -619,23 +639,27 @@ textarea.copy-target {
   function refreshButtons() {
     var send = document.getElementById("send");
     var hint = document.getElementById("hint");
+    if (LIVE) {
+      var marks = markedNames();
+      send.disabled = !marks.length;
+      send.textContent = marks.length ? "סיימתי — תוריד מהרשימה את מה שלקחתי" : "סמן מה שלקחת";
+      hint.textContent = marks.length
+        ? "הסימון כבר אצל הבוט, וגם מי שחולק איתך את הרשימה רואה אותו"
+        : "כל סימון נשמר מיד, גם אצל מי שחולק איתך את הרשימה";
+      return;
+    }
     var step = nextStep();
-    var marks = markedNames();
+    var marks2 = markedNames();
     var adds = addedNames();
-
     if (step === "marks") {
       send.disabled = false;
       send.textContent = "שלח לבוט את מה שלקחתי";
-      hint.textContent = marks.length === 1
-        ? "כלומר: " + marks[0]
-        : "כלומר: " + marks.join(", ");
+      hint.textContent = "כלומר: " + marks2.join(", ");
       return;
     }
     if (step === "adds") {
       send.disabled = false;
-      send.textContent = sent.marks
-        ? "ועכשיו — שלח את מה שהוספתי"
-        : "שלח לבוט את מה שהוספתי";
+      send.textContent = sent.marks ? "ועכשיו — שלח את מה שהוספתי" : "שלח לבוט את מה שהוספתי";
       hint.textContent = "כלומר: " + adds.join(", ");
       return;
     }
@@ -649,29 +673,10 @@ textarea.copy-target {
     }
   }
 
-  // Two messages, not one, because they are two different instructions to
-  // the bot: what came off the list, and what should go on to it. The bot
-  // reads either on its own, so nothing here has to be clever.
-  // A machine-shaped prefix on purpose (31.08): the old free-text
-  // "קניתי X, Y" re-entered the bot through its human-sentence reader,
-  // which re-GUESSED each name - and a line the shopper typed as
-  // "קולה זירו" came back as its category. The bot reads this prefix
-  // with exact matching and no guessing at all.
   function markMessage() { return "סימנתי בדף: " + markedNames().join(", "); }
   function addMessage() { return "תוסיף " + addedNames().join(", "); }
 
-  function toast(text) {
-    var el = document.getElementById("toast");
-    el.textContent = text;
-    el.classList.add("show");
-    clearTimeout(toast._t);
-    toast._t = setTimeout(function () { el.classList.remove("show"); }, 2400);
-  }
-
   function hand_over(text) {
-    // A wa.me link only works once the bot has a number of its own. Until
-    // then the honest fallback is the clipboard, which needs no setup and
-    // no permission from anybody.
     if (payload.p) {
       location.href = "https://wa.me/" + payload.p + "?text=" + encodeURIComponent(text);
       return;
@@ -690,15 +695,23 @@ textarea.copy-target {
     var box = document.getElementById("copier");
     box.value = text;
     box.select();
-    try {
-      document.execCommand("copy");
-      toast("הועתק — תדביק לבוט בוואטסאפ");
-    } catch (e) {
-      toast("תעתיק ידנית: " + text);
-    }
+    try { document.execCommand("copy"); toast("הועתק — תדביק לבוט בוואטסאפ"); }
+    catch (e) { toast("תעתיק ידנית: " + text); }
   }
 
   document.getElementById("send").addEventListener("click", function () {
+    if (LIVE) {
+      var send = document.getElementById("send");
+      send.disabled = true;
+      flush().then(function () { return api("POST", "finish"); }).then(function (out) {
+        if (out && out.state) absorb(out.state);
+        toast(out && out.reply ? out.reply : "הרשימה עודכנה ✅");
+      }).catch(function () {
+        send.disabled = false;
+        toast("אין קליטה — נסה שוב עוד רגע");
+      });
+      return;
+    }
     var step = nextStep();
     if (step === "marks") { sent.marks = true; hand_over(markMessage()); }
     else if (step === "adds") { sent.adds = true; hand_over(addMessage()); }
@@ -706,5 +719,11 @@ textarea.copy-target {
   });
 
   render();
+  if (LIVE) {
+    setInterval(poll, 4000);
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") poll();
+    });
+  }
 })();
 </script>
